@@ -1,10 +1,10 @@
 import React from 'react'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
-import HeroSection from './features/home/HeroSection'
-import CurrentProject from './features/projects/CurrentProject'
-import AboutUs from './features/about/AboutUs'
-import PastProjects from './features/projects/PastProjects'
+import { HeroSection } from './features/home/HeroSection'
+import { CurrentProject } from './features/projects/CurrentProject'
+import { AboutUs } from './features/about/AboutUs'
+import { PastProjects } from './features/projects/PastProjects'
 
 function App() {
   return (
