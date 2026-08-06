@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-cranberry: #d41367;
+  --font-heading: "Garet Bold", "Montserrat", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-white);
+    color: var(--color-gray-800);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+}
