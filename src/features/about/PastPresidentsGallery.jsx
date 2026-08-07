@@ -10,9 +10,8 @@ export const PastPresidentsGallery = () => {
       {/* Section Header */}
       <div
         ref={ref}
-        className={`text-center max-w-3xl mx-auto mb-16 space-y-4 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
+        className={`text-center max-w-3xl mx-auto mb-16 space-y-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
       >
         <span className="inline-block text-xs font-montserrat font-semibold tracking-[0.2em] uppercase text-cranberry">
           Historia & Memoria
@@ -23,17 +22,24 @@ export const PastPresidentsGallery = () => {
         <p className="text-gray-600 font-montserrat text-base max-w-xl mx-auto">
           Honramos el liderazgo, dedicación y huella de quienes lideraron la comisión de Rotaract Club Arrecifes a lo largo de las gestiones.
         </p>
+
+        {/* Divider motif — echoed inside each card's nameplate */}
+        <div className="flex items-center justify-center gap-3 pt-2">
+          <span className="h-px w-10 bg-gray-200" />
+          <span className="w-1.5 h-1.5 rotate-45 bg-cranberry/60" />
+          <span className="h-px w-10 bg-gray-200" />
+        </div>
       </div>
 
       {/* Presidents Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-6xl mx-auto">
         {pastPresidentsData.map((president) => {
           // Normalize periods array (supports both periods: [] or period: "")
           const periodList = president.periods
             ? president.periods
             : president.period
-            ? [president.period]
-            : [];
+              ? [president.period]
+              : [];
 
           const isMultiTerm = periodList.length > 1;
           const isCurrent = president.isCurrent;
@@ -41,91 +47,77 @@ export const PastPresidentsGallery = () => {
           return (
             <div
               key={president.id}
-              className={`group relative bg-white rounded-3xl overflow-hidden border transition-all duration-500 card-hover flex flex-col justify-between ${
-                isCurrent ? 'border-emerald-200 shadow-md ring-2 ring-emerald-500/20' : 'border-gray-100 shadow-sm hover:shadow-xl'
-              }`}
+              className={`group relative bg-white rounded-2xl overflow-hidden border transition-all duration-500 flex flex-col ${isCurrent
+                  ? 'border-emerald-200 shadow-lg shadow-emerald-900/5 ring-1 ring-emerald-500/20'
+                  : 'border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1'
+                }`}
             >
-              {/* Top Photo & Badges */}
-              <div className="relative aspect-square overflow-hidden bg-gray-100">
+              {/* Portrait */}
+              <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
                 <img
                   src={president.image}
                   alt={`Presidente ${president.name}`}
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                
-                {/* Status / Multi-term indicator badge (Top Left) */}
-                <div className="absolute top-4 left-4 flex flex-col gap-1.5 items-start">
-                  {isCurrent && (
-                    <span className="px-3 py-1 bg-emerald-600 text-white rounded-full text-xs font-montserrat font-bold shadow-md flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                      En curso
-                    </span>
-                  )}
-                  {isMultiTerm && (
-                    <span className="px-3 py-1 bg-amber-500 text-white rounded-full text-xs font-montserrat font-bold shadow-md flex items-center gap-1.5">
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                      </svg>
-                      {periodList.length} Gestiones
-                    </span>
-                  )}
-                </div>
 
-                {/* Period badges list (Top Right) */}
-                <div className="absolute top-4 right-4 flex flex-col items-end gap-1.5">
-                  {periodList.map((per, idx) => (
-                    <span
-                      key={idx}
-                      className={`px-3 py-1 rounded-full text-xs font-montserrat font-semibold shadow-md ${
-                        isCurrent && idx === periodList.length - 1
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-cranberry text-white'
-                      }`}
-                    >
-                      {per}
-                    </span>
-                  ))}
-                </div>
+                {/* Frame corners — always on for the current president, revealed on hover for alumni */}
+                <span
+                  className={`pointer-events-none absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 transition-all duration-500 ${isCurrent
+                      ? 'border-emerald-300/90 opacity-100'
+                      : 'border-white/90 opacity-0 group-hover:opacity-100'
+                    }`}
+                />
+                <span
+                  className={`pointer-events-none absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 transition-all duration-500 ${isCurrent
+                      ? 'border-emerald-300/90 opacity-100'
+                      : 'border-white/90 opacity-0 group-hover:opacity-100'
+                    }`}
+                />
 
-                {/* Name at bottom of photo */}
-                <div className="absolute bottom-4 left-5 right-5 text-white">
-                  <h4 className="text-2xl font-garet drop-shadow-md">
-                    {president.name}
-                  </h4>
-                  <p className="text-xs font-montserrat text-gray-200 mt-1 flex items-center gap-1.5">
-                    {isCurrent ? (
-                      <>
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                        Presidente Actual
-                      </>
-                    ) : (
-                      'Ex Presidente Rotaract Arrecifes'
-                    )}
-                  </p>
-                </div>
+                {isCurrent && (
+                  <span className="absolute top-3 right-3 flex items-center gap-1.5 pl-2 pr-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-emerald-700 text-[10px] font-montserrat font-bold tracking-wide shadow-sm">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                    </span>
+                    En curso
+                  </span>
+                )}
+              </div>
+
+              {/* Nameplate */}
+              <div className="px-6 pt-5 pb-3 text-center">
+                <h4 className="text-xl font-garet text-gray-900 tracking-wide">
+                  {president.name}
+                </h4>
+                <p
+                  className={`mt-1 text-[10px] font-montserrat font-semibold tracking-[0.15em] uppercase ${isCurrent ? 'text-emerald-600' : 'text-cranberry/80'
+                    }`}
+                >
+                  {isCurrent
+                    ? 'Presidencia en curso'
+                    : isMultiTerm
+                      ? `Ex Presidente · ${periodList.length} gestiones`
+                      : 'Ex Presidente'}
+                </p>
+                <p className="mt-2 text-xs font-montserrat tracking-wide text-gray-400">
+                  {periodList.join('   ·   ')}
+                </p>
+              </div>
+
+              {/* Divider echoing the section header */}
+              <div className="flex items-center justify-center gap-2 px-6">
+                <span className="h-px flex-1 bg-gray-100" />
+                <span className="w-1 h-1 rotate-45 bg-gray-200" />
+                <span className="h-px flex-1 bg-gray-100" />
               </div>
 
               {/* Achievement / Legacy note */}
-              <div className="p-6 bg-white flex-grow flex flex-col justify-between">
+              <div className="px-6 py-5 flex-grow">
                 <p className="text-gray-600 font-montserrat text-sm leading-relaxed">
                   {president.achievement}
                 </p>
-
-                <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400 font-montserrat">
-                  {isCurrent ? (
-                    <span className="text-emerald-600 font-semibold flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      Gestión en curso
-                    </span>
-                  ) : (
-                    <span className="text-cranberry font-medium">
-                      {isMultiTerm ? `${periodList.length} Períodos Cumplidos` : 'Período Cumplido'}
-                    </span>
-                  )}
-                  <span className={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-emerald-500' : 'bg-cranberry'}`} />
-                </div>
               </div>
             </div>
           );

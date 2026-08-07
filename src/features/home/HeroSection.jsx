@@ -56,7 +56,7 @@ export const HeroSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 lg:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
         {/* ── Columna de Texto ── */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:col-span-7 order-2 lg:order-1">
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:col-span-7 order-1">
 
           {/* Badge */}
           <span
@@ -117,14 +117,14 @@ export const HeroSection = () => {
             <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8" aria-hidden="true" />
             <div className="flex justify-center lg:justify-start gap-10 md:gap-16">
               <AnimatedStat prefix="+" value={10} suffix="" label="Miembros activos" delay={0} />
-              <AnimatedStat prefix="+" value={30} suffix="" label="Proyectos realizados" delay={100} />
+              <AnimatedStat prefix="+" value={10} suffix="" label="Proyectos realizados" delay={100} />
               <AnimatedStat prefix="" value={5} suffix="+" label="Años de impacto" delay={200} />
             </div>
           </div>
         </div>
 
         {/* ── Columna de Imagen ── */}
-        <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div className="lg:col-span-5 order-2 flex justify-center lg:justify-end">
           <div
             className="animate-hidden-right relative w-full max-w-md lg:max-w-none"
             style={{ transitionDelay: '150ms' }}

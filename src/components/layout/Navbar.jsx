@@ -15,8 +15,8 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '#', label: 'Inicio', sectionId: null },
-    { href: '#quienes-somos', label: 'Quiénes Somos', sectionId: 'quienes-somos' },
     { href: '#proyectos', label: 'Proyectos', sectionId: 'proyectos' },
+    { href: '#quienes-somos', label: 'Quiénes Somos', sectionId: 'quienes-somos' },
   ];
 
   // Maneja el click de un link de nav:
@@ -46,9 +46,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition-all duration-500 ${
-        scrolled ? 'navbar-glass' : 'bg-white border-b border-gray-100'
-      }`}
+      className={`sticky top-0 z-50 transition-all duration-500 ${scrolled ? 'navbar-glass' : 'bg-white border-b border-gray-100'
+        }`}
       aria-label="Navegación principal"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -116,9 +115,8 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-400 ease-in-out ${
-          isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={`md:hidden overflow-hidden transition-all duration-400 ease-in-out ${isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          }`}
         style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
       >
         <div className="border-t border-gray-100 bg-white/95 backdrop-blur-md px-4 pt-3 pb-6 space-y-1">
