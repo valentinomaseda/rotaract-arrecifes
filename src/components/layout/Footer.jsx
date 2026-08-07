@@ -169,9 +169,6 @@ const Footer = () => {
           <p className="font-montserrat text-sm text-gray-500">
             © {year} Rotaract Club Arrecifes. Todos los derechos reservados.
           </p>
-          <p className="font-montserrat text-xs text-gray-500">
-            Hecho con ❤️ para la comunidad de Arrecifes
-          </p>
         </div>
       </div>
     </footer>
