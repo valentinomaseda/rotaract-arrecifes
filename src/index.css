@@ -94,6 +94,11 @@
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 @keyframes floatY {
   0%, 100% { transform: translateY(0px) rotate(2deg); }
   50%       { transform: translateY(-12px) rotate(2deg); }
@@ -194,6 +199,11 @@
     animation: pulseDot 2s ease-in-out infinite;
   }
 
+  /* Fade-in para galería */
+  .animate-fade-in {
+    animation: fadeIn 0.35s ease-out both;
+  }
+
   /* Gradiente animado de texto */
   .text-gradient-animated {
     background: linear-gradient(
@@ -274,3 +284,20 @@
   pointer-events: none;
   z-index: 0;
 }
+
+/* =========================================
+   CARRUSEL DE PROYECTOS
+   ========================================= */
+/* Oculta la scrollbar nativa manteniendo funcionalidad */
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+.carousel-track {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.carousel-track > * {
+  scroll-snap-align: start;
+}
+

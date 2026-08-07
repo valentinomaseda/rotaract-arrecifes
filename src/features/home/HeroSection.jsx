@@ -1,19 +1,25 @@
 import React, { useEffect, useRef } from 'react';
+import { useCountUp } from '../../hooks/useCountUp';
 
-const heroImageUrl = '/images/hero-rotaract-action.jpg';
+const heroImageUrl = '/hero-image.jpeg';
 
-// Componente de stat individual
-const StatItem = ({ value, label, delay }) => (
-  <div
-    className="flex flex-col items-center lg:items-start animate-hidden"
-    style={{ transitionDelay: `${delay}ms` }}
-  >
-    <span className="font-garet text-3xl md:text-4xl text-cranberry font-bold leading-none">
-      {value}
-    </span>
-    <span className="font-montserrat text-sm text-gray-500 mt-1">{label}</span>
-  </div>
-);
+// Stat con animación de conteo
+const AnimatedStat = ({ prefix, value, suffix, label, delay }) => {
+  const [ref, count] = useCountUp(value, 1600);
+
+  return (
+    <div
+      ref={ref}
+      className="flex flex-col items-center lg:items-start"
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <span className="font-garet text-3xl md:text-4xl text-cranberry font-bold leading-none tabular-nums">
+        {prefix}{count}{suffix}
+      </span>
+      <span className="font-montserrat text-sm text-gray-500 mt-1">{label}</span>
+    </div>
+  );
+};
 
 export const HeroSection = () => {
   const sectionRef = useRef(null);
@@ -103,25 +109,16 @@ export const HeroSection = () => {
             </a>
           </div>
 
-          {/* Stats */}
+          {/* Stats con animación de conteo */}
           <div
             className="animate-hidden w-full"
             style={{ transitionDelay: '480ms' }}
           >
             <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8" aria-hidden="true" />
             <div className="flex justify-center lg:justify-start gap-10 md:gap-16">
-              <div className="flex flex-col items-center lg:items-start">
-                <span className="font-garet text-3xl md:text-4xl text-cranberry font-bold leading-none">+50</span>
-                <span className="font-montserrat text-sm text-gray-500 mt-1">Miembros activos</span>
-              </div>
-              <div className="flex flex-col items-center lg:items-start">
-                <span className="font-garet text-3xl md:text-4xl text-cranberry font-bold leading-none">+30</span>
-                <span className="font-montserrat text-sm text-gray-500 mt-1">Proyectos realizados</span>
-              </div>
-              <div className="flex flex-col items-center lg:items-start">
-                <span className="font-garet text-3xl md:text-4xl text-cranberry font-bold leading-none">5+</span>
-                <span className="font-montserrat text-sm text-gray-500 mt-1">Años de impacto</span>
-              </div>
+              <AnimatedStat prefix="+" value={10} suffix="" label="Miembros activos" delay={0} />
+              <AnimatedStat prefix="+" value={30} suffix="" label="Proyectos realizados" delay={100} />
+              <AnimatedStat prefix="" value={5} suffix="+" label="Años de impacto" delay={200} />
             </div>
           </div>
         </div>

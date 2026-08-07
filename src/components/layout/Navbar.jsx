@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -11,10 +14,35 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { href: '#', label: 'Inicio' },
-    { href: '#about-us-title', label: 'Quiénes Somos' },
-    { href: '#current-project-title', label: 'Proyectos' },
+    { href: '#', label: 'Inicio', sectionId: null },
+    { href: '#about-us-title', label: 'Quiénes Somos', sectionId: 'about-us-title' },
+    { href: '#proyectos', label: 'Proyectos', sectionId: 'proyectos' },
   ];
+
+  // Maneja el click de un link de nav:
+  // - Si ya estamos en "/", hace scroll suave al ID
+  // - Si estamos en otra ruta, navega a "/" con state para hacer scroll después
+  const handleNavClick = (e, link) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    if (!link.sectionId) {
+      // "Inicio" → ir al top de la home
+      if (location.pathname !== '/') {
+        navigate('/');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: link.sectionId } });
+    } else {
+      const el = document.getElementById(link.sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <nav
@@ -28,30 +56,36 @@ const Navbar = () => {
 
           {/* Logo */}
           <div className="flex items-center">
-            <a href="#" className="flex-shrink-0 flex items-center gap-3 group">
+            <button
+              onClick={(e) => handleNavClick(e, { sectionId: null })}
+              className="flex-shrink-0 flex items-center gap-3 group cursor-pointer bg-transparent border-0 p-0"
+              aria-label="Ir al inicio"
+            >
               <img
                 className="h-12 w-auto transition-transform duration-300 group-hover:scale-105"
                 src="/logo.png"
                 alt="Rotaract Arrecifes"
               />
-            </a>
+            </button>
           </div>
 
           {/* Desktop links */}
           <div className="hidden md:flex md:items-center md:gap-1">
-            {navLinks.map(({ href, label }) => (
+            {navLinks.map((link) => (
               <a
-                key={label}
-                href={href}
+                key={link.label}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link)}
                 className="relative px-4 py-2 text-sm font-medium text-gray-600 font-montserrat transition-colors duration-300 hover:text-cranberry group"
               >
-                {label}
+                {link.label}
                 {/* Underline animado */}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-cranberry rounded-full transition-all duration-300 group-hover:w-3/4" />
               </a>
             ))}
             <a
               href="#unete"
+              onClick={(e) => { e.preventDefault(); setIsOpen(false); }}
               className="ml-4 btn-cranberry text-white px-6 py-2.5 rounded-full text-sm font-semibold font-montserrat inline-flex items-center gap-2"
             >
               Colaborar
@@ -87,14 +121,14 @@ const Navbar = () => {
         style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
       >
         <div className="border-t border-gray-100 bg-white/95 backdrop-blur-md px-4 pt-3 pb-6 space-y-1">
-          {navLinks.map(({ href, label }) => (
+          {navLinks.map((link) => (
             <a
-              key={label}
-              href={href}
-              onClick={() => setIsOpen(false)}
+              key={link.label}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link)}
               className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 font-montserrat hover:bg-cranberry/5 hover:text-cranberry transition-all duration-200"
             >
-              {label}
+              {link.label}
             </a>
           ))}
           <a
