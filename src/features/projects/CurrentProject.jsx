@@ -19,9 +19,8 @@ export const CurrentProject = () => {
       <div className="relative z-10 max-w-4xl mx-auto">
         <div
           ref={contentRef}
-          className={`bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-8 sm:p-12 md:p-16 border border-gray-100 shadow-xl transition-all duration-800 space-y-8 text-center ${
-            contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+          className={`bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-8 sm:p-12 md:p-16 border border-gray-100 shadow-xl transition-all duration-800 space-y-8 text-center ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
           style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
         >
           {/* Tag & Title */}
@@ -63,7 +62,7 @@ export const CurrentProject = () => {
           {/* CTA Button */}
           <div className="pt-4 flex justify-center">
             <a
-              href="https://forms.google.com"
+              href="https://drive.google.com/file/d/1sWJZDwZ3C59xsntAB4VdBAK4M1R56G-Z/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cranberry text-white font-montserrat font-semibold hover:bg-cranberry-dark shadow-lg shadow-cranberry/25 hover:shadow-xl hover:shadow-cranberry/35 transition-all duration-300 group"
