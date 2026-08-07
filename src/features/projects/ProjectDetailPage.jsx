@@ -1,70 +1,195 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from '../../data/projectsData';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
-// Galería de imágenes con lightbox simple
-const GalleryView = ({ images, title }) => {
-  const [active, setActive] = useState(0);
+/* ── Lightbox fullscreen ── */
+const Lightbox = ({ images, startIndex, onClose }) => {
+  const [current, setCurrent] = useState(startIndex);
+
+  const prev = useCallback(() => setCurrent((i) => (i - 1 + images.length) % images.length), [images.length]);
+  const next = useCallback(() => setCurrent((i) => (i + 1) % images.length), [images.length]);
+
+  // Teclado: Escape cierra, flechas navegan
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    };
+    window.addEventListener('keydown', onKey);
+    // Bloquea scroll del body mientras está abierto
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose, prev, next]);
 
   return (
-    <div className="space-y-4">
-      {/* Imagen principal */}
-      <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl bg-gray-100">
-        <img
-          key={active}
-          src={images[active]}
-          alt={`${title} - foto ${active + 1}`}
-          className="w-full h-full object-cover animate-fade-in"
-        />
-        {/* Flechas */}
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={() => setActive((p) => (p - 1 + images.length) % images.length)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center text-gray-700 hover:text-cranberry hover:border-cranberry border border-transparent transition-all duration-200"
-              aria-label="Foto anterior"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
-            </button>
-            <button
-              onClick={() => setActive((p) => (p + 1) % images.length)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center text-gray-700 hover:text-cranberry border border-transparent hover:border-cranberry transition-all duration-200"
-              aria-label="Foto siguiente"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-            </button>
-            {/* Indicador */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-              {images.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActive(i)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${i === active ? 'bg-white w-5' : 'bg-white/50'}`}
-                  aria-label={`Ir a foto ${i + 1}`}
-                />
-              ))}
-            </div>
-          </>
-        )}
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center"
+      style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(8px)' }}
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Visor de imagen"
+    >
+      {/* Contador */}
+      <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-black/40 text-white font-montserrat text-sm px-4 py-1.5 rounded-full">
+        {current + 1} / {images.length}
       </div>
 
-      {/* Thumbnails */}
-      <div className="flex gap-3 overflow-x-auto pb-1">
-        {images.map((src, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`flex-none w-20 h-14 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-              i === active ? 'border-cranberry shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
-            }`}
-            aria-label={`Ver foto ${i + 1}`}
-          >
-            <img src={src} alt="" className="w-full h-full object-cover" />
-          </button>
-        ))}
+      {/* Botón cerrar */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-all duration-200 border border-white/20"
+        aria-label="Cerrar visor"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      {/* Imagen — detiene propagación para no cerrar al clickear la imagen */}
+      <div
+        className="relative max-w-[90vw] max-h-[85vh] flex items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          key={current}
+          src={images[current]}
+          alt={`Foto ${current + 1}`}
+          className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl animate-fade-in"
+          style={{ userSelect: 'none' }}
+        />
       </div>
+
+      {/* Flecha izquierda */}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white border border-white/20 transition-all duration-200"
+            aria-label="Foto anterior"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white border border-white/20 transition-all duration-200"
+            aria-label="Foto siguiente"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+          </button>
+
+          {/* Puntos indicadores */}
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
+                className={`rounded-full transition-all duration-300 ${i === current ? 'bg-white w-5 h-2' : 'bg-white/40 w-2 h-2'}`}
+                aria-label={`Ir a foto ${i + 1}`}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
+  );
+};
+
+/* ── Galería con lightbox ── */
+const GalleryView = ({ images, title }) => {
+  const [active, setActive] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  return (
+    <>
+      <div className="space-y-4">
+        {/* Imagen principal — clickeable para abrir lightbox */}
+        <div
+          className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl bg-gray-100 group"
+          onClick={() => setLightboxOpen(true)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && setLightboxOpen(true)}
+          aria-label="Ampliar imagen"
+          style={{ cursor: 'zoom-in' }}
+        >
+          <img
+            key={active}
+            src={images[active]}
+            alt={`${title} - foto ${active + 1}`}
+            className="w-full h-full object-cover animate-fade-in transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+          {/* Ícono de lupa al hover */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
+            <div className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
+              <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0zm0 0v.01M11 8v6M8 11h6" />
+              </svg>
+            </div>
+          </div>
+          {/* Flechas internas (solo para cambiar foto, no abren lightbox) */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={(e) => { e.stopPropagation(); setActive((p) => (p - 1 + images.length) % images.length); }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center text-gray-700 hover:text-cranberry border border-transparent hover:border-cranberry transition-all duration-200"
+                aria-label="Foto anterior"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); setActive((p) => (p + 1) % images.length); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center text-gray-700 hover:text-cranberry border border-transparent hover:border-cranberry transition-all duration-200"
+                aria-label="Foto siguiente"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
+              </button>
+              {/* Indicador */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {images.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={(e) => { e.stopPropagation(); setActive(i); }}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${i === active ? 'bg-white w-5' : 'bg-white/50'}`}
+                    aria-label={`Ir a foto ${i + 1}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Thumbnails */}
+        <div className="flex gap-3 overflow-x-auto pb-1">
+          {images.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className={`flex-none w-20 h-14 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
+                i === active ? 'border-cranberry shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
+              }`}
+              aria-label={`Ver foto ${i + 1}`}
+            >
+              <img src={src} alt="" className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      {lightboxOpen && (
+        <Lightbox
+          images={images}
+          startIndex={active}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

@@ -38,6 +38,10 @@ export const projectsData = [
       '/images/proyectos/debate-candidatos-2023/foto-1.jpg',
       '/images/proyectos/debate-candidatos-2023/foto-2.jpg',
       '/images/proyectos/debate-candidatos-2023/foto-3.jpg',
+      '/images/proyectos/debate-candidatos-2023/foto-4.jpg',
+      '/images/proyectos/debate-candidatos-2023/foto-5.jpg',
+      '/images/proyectos/debate-candidatos-2023/foto-6.jpg',
+
     ],
     stats: [
       { value: '4+', label: 'Candidatos participantes' },
@@ -194,6 +198,27 @@ export const projectsData = [
       { value: 'Gratis', label: 'Orientación sin costo' },
       { value: '🎓', label: 'Carreras, terciarios y oficios' },
       { value: 'Jul 25', label: 'Julio 2025' },
+    ],
+  },
+  {
+    id: 'pintado-cec-2025',
+    title: 'Pintado del CEC El Roble',
+    description: 'Nos sumamos a renovar el SUM del CEC El Roble junto a la comunidad educativa, con pintura donada por Supercolor y muchas ganas de transformar el espacio.',
+    imageUrl: '/images/proyectos/pintado-cec-2025/portada.jpg',
+    date: '2025',
+    category: 'Comunidad',
+    impact: 'Comunidad educativa del CEC',
+    longDescription: `El equipo del CEC El Roble nos invitó a colaborar con el pintado de la institución, y desde Rotaract no dudamos en sumarnos a la iniciativa. Gracias a la donación de pintura de Supercolor y al compromiso de toda la comunidad educativa, logramos avanzar con el objetivo propuesto: renovar el SUM, un espacio fundamental para las actividades de los chicos.\n\nDurante el jueves y el sábado estuvimos acompañando en las jornadas de pintura, compartiendo trabajo, risas y el entusiasmo de ver cómo poco a poco el espacio iba tomando color.\n\nAgradecemos al CEC por invitarnos a formar parte, a Supercolor por su aporte solidario, y a todos los rotaractianos que se acercaron a dar una mano. Pequeñas acciones que transforman grandes espacios.`,
+    images: [
+      '/images/proyectos/pintado-cec-2025/foto-1.jpg',
+      '/images/proyectos/pintado-cec-2025/foto-2.jpg',
+      '/images/proyectos/pintado-cec-2025/foto-3.jpg',
+      '/images/proyectos/pintado-cec-2025/foto-4.jpg',
+    ],
+    stats: [
+      { value: '🎨', label: 'Pintura donada por Supercolor' },
+      { value: 'SUM', label: 'Espacio renovado' },
+      { value: 'CEC', label: 'El Roble Arrecifes' },
     ],
   },
 ];
