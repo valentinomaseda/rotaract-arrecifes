@@ -206,14 +206,14 @@ export const pastPresidentsData = [
     name: "Valentín Ramos",
     periods: ["2022 - 2023", "2025 - 2026"],
     image: "/images/galeria-presidentes/valvo.jpeg",
-    achievement: "Impulso de proyectos ecológicos sustentables y fortalecimiento de alianzas comunitarias.",
+    achievement: "Presidente fundador del club, responsable de sentar las bases operativas, el espíritu de servicio y los primeros grandes vínculos comunitarios.",
   },
   {
     id: "p-2022",
     name: "Valentino Maseda",
     periods: ["2023 - 2024", "2024 - 2025"],
     image: "/images/galeria-presidentes/valentino.jfif",
-    achievement: "Crecimiento del 40% en membresía del club y realización del I Foro Joven de Arrecifes.",
+    achievement: "Impulsor de un destacado crecimiento en la membresía del club, organizador del Foro Distrital y consolidador de las bases institucionales.",
   },
   {
     id: "p-2021",
@@ -221,6 +221,6 @@ export const pastPresidentsData = [
     periods: ["2026 - 2027"],
     isCurrent: true,
     image: "/images/galeria-presidentes/alexis.jpg",
-    achievement: "Liderazgo de la gestión actual enfocado en la innovación de proyectos sociales y desarrollo del club.",
+    achievement: "Impulsor de importantes reformas estructurales, nuevos comités y proyectos comunitarios de gran escala. RDI (Representante Distrital de Interact) en el período 2018 - 2019.",
   },
 ];
