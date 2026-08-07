@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { projectsData } from '../../data/projectsData';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { useSwipe } from '../../hooks/useSwipe';
 
 /* ── Lightbox fullscreen ── */
 const Lightbox = ({ images, startIndex, onClose }) => {
@@ -9,6 +10,11 @@ const Lightbox = ({ images, startIndex, onClose }) => {
 
   const prev = useCallback(() => setCurrent((i) => (i - 1 + images.length) % images.length), [images.length]);
   const next = useCallback(() => setCurrent((i) => (i + 1) % images.length), [images.length]);
+
+  const { handlers } = useSwipe({
+    onSwipeLeft: next,
+    onSwipeRight: prev,
+  });
 
   // Teclado: Escape cierra, flechas navegan
   useEffect(() => {
@@ -28,22 +34,23 @@ const Lightbox = ({ images, startIndex, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center"
-      style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(8px)' }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center select-none"
+      style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(8px)', touchAction: 'pan-y' }}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Visor de imagen"
+      {...handlers}
     >
       {/* Contador */}
-      <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-black/40 text-white font-montserrat text-sm px-4 py-1.5 rounded-full">
+      <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-black/40 text-white font-montserrat text-sm px-4 py-1.5 rounded-full z-10">
         {current + 1} / {images.length}
       </div>
 
       {/* Botón cerrar */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-all duration-200 border border-white/20"
+        className="absolute top-4 right-4 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white transition-all duration-200 border border-white/20 z-10"
         aria-label="Cerrar visor"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,7 +67,7 @@ const Lightbox = ({ images, startIndex, onClose }) => {
           key={current}
           src={images[current]}
           alt={`Foto ${current + 1}`}
-          className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl animate-fade-in"
+          className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl animate-fade-in pointer-events-none"
           style={{ userSelect: 'none' }}
         />
       </div>
@@ -70,21 +77,21 @@ const Lightbox = ({ images, startIndex, onClose }) => {
         <>
           <button
             onClick={(e) => { e.stopPropagation(); prev(); }}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white border border-white/20 transition-all duration-200"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white border border-white/20 transition-all duration-200 z-10"
             aria-label="Foto anterior"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); next(); }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white border border-white/20 transition-all duration-200"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center text-white border border-white/20 transition-all duration-200 z-10"
             aria-label="Foto siguiente"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
           </button>
 
           {/* Puntos indicadores */}
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-10">
             {images.map((_, i) => (
               <button
                 key={i}
@@ -105,57 +112,85 @@ const GalleryView = ({ images, title }) => {
   const [active, setActive] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
+  const prev = useCallback(() => setActive((p) => (p - 1 + images.length) % images.length), [images.length]);
+  const next = useCallback(() => setActive((p) => (p + 1) % images.length), [images.length]);
+
+  const { handlers, isSwipingRef } = useSwipe({
+    onSwipeLeft: next,
+    onSwipeRight: prev,
+  });
+
   return (
     <>
       <div className="space-y-4">
-        {/* Imagen principal — clickeable para abrir lightbox */}
+        {/* Imagen principal — clickeable para abrir lightbox, deslizable para cambiar foto */}
         <div
-          className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl bg-gray-100 group"
-          onClick={() => setLightboxOpen(true)}
+          className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl bg-gray-100 group select-none"
+          style={{ cursor: 'zoom-in', touchAction: 'pan-y' }}
+          {...handlers}
+          onClick={(e) => {
+            if (isSwipingRef.current) {
+              e.stopPropagation();
+              return;
+            }
+            setLightboxOpen(true);
+          }}
           role="button"
           tabIndex={0}
           onKeyDown={(e) => e.key === 'Enter' && setLightboxOpen(true)}
           aria-label="Ampliar imagen"
-          style={{ cursor: 'zoom-in' }}
         >
           <img
             key={active}
             src={images[active]}
             alt={`${title} - foto ${active + 1}`}
-            className="w-full h-full object-cover animate-fade-in transition-transform duration-500 group-hover:scale-[1.02]"
+            className="w-full h-full object-cover animate-fade-in transition-transform duration-500 group-hover:scale-[1.02] pointer-events-none"
           />
+
+          {/* Badge indicador de deslizamiento en mobile */}
+          {images.length > 1 && (
+            <div className="md:hidden absolute top-3 left-3 z-10 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-montserrat flex items-center gap-1.5 pointer-events-none">
+              <svg className="w-3.5 h-3.5 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h8M8 12h8M8 17h8" />
+              </svg>
+              Deslizá para cambiar
+            </div>
+          )}
+
           {/* Ícono de lupa al hover */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20 pointer-events-none">
             <div className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
               <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0zm0 0v.01M11 8v6M8 11h6" />
               </svg>
             </div>
           </div>
-          {/* Flechas internas (solo para cambiar foto, no abren lightbox) */}
+
+          {/* Flechas internas */}
           {images.length > 1 && (
             <>
               <button
-                onClick={(e) => { e.stopPropagation(); setActive((p) => (p - 1 + images.length) % images.length); }}
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center text-gray-700 hover:text-cranberry border border-transparent hover:border-cranberry transition-all duration-200"
+                onClick={(e) => { e.stopPropagation(); prev(); }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center text-gray-700 hover:text-cranberry border border-transparent hover:border-cranberry transition-all duration-200 z-10"
                 aria-label="Foto anterior"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" /></svg>
               </button>
               <button
-                onClick={(e) => { e.stopPropagation(); setActive((p) => (p + 1) % images.length); }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center text-gray-700 hover:text-cranberry border border-transparent hover:border-cranberry transition-all duration-200"
+                onClick={(e) => { e.stopPropagation(); next(); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-md flex items-center justify-center text-gray-700 hover:text-cranberry border border-transparent hover:border-cranberry transition-all duration-200 z-10"
                 aria-label="Foto siguiente"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
               </button>
+
               {/* Indicador */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                 {images.map((_, i) => (
                   <button
                     key={i}
                     onClick={(e) => { e.stopPropagation(); setActive(i); }}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${i === active ? 'bg-white w-5' : 'bg-white/50'}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === active ? 'bg-white w-5' : 'bg-white/50 w-2'}`}
                     aria-label={`Ir a foto ${i + 1}`}
                   />
                 ))}
