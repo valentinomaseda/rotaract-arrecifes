@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '#', label: 'Inicio', sectionId: null },
-    { href: '#about-us-title', label: 'Quiénes Somos', sectionId: 'about-us-title' },
+    { href: '#quienes-somos', label: 'Quiénes Somos', sectionId: 'quienes-somos' },
     { href: '#proyectos', label: 'Proyectos', sectionId: 'proyectos' },
   ];
 
@@ -84,8 +84,9 @@ const Navbar = () => {
               </a>
             ))}
             <a
-              href="#unete"
-              onClick={(e) => { e.preventDefault(); setIsOpen(false); }}
+              href="https://wa.me/5492478513553"
+              target="_blank"
+              rel="noopener noreferrer"
               className="ml-4 btn-cranberry text-white px-6 py-2.5 rounded-full text-sm font-semibold font-montserrat inline-flex items-center gap-2"
             >
               Colaborar

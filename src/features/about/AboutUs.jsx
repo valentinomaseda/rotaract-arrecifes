@@ -1,5 +1,10 @@
 import React from 'react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { youthIdentityData } from '../../data/aboutData';
+import { RotaryAreasSection } from './RotaryAreasSection';
+import { BoardSection } from './BoardSection';
+import { CommitteesCarousel } from './CommitteesCarousel';
+import { PastPresidentsGallery } from './PastPresidentsGallery';
 
 // Íconos SVG inline para cada valor
 const icons = {
@@ -40,7 +45,7 @@ const ValueCard = ({ title, description, delay }) => {
       <div className="absolute top-0 left-8 right-8 h-0.5 rounded-b-full bg-gradient-to-r from-cranberry/0 via-cranberry to-cranberry/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
 
       {/* Icon */}
-      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-cranberry/8 text-cranberry mb-6 group-hover:bg-cranberry group-hover:text-white transition-all duration-400">
+      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-cranberry/10 text-cranberry mb-6 group-hover:bg-cranberry group-hover:text-white transition-all duration-400">
         {icons[title]}
       </div>
 
@@ -79,37 +84,59 @@ export const AboutUs = () => {
 
   return (
     <section
-      className="relative bg-gray-50 py-24 md:py-32 px-6 lg:px-8 overflow-hidden"
+      id="quienes-somos"
+      className="scroll-mt-20 relative bg-gray-50 py-24 md:py-32 px-6 lg:px-8 overflow-hidden"
       aria-labelledby="about-us-title"
     >
-      {/* Decorative blob */}
+      {/* Decorative blobs */}
       <div
-        className="blob-decoration w-[500px] h-[500px] bg-cranberry/4 -bottom-40 -right-40"
+        className="blob-decoration w-[500px] h-[500px] bg-cranberry/5 -bottom-40 -right-40"
+        aria-hidden="true"
+      />
+      <div
+        className="blob-decoration w-[400px] h-[400px] bg-blue-500/5 top-20 -left-40"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto space-y-20">
+      <div className="relative z-10 max-w-6xl mx-auto space-y-24">
 
-        {/* Cabecera */}
+        {/* Header Principal con énfasis en jóvenes 18-30 */}
         <div
           ref={headerRef}
-          className={`text-center max-w-3xl mx-auto space-y-5 transition-all duration-800 ${
+          className={`text-center max-w-4xl mx-auto space-y-6 transition-all duration-800 ${
             headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
           style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
         >
-          <span className="inline-block text-xs font-montserrat font-semibold tracking-[0.2em] uppercase text-cranberry mb-2">
-            Nuestra organización
-          </span>
-          <h2 id="about-us-title" className="text-4xl md:text-5xl font-garet text-gray-900">
-            Quiénes Somos
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-montserrat font-semibold uppercase tracking-widest bg-cranberry/10 text-cranberry border border-cranberry/20">
+            <span className="w-2 h-2 rounded-full bg-cranberry animate-pulse" />
+            {youthIdentityData.badge}
+          </div>
+
+          <h2 id="about-us-title" className="text-4xl md:text-5xl lg:text-6xl font-garet text-gray-900 leading-tight">
+            {youthIdentityData.title}
           </h2>
-          <p className="text-xl text-gray-500 font-montserrat leading-relaxed">
-            Formados por jóvenes líderes que intercambian ideas, adquieren nuevas habilidades profesionales y desarrollan proyectos para beneficiar a Arrecifes.
+
+          <p className="text-lg md:text-xl text-gray-600 font-montserrat leading-relaxed max-w-3xl mx-auto">
+            {youthIdentityData.description}
           </p>
+
+          {/* Metric Badges */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 max-w-3xl mx-auto">
+            {youthIdentityData.stats.map((stat) => (
+              <div key={stat.label} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm text-center">
+                <span className="block text-2xl md:text-3xl font-garet text-cranberry font-bold">
+                  {stat.value}
+                </span>
+                <span className="text-xs font-montserrat text-gray-500 mt-1 block">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Value cards grid */}
+        {/* Value cards grid (Misión, Visión, Valores) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {values.map((v, i) => (
             <ValueCard
@@ -120,6 +147,18 @@ export const AboutUs = () => {
             />
           ))}
         </div>
+
+        {/* 7 Áreas de Interés de Rotary */}
+        <RotaryAreasSection />
+
+        {/* Comisión Directiva Actual */}
+        <BoardSection />
+
+        {/* Mini Carrusel de Comités */}
+        <CommitteesCarousel />
+
+        {/* Galería de Presidentes */}
+        <PastPresidentsGallery />
 
       </div>
     </section>
