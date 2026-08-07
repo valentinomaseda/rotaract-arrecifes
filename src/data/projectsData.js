@@ -123,7 +123,6 @@ export const projectsData = [
     images: [
       '/images/proyectos/salud-mental-2024/foto-1.jpg',
       '/images/proyectos/salud-mental-2024/foto-2.jpg',
-      '/images/proyectos/salud-mental-2024/foto-3.jpg',
     ],
     stats: [
       { value: 'Libre', label: 'Entrada libre y gratuita' },
