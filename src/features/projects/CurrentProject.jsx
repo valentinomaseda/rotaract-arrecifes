@@ -45,22 +45,6 @@ export const CurrentProject = () => {
             Estamos reuniendo alimentos no perecederos para abastecer a comedores comunitarios de la ciudad durante los meses de invierno. Tu aporte hace la diferencia directa en nuestra comunidad.
           </p>
 
-          {/* Progress bar decorativa */}
-          <div className="space-y-2 text-left">
-            <div className="flex justify-between font-montserrat text-sm">
-              <span className="text-gray-600 font-medium">Meta de recolección</span>
-              <span className="text-cranberry font-semibold">68%</span>
-            </div>
-            <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className={`h-full bg-gradient-to-r from-cranberry to-pink-400 rounded-full transition-all duration-1500 ease-out ${
-                  textVisible ? 'w-[68%]' : 'w-0'
-                }`}
-                style={{ transitionDelay: '400ms' }}
-              />
-            </div>
-            <p className="font-montserrat text-xs text-gray-400">340 kg reunidos de 500 kg objetivo</p>
-          </div>
 
           {/* CTA */}
           <div className="pt-2 flex justify-center lg:justify-start">

@@ -34,6 +34,17 @@
     font-family: var(--font-heading);
     font-weight: 700;
   }
+
+  /* Cursor pointer en todo lo clickeable */
+  a,
+  button,
+  [role="button"],
+  [tabindex]:not([tabindex="-1"]),
+  label[for],
+  select,
+  summary {
+    cursor: pointer;
+  }
 }
 
 /* =========================================

@@ -4,7 +4,7 @@ import { projectsData } from '../../data/projectsData';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 // Galería de imágenes con lightbox simple
-const Gallery = ({ images, title }) => {
+const GalleryView = ({ images, title }) => {
   const [active, setActive] = useState(0);
 
   return (
@@ -144,9 +144,14 @@ export const ProjectDetailPage = () => {
 
             {/* Galería */}
             <div className="lg:col-span-7">
-              {project.images?.length > 0 && (
-                <Gallery images={project.images} title={project.title} />
-              )}
+              {(() => {
+                const allImages = project.imageUrl
+                  ? [project.imageUrl, ...(project.images ?? []).filter(img => img !== project.imageUrl)]
+                  : (project.images ?? []);
+                return allImages.length > 0
+                  ? <GalleryView images={allImages} title={project.title} />
+                  : null;
+              })()}
             </div>
 
             {/* Info lateral */}

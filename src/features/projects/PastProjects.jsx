@@ -104,27 +104,30 @@ export const PastProjects = () => {
             onClick={() => scroll('left')}
             disabled={!canScrollLeft}
             aria-label="Proyectos anteriores"
-            className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-11 h-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 transition-all duration-300 hover:border-cranberry hover:text-cranberry hover:shadow-lg ${
+            className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-20 w-11 h-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 cursor-pointer transition-all duration-300 hover:border-cranberry hover:text-cranberry hover:shadow-lg ${
               canScrollLeft ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'
             }`}
           >
             <ChevronLeft />
           </button>
 
-          {/* Track del carrusel */}
-          <div
-            ref={trackRef}
-            className="flex gap-6 overflow-x-auto pb-4 scroll-smooth carousel-track"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {projectsData.map((project, index) => (
-              <div
-                key={project.id}
-                className="flex-none w-[320px] md:w-[360px]"
-              >
-                <ProjectCard project={project} index={index} />
-              </div>
-            ))}
+          {/* Wrapper que corta el desbordamiento vertical del pb-4 del track */}
+          <div className="overflow-hidden">
+            {/* Track del carrusel */}
+            <div
+              ref={trackRef}
+              className="flex gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth carousel-track"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {projectsData.map((project, index) => (
+                <div
+                  key={project.id}
+                  className="flex-none w-[320px] md:w-[360px]"
+                >
+                  <ProjectCard project={project} index={index} />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Botón derecha */}
@@ -132,7 +135,7 @@ export const PastProjects = () => {
             onClick={() => scroll('right')}
             disabled={!canScrollRight}
             aria-label="Proyectos siguientes"
-            className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-11 h-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 transition-all duration-300 hover:border-cranberry hover:text-cranberry hover:shadow-lg ${
+            className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 w-11 h-11 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-700 cursor-pointer transition-all duration-300 hover:border-cranberry hover:text-cranberry hover:shadow-lg ${
               canScrollRight ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'
             }`}
           >
