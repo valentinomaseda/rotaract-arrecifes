@@ -19,9 +19,8 @@ export const ProjectCard = ({ project, index = 0 }) => {
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && handleClick()}
       aria-label={`Ver detalles del proyecto: ${project.title}`}
-      className={`group flex flex-col bg-white rounded-2xl overflow-hidden card-hover border border-gray-100/80 transition-all duration-700 cursor-pointer select-none ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      className={`group flex flex-col bg-white rounded-2xl overflow-hidden card-hover border border-gray-100/80 transition-all duration-700 cursor-pointer select-none ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       {/* Imagen */}
@@ -37,16 +36,16 @@ export const ProjectCard = ({ project, index = 0 }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-cranberry/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* Date badge */}
-        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm">
-          <span className="font-montserrat text-xs font-semibold text-gray-700 uppercase tracking-wider">
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-white/95 backdrop-blur-sm px-2 py-1 sm:px-3 sm:py-1.5 rounded-full shadow-sm max-w-[45%]">
+          <span className="font-montserrat text-[10px] sm:text-xs font-semibold text-gray-700 uppercase tracking-wider truncate block">
             {project.date}
           </span>
         </div>
 
         {/* Category badge */}
         {project.category && (
-          <div className="absolute top-4 right-4 bg-cranberry/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm">
-            <span className="font-montserrat text-xs font-semibold text-white uppercase tracking-wider">
+          <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-cranberry/90 backdrop-blur-sm px-2 py-1 sm:px-3 sm:py-1.5 rounded-full shadow-sm max-w-[45%]">
+            <span className="font-montserrat text-[10px] sm:text-xs font-semibold text-white uppercase tracking-wider truncate block">
               {project.category}
             </span>
           </div>
