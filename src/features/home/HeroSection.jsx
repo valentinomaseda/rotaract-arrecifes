@@ -151,6 +151,8 @@ export const HeroSection = () => {
                 alt="Jóvenes de Rotaract Arrecifes trabajando en un proyecto comunitario"
                 className="w-full h-full object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
                 loading="eager"
+                fetchpriority="high"
+                decoding="sync"
                 width="600"
                 height="750"
               />

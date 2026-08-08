@@ -204,10 +204,12 @@
   /* Animaciones continuas */
   .animate-float {
     animation: floatY 6s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-pulse-dot {
     animation: pulseDot 2s ease-in-out infinite;
+    will-change: transform, opacity;
   }
 
   /* Fade-in para galería */
@@ -229,6 +231,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: shimmer 4s linear infinite;
+    will-change: background-position;
   }
 }
 
@@ -291,9 +294,10 @@
 .blob-decoration {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(80px);
+  filter: blur(60px);
   pointer-events: none;
   z-index: 0;
+  will-change: auto;
 }
 
 /* =========================================

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
@@ -7,8 +7,10 @@ import { HeroSection } from './features/home/HeroSection'
 import { CurrentProject } from './features/projects/CurrentProject'
 import { AboutUs } from './features/about/AboutUs'
 import { PastProjects } from './features/projects/PastProjects'
-import { AllProjectsPage } from './features/home/AllProjectsPage'
-import { ProjectDetailPage } from './features/projects/ProjectDetailPage'
+
+// Lazy loading de rutas secundarias → no se descargan hasta que el usuario navega allí
+const AllProjectsPage = lazy(() => import('./features/home/AllProjectsPage').then(m => ({ default: m.AllProjectsPage })))
+const ProjectDetailPage = lazy(() => import('./features/projects/ProjectDetailPage').then(m => ({ default: m.ProjectDetailPage })))
 
 // HomePage: maneja el scroll a una sección si viene con state.scrollTo
 const HomePage = () => {
@@ -39,11 +41,13 @@ function App() {
       <ScrollToTop />
       <div className="min-h-screen bg-white text-gray-800 flex flex-col">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/proyectos" element={<AllProjectsPage />} />
-          <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/proyectos" element={<AllProjectsPage />} />
+            <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
+          </Routes>
+        </Suspense>
         <Footer />
       </div>
     </BrowserRouter>

@@ -28,7 +28,7 @@ export const projectsData = [
   {
     id: 'debate-candidatos-2023',
     title: 'Debate entre Candidatos a Intendente',
-    description: 'Organizamos el primer debate público entre candidatos a intendente de Arrecifes, fomentando la participación ciudadana y la democracia.',
+    description: 'Organizamos el debate público entre candidatos a intendente de Arrecifes, fomentando la participación ciudadana y la democracia.',
     imageUrl: '/hero-image.jpeg',
     date: 'Octubre 2023',
     category: 'Ciudadanía',
