@@ -3,13 +3,13 @@ import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 const FORM_VOTACION_URL = 'https://forms.gle/Wtm3uDqYNu33eSUB7';
 
-const ProjectCard = ({ badge, title, description, stats, cta }) => {
+const ProjectCard = ({ badge, title, description, stats, cta, className = '' }) => {
   const [ref, visible] = useScrollAnimation({ threshold: 0.12 });
 
   return (
     <div
       ref={ref}
-      className={`flex flex-col bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-xl transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`flex flex-col bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-xl transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${className}`}
       style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
     >
       {/* Badge */}
@@ -140,6 +140,28 @@ export const CurrentProject = () => {
               icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              ),
+            }}
+          />
+
+          <ProjectCard
+            className="md:col-span-2 max-w-3xl mx-auto w-full"
+            badge="En progreso"
+            title="Banco de Elementos Ortopédicos"
+            description="Proyecto destinado a fortalecer y renovar el banco de elementos ortopédicos de Rotary mediante la incorporación de sillas de ruedas, andadores, muletas, colchones antiescaras y otros elementos de apoyo, para facilitar el acceso a recursos esenciales a personas que los necesitan de manera temporal y promover su reutilización solidaria dentro de la comunidad."
+            stats={[
+              { value: '25', label: 'Elementos actuales', color: 'text-cranberry' },
+              { value: '🏥', label: 'Rotary Club', color: 'text-gray-700' },
+              { value: 'Activo', label: 'Recaudación', color: 'text-emerald-600' },
+            ]}
+            cta={{
+              href: 'https://wa.me/5492478513553',
+              label: 'Cómo colaborar',
+              ariaLabel: 'Cómo colaborar con la renovación del banco de elementos ortopédicos',
+              icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               ),
             }}
