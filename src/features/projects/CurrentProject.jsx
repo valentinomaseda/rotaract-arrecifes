@@ -1,8 +1,72 @@
 import React from 'react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
+const FORM_VOTACION_URL = 'https://forms.gle/Wtm3uDqYNu33eSUB7';
+
+const ProjectCard = ({ badge, title, description, stats, cta }) => {
+  const [ref, visible] = useScrollAnimation({ threshold: 0.12 });
+
+  return (
+    <div
+      ref={ref}
+      className={`flex flex-col bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-xl transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
+    >
+      {/* Badge */}
+      <span className="inline-flex items-center gap-2 self-start px-4 py-1.5 rounded-full text-xs font-montserrat font-semibold tracking-widest uppercase bg-cranberry/10 text-cranberry border border-cranberry/20 mb-5">
+        <span className="w-2 h-2 rounded-full bg-cranberry animate-pulse" aria-hidden="true" />
+        {badge}
+      </span>
+
+      {/* Title */}
+      <h3 className="font-garet text-2xl md:text-3xl text-gray-900 leading-tight mb-4">
+        {title}
+      </h3>
+
+      {/* Description */}
+      <p className="font-montserrat text-gray-600 leading-relaxed text-base md:text-lg mb-6 flex-grow">
+        {description}
+      </p>
+
+      {/* Stats */}
+      {stats && (
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          {stats.map((stat) => (
+            <div key={stat.label} className="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm text-center">
+              <span className={`block font-garet text-xl font-bold ${stat.color ?? 'text-cranberry'}`}>
+                {stat.value}
+              </span>
+              <span className="text-xs font-montserrat text-gray-500">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* CTA */}
+      <div className="mt-auto">
+        <a
+          href={cta.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-cranberry text-white font-montserrat font-semibold hover:bg-cranberry-dark shadow-lg shadow-cranberry/25 hover:shadow-xl hover:shadow-cranberry/35 transition-all duration-300 group"
+          aria-label={cta.ariaLabel}
+        >
+          {cta.icon}
+          {cta.label}
+          <svg
+            className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"
+            fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
+};
+
 export const CurrentProject = () => {
-  const [contentRef, contentVisible] = useScrollAnimation({ threshold: 0.15 });
+  const [headerRef, headerVisible] = useScrollAnimation({ threshold: 0.2 });
 
   return (
     <section
@@ -16,70 +80,76 @@ export const CurrentProject = () => {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
+
+        {/* Header */}
         <div
-          ref={contentRef}
-          className={`bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-8 sm:p-12 md:p-16 border border-gray-100 shadow-xl transition-all duration-800 space-y-8 text-center ${contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+          ref={headerRef}
+          className={`text-center mb-12 transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
         >
-          {/* Tag & Title */}
-          <div className="space-y-4 max-w-2xl mx-auto">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-montserrat font-semibold tracking-widest uppercase bg-cranberry/10 text-cranberry border border-cranberry/20">
-              <span className="w-2 h-2 rounded-full bg-cranberry animate-pulse" />
-              Proyecto Destacado
-            </span>
-
-            <h2
-              id="current-project-title"
-              className="text-3xl md:text-5xl font-garet text-gray-900 leading-tight"
-            >
-              Tu Huella, No Tu Colilla
-            </h2>
-          </div>
-
-          {/* Description */}
-          <p className="text-gray-600 font-montserrat leading-relaxed text-lg md:text-xl max-w-3xl mx-auto">
-            Iniciativa para la instalación de 50 colilleros ecológicos en puntos estratégicos de Arrecifes. Buscamos reducir la contaminación por colillas, mejorar la limpieza de los espacios públicos y concientizar a través de códigos QR informativos en cada dispositivo.
+          <h2
+            id="current-project-title"
+            className="font-garet text-4xl md:text-5xl text-gray-900 mb-4"
+          >
+            Proyectos Actuales
+          </h2>
+          <p className="font-montserrat text-gray-500 text-lg max-w-xl mx-auto">
+            Lo que estamos haciendo hoy para transformar Arrecifes.
           </p>
+          <div className="h-px w-24 bg-cranberry/40 mx-auto mt-6 rounded-full" aria-hidden="true" />
+        </div>
 
-          {/* Key Metric Highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
-              <span className="block font-garet text-2xl font-bold text-cranberry">50</span>
-              <span className="text-xs font-montserrat text-gray-500">Colilleros Eco</span>
-            </div>
-            <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
-              <span className="block font-garet text-2xl font-bold text-emerald-600">En Progreso</span>
-              <span className="text-xs font-montserrat text-gray-500">Estado Actual</span>
-            </div>
-            <div className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
-              <span className="block font-garet text-2xl font-bold text-cranberry">QR Activos</span>
-              <span className="text-xs font-montserrat text-gray-500">Educación Ambiental</span>
-            </div>
-          </div>
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
 
-          {/* CTA Button */}
-          <div className="pt-4 flex justify-center">
-            <a
-              href="https://drive.google.com/file/d/1sWJZDwZ3C59xsntAB4VdBAK4M1R56G-Z/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cranberry text-white font-montserrat font-semibold hover:bg-cranberry-dark shadow-lg shadow-cranberry/25 hover:shadow-xl hover:shadow-cranberry/35 transition-all duration-300 group"
-              aria-label="Saber más sobre el proyecto (Abre en nueva pestaña)"
-            >
-              Más Información
-              <svg
-                className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1"
-                fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-          </div>
+          <ProjectCard
+            badge="En progreso"
+            title="Tu Huella, No Tu Colilla"
+            description="Instalación de 50 colilleros ecológicos en puntos estratégicos de Arrecifes. Buscamos reducir la contaminación, mejorar los espacios públicos y concientizar mediante códigos QR informativos."
+            stats={[
+              { value: '50', label: 'Colilleros Eco', color: 'text-cranberry' },
+              { value: 'Activo', label: 'Estado', color: 'text-emerald-600' },
+              { value: 'QR', label: 'Ed. Ambiental', color: 'text-cranberry' },
+            ]}
+            cta={{
+              href: 'https://drive.google.com/file/d/1sWJZDwZ3C59xsntAB4VdBAK4M1R56G-Z/view?usp=sharing',
+              label: 'Más información',
+              ariaLabel: 'Saber más sobre Tu Huella, No Tu Colilla (abre en nueva pestaña)',
+              icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              ),
+            }}
+          />
+
+          <ProjectCard
+            badge="¡Nuevo · 2026!"
+            title="Ciclo de Capacitaciones"
+            description="Una vez al mes, en nuestra última reunión, traemos a un orador invitado para compartir su experiencia y conocimiento con toda la comunidad. ¿Qué temáticas te gustaría que abordemos? ¡Votá y ayudanos a definir los próximos encuentros!"
+            stats={[
+              { value: '1/mes', label: 'Frecuencia', color: 'text-cranberry' },
+              { value: '🎤', label: 'Orador invitado', color: 'text-gray-700' },
+              { value: 'Abierto', label: 'A todos', color: 'text-emerald-600' },
+            ]}
+            cta={{
+              href: FORM_VOTACION_URL,
+              label: 'Votá las temáticas',
+              ariaLabel: 'Votar temáticas del Ciclo de Capacitaciones (abre en nueva pestaña)',
+              icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              ),
+            }}
+          />
 
         </div>
       </div>
+
+      {/* Bottom divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-px section-divider" aria-hidden="true" />
     </section>
   );
 };
