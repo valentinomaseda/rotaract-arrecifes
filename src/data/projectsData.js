@@ -57,7 +57,7 @@ export const projectsData = [
     date: 'Abril 2024',
     category: 'Asistencia Social',
     impact: 'Adultos mayores beneficiados',
-    longDescription: `En abril de 2024, los miembros del Rotaract Club visitaron el hogar de ancianos de Arrecifes para pasar una tarde especial con los residentes. La jornada incluyó actividades recreativas, música, charlas y merienda compartida.\n\nMuchos de los adultos mayores reciben pocas visitas, por lo que la presencia de los jóvenes del club generó un impacto emocional muy significativo. El intercambio intergeneracional fue enriquecedor para ambas partes.\n\nEsta visita nos recordó la importancia de mantener los lazos con los sectores más vulnerables de nuestra comunidad y motivó al club a repetir la experiencia de forma periódica.`,
+    longDescription: `Junto al RDR Jeremías y los chicos de Interact Arrecifes, tuvimos la oportunidad de visitar el Hogar de Ancianos Municipal. Disfrutamos de conversaciones encantadoras, risas y momentos inolvidables en compañía de los abuelos del hogar.\n\nMuchos de los adultos mayores reciben pocas visitas, por lo que la presencia de los jóvenes del club generó un impacto emocional muy significativo. El intercambio intergeneracional fue enriquecedor para ambas partes.\n\nEsta visita nos llenó el corazón con tanto cariño y sabiduría, y nos motivó a repetir la experiencia de forma periódica. ¡Esperamos volver pronto!`,
     images: [
       '/images/proyectos/visita-asilo-2024/foto-1.jpg',
       '/images/proyectos/visita-asilo-2024/foto-2.jpg',
@@ -79,7 +79,7 @@ export const projectsData = [
     date: 'Octubre 2024',
     category: 'Medio Ambiente',
     impact: 'Comunidad educativa',
-    longDescription: `En octubre de 2024, en el marco del Día del Árbol, el Rotaract Club Arrecifes llevó adelante una jornada de plantación en la Escuela de Educación Secundaria Nº6, en colaboración con técnicos del INTA local.\n\nLos especialistas del INTA brindaron una charla educativa sobre especies nativas y su importancia para el ecosistema regional. Luego, estudiantes y voluntarios participaron activamente en la plantación de los ejemplares en los espacios verdes del establecimiento.\n\nLa colaboración entre el sector educativo, el INTA y la organización juvenil demostró que el trabajo conjunto multiplica el impacto de cada acción ambiental.`,
+    longDescription: `El viernes 18 estuvimos llevando a cabo el primer plantío de árboles en la Escuela EES Nº6, como parte de nuestra campaña de reforestación. Agradecemos al INTA por la generosa donación de tres árboles que ayudarán a embellecer el entorno y promover un ambiente más saludable para los estudiantes.\n\nLa jornada contó con la participación de estudiantes y voluntarios que se sumaron activamente al cuidado del espacio verde del establecimiento.\n\nJuntos, sembramos el futuro. La colaboración entre el sector educativo, el INTA y la organización juvenil demostró que el trabajo conjunto multiplica el impacto de cada acción ambiental.`,
     images: [
       '/images/proyectos/plantio-arboles-ees6-2024/foto-1.jpg',
       '/images/proyectos/plantio-arboles-ees6-2024/foto-2.jpg',
@@ -99,7 +99,7 @@ export const projectsData = [
     date: 'Diciembre 2024',
     category: 'Organizacional',
     impact: '+100 rotaractianos internacionales',
-    longDescription: `En diciembre de 2024, Arrecifes fue la sede del Foro Distrital Rotaract, un evento que reunió a más de 100 jóvenes líderes de Argentina, Uruguay y Paraguay. La organización completa del evento estuvo a cargo del Rotaract Club Arrecifes.\n\nDurante el foro se realizaron paneles temáticos, talleres de liderazgo, actividades de integración y una agenda social que incluyó recorridos por la ciudad. Fue una oportunidad única para mostrar Arrecifes al mundo rotaractiano y posicionar al club como referente en la región.\n\nLa logística de alojar y coordinar a más de 100 personas de tres países distintos fue un desafío monumental que el club superó con creces, recibiendo elogios de todos los asistentes.`,
+    longDescription: `El 30 de noviembre y 1 de diciembre vivimos un evento inolvidable lleno de aprendizajes, trabajo en equipo y pura energía. Desde capacitaciones hasta momentos de camaradería, este foro lo tuvo todo.\n\nEl sábado arrancó con capacitaciones, la Asamblea de AIRAUP y una fiesta épica para cerrar el día con toda la actitud. El domingo fue el turno de la actividad de servicio —donde pintamos y ayudamos con reformas a la Escuela Nº29—, la Asamblea Distrital y un rico almuerzo para cerrar con broche de oro.\n\nFue una oportunidad única para mostrar Arrecifes al mundo rotaractiano y posicionar al club como referente en la región. La logística de alojar y coordinar a más de 100 personas de tres países distintos fue un desafío monumental que el club superó con creces.`,
     images: [
       '/images/proyectos/foro-distrital-2024/foto-1.jpeg',
       '/images/proyectos/foro-distrital-2024/foto-2.jpeg',
@@ -119,7 +119,7 @@ export const projectsData = [
     date: 'Septiembre 2024',
     category: 'Salud',
     impact: 'Jóvenes de Arrecifes',
-    longDescription: `En el marco del Día Mundial de la Salud Mental, el Rotaract Club Arrecifes organizó una jornada de concientización dirigida especialmente a los jóvenes de la ciudad. El evento contó con la participación de profesionales de la salud mental locales que brindaron charlas y talleres.\n\nLos temas abordados incluyeron el manejo de la ansiedad, herramientas para pedir ayuda, desmitificación del tratamiento psicológico y espacios de escucha activa. La jornada fue de entrada libre y gratuita.\n\nEn un contexto donde la salud mental juvenil es cada vez más una prioridad, este proyecto reafirmó el compromiso del club con el bienestar integral de la comunidad.`,
+    longDescription: `La charla estuvo a cargo de la psicóloga Laura Casal, quien compartió con nosotros su conocimiento sobre el estrés, la ansiedad y la depresión. La dinámica permitió la participación del público, fomentando un ambiente de diálogo abierto donde los asistentes pudieron hacer preguntas y compartir experiencias.\n\nFue una jornada llena de valiosos consejos y reflexiones que nos ayudarán a manejar mejor estos desafíos en nuestras vidas. Nuestro objetivo fue proporcionar herramientas prácticas y conocimientos valiosos para mejorar el bienestar mental.\n\nEn un contexto donde la salud mental juvenil es cada vez más una prioridad, este proyecto reafirmó el compromiso del club con el bienestar integral de la comunidad. ¡Gracias, Laura, por tu dedicación y sabiduría!`,
     images: [
       '/images/proyectos/salud-mental-2024/foto-1.jpg',
       '/images/proyectos/salud-mental-2024/foto-2.jpg',
@@ -138,7 +138,7 @@ export const projectsData = [
     date: 'Agosto 2025',
     category: 'Asistencia Social',
     impact: 'Familias vulnerables',
-    longDescription: `En agosto de 2025, en el marco del programa internacional Rotaract "Sirve Ahora", el club armó y distribuyó kits de higiene personal para familias en situación de vulnerabilidad de la ciudad de Arrecifes.\n\nCada kit incluyó productos de higiene básica: jabón, shampoo, pasta dental, cepillo, desodorante y artículos de cuidado femenino. Los paquetes fueron armados en jornadas de trabajo conjunto por los miembros del club y luego entregados puerta a puerta en los barrios identificados.\n\nEste proyecto es parte de una iniciativa global del movimiento Rotaract que busca que los clubes del mundo actúen simultáneamente en sus comunidades, generando un impacto colectivo a escala mundial.`,
+    longDescription: `Junto a los chicos de Meriendas Compartidas, compartimos una tarde llena de juegos, risas y aprendizaje. Además, hicimos entrega de kits de higiene personal para seguir fomentando hábitos saludables y el cuidado diario.\n\nCada kit incluyó productos de higiene básica esenciales para las familias. Los paquetes fueron armados en jornadas de trabajo conjunto por los miembros del club.\n\nEste proyecto es parte de la iniciativa global del movimiento Rotaract "Sirve Ahora", que busca que los clubes del mundo actúen simultáneamente en sus comunidades, generando un impacto colectivo a escala mundial.`,
     images: [
       '/images/proyectos/kits-higiene-2025/foto-1.jpg',
       '/images/proyectos/kits-higiene-2025/foto-2.jpg',
@@ -159,7 +159,7 @@ export const projectsData = [
     date: 'Septiembre 2025',
     category: 'Asistencia Social',
     impact: 'Niños y familias',
-    longDescription: `En septiembre de 2025, el Rotaract Club organizó un merendero comunitario destinado a niños y familias de sectores vulnerables de Arrecifes. La jornada contó con la participación de voluntarios del club y colaboradores de la comunidad que donaron alimentos y materiales.\n\nSe sirvió merienda completa y se realizaron actividades lúdicas para los más chicos mientras los adultos podían acceder a información sobre recursos y programas sociales disponibles en la ciudad.\n\nEl merendero es una forma concreta y directa de servicio a la comunidad, y refleja los valores de solidaridad y acción que definen al Rotaract.`,
+    longDescription: `El sábado 13 de septiembre compartimos una tarde hermosa junto a los chicos de Meriendas Compartidas. Hubo risas, baile, juegos y muchísima energía. Además, tuvimos la gran oportunidad de vivir la experiencia del Turismo Standard Histórico que pasó por nuestra ciudad, y acompañar a los chicos a disfrutar de unas vueltas inolvidables en los autos.\n\nSe sirvió merienda completa y se realizaron actividades lúdicas para los más chicos. Fue un día lleno de sonrisas, emociones y recuerdos que nos quedan en el corazón.\n\nEl merendero es una forma concreta y directa de servicio a la comunidad, y refleja los valores de solidaridad y acción que definen al Rotaract.`,
     images: [
       '/images/proyectos/merendero-2025/foto-1.jpg',
       '/images/proyectos/merendero-2025/foto-2.jpg',
@@ -185,7 +185,7 @@ export const projectsData = [
     date: 'Julio 2025',
     category: 'Educación',
     impact: 'Estudiantes secundarios',
-    longDescription: `En julio de 2025, el Rotaract Club Arrecifes organizó una jornada de orientación vocacional gratuita para estudiantes de los últimos años del secundario. La actividad incluyó la realización de tests vocacionales y una instancia de devolución personalizada con orientadores.\n\nEl objetivo fue brindarle a los jóvenes herramientas concretas para tomar decisiones informadas sobre su futuro académico y profesional, en un momento clave de sus vidas. Se abordaron tanto carreras universitarias como terciarias y oficios.\n\nEsta iniciativa nació de la propia experiencia de los miembros del club, muchos de los cuales reconocen haber necesitado este tipo de orientación en su momento y quieren que otros jóvenes tengan esa oportunidad.`,
+    longDescription: `Durante dos meses de jornadas semanales, cada participante se animó a mirar hacia adentro, a escucharse y a empezar a construir su propio camino, con valentía y autenticidad. El viernes 11 de julio cerramos un espacio que fue mucho más que un taller: fue un camino compartido de preguntas, búsquedas, dudas, descubrimientos y proyecciones hacia el futuro.\n\nAgradecemos especialmente a Dana y Agus, las profesionales que llevaron adelante este proceso con tanta dedicación, calidez y compromiso. Gracias por guiar, por acompañar cada paso y por sembrar herramientas que quedarán para siempre.\n\nPorque elegir no siempre es fácil, pero hacerlo en compañía, con escucha y contención, lo vuelve más posible. La vocación no se encuentra, se construye. Y este fue solo el comienzo…`,
     images: [
       '/images/proyectos/test-vocacionales-2025/foto-1.jpg',
       '/images/proyectos/test-vocacionales-2025/foto-2.jpg',
