@@ -75,7 +75,7 @@ const PROJECTS = [
 /* ─── Card individual ─── */
 const ProjectCard = ({ badge, title, description, stats, cta, active }) => (
   <div
-    className={`flex flex-col h-full bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-xl transition-all duration-500 ${
+    className={`flex flex-col h-full bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-5 sm:p-8 md:p-10 border border-gray-100 shadow-xl transition-all duration-500 ${
       active
         ? 'opacity-100 scale-100 shadow-xl'
         : 'opacity-40 scale-[0.97] shadow-md'
@@ -83,43 +83,49 @@ const ProjectCard = ({ badge, title, description, stats, cta, active }) => (
     style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
     aria-hidden={!active}
   >
-    <span className="inline-flex items-center gap-2 self-start px-4 py-1.5 rounded-full text-xs font-montserrat font-semibold tracking-widest uppercase bg-cranberry/10 text-cranberry border border-cranberry/20 mb-5">
-      <span className="w-2 h-2 rounded-full bg-cranberry animate-pulse" aria-hidden="true" />
+    {/* Badge */}
+    <span className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full text-[10px] sm:text-xs font-montserrat font-semibold tracking-widest uppercase bg-cranberry/10 text-cranberry border border-cranberry/20 mb-3 sm:mb-5">
+      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cranberry animate-pulse" aria-hidden="true" />
       {badge}
     </span>
 
-    <h3 className="font-garet text-2xl md:text-3xl text-gray-900 leading-tight mb-4">{title}</h3>
+    {/* Título */}
+    <h3 className="font-garet text-lg sm:text-2xl md:text-3xl text-gray-900 leading-tight mb-2 sm:mb-4">{title}</h3>
 
-    <p className="font-montserrat text-gray-600 leading-relaxed text-base md:text-lg mb-6 flex-grow">{description}</p>
+    {/* Descripción */}
+    <p className="font-montserrat text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg mb-4 sm:mb-6 flex-grow">{description}</p>
 
+    {/* Stats */}
     {stats && (
-      <div className="grid grid-cols-3 gap-3 mb-6">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
         {stats.map((stat) => (
-          <div key={stat.label} className="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm text-center">
-            <span className={`block font-garet text-xl font-bold ${stat.color ?? 'text-cranberry'}`}>{stat.value}</span>
-            <span className="text-xs font-montserrat text-gray-500">{stat.label}</span>
+          <div key={stat.label} className="bg-white rounded-xl sm:rounded-2xl p-2 sm:p-3 border border-gray-100 shadow-sm text-center">
+            <span className={`block font-garet text-base sm:text-xl font-bold ${stat.color ?? 'text-cranberry'}`}>{stat.value}</span>
+            <span className="text-[10px] sm:text-xs font-montserrat text-gray-500 leading-tight">{stat.label}</span>
           </div>
         ))}
       </div>
     )}
 
+    {/* CTA */}
     <div className="mt-auto">
       <a
         href={cta.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-cranberry text-white font-montserrat font-semibold hover:bg-cranberry-dark shadow-lg shadow-cranberry/25 hover:shadow-xl hover:shadow-cranberry/35 transition-all duration-300 group"
+        className="inline-flex items-center gap-2 sm:gap-3 px-5 py-2.5 sm:px-7 sm:py-3.5 rounded-full bg-cranberry text-white font-montserrat font-semibold text-sm sm:text-base hover:bg-cranberry-dark shadow-lg shadow-cranberry/25 hover:shadow-xl hover:shadow-cranberry/35 transition-all duration-300 group"
         aria-label={cta.ariaLabel}
         tabIndex={active ? 0 : -1}
       >
         {cta.icon}
         {cta.label}
-        <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
       </a>
     </div>
   </div>
+
 );
 
 /* ─── Flecha de navegación ─── */
