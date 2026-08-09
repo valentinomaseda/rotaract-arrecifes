@@ -303,6 +303,10 @@
 /* =========================================
    CARRUSEL DE PROYECTOS
    ========================================= */
+@keyframes carouselProgress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
 /* Oculta la scrollbar nativa manteniendo funcionalidad */
 .carousel-track::-webkit-scrollbar {
   display: none;
