@@ -113,17 +113,18 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu — usa transform+opacity en vez de max-height para correr en el compositor GPU */}
+      {/* Mobile menu — grid-template-rows 0fr→1fr: colapsa SIN dejar espacio fantasma */}
       <div
-        className="md:hidden overflow-hidden"
+        className="md:hidden"
         style={{
-          transform: isOpen ? 'scaleY(1)' : 'scaleY(0)',
+          display: 'grid',
+          gridTemplateRows: isOpen ? '1fr' : '0fr',
           opacity: isOpen ? 1 : 0,
-          transformOrigin: 'top',
-          transition: 'transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease',
-          willChange: 'transform, opacity',
+          transition: 'grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease',
         }}
       >
+        {/* El overflow:hidden + minHeight:0 en el hijo es lo que hace funcionar el truco del grid */}
+        <div style={{ overflow: 'hidden', minHeight: 0 }}>
         <div className="border-t border-gray-100 bg-white px-4 pt-3 pb-6 space-y-1">
           {navLinks.map((link) => (
             <a
@@ -142,6 +143,7 @@ const Navbar = () => {
           >
             Colaborar
           </a>
+        </div>
         </div>
       </div>
     </nav>
