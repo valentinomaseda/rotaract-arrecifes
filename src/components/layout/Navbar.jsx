@@ -113,13 +113,18 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — usa transform+opacity en vez de max-height para correr en el compositor GPU */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-400 ease-in-out ${isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
+        className="md:hidden overflow-hidden"
+        style={{
+          transform: isOpen ? 'scaleY(1)' : 'scaleY(0)',
+          opacity: isOpen ? 1 : 0,
+          transformOrigin: 'top',
+          transition: 'transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease',
+          willChange: 'transform, opacity',
+        }}
       >
-        <div className="border-t border-gray-100 bg-white/95 backdrop-blur-md px-4 pt-3 pb-6 space-y-1">
+        <div className="border-t border-gray-100 bg-white px-4 pt-3 pb-6 space-y-1">
           {navLinks.map((link) => (
             <a
               key={link.label}
