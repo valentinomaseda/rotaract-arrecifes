@@ -105,7 +105,7 @@ export const boardMembersData = [
   },
   {
     id: "tesorero",
-    role: "Tesorero",
+    role: "Tesorera",
     name: "Victoria Izquierdo",
     image: "/images/comision/vicky.png",
     badgeColor: "bg-emerald-600 text-white",
