@@ -112,20 +112,10 @@ export const BoardSection = () => {
               </div>
 
               {/* Name */}
-              <div className="px-6 pt-4 text-center">
+              <div className="px-6 pt-4 pb-6 text-center">
                 <h4 className="text-lg font-garet text-gray-900">
                   {member.name}
                 </h4>
-              </div>
-
-              {/* Quote */}
-              <div className="relative px-6 pt-3 pb-6 flex-grow">
-                <span className="absolute top-1 left-4 text-5xl font-garet text-cranberry/10 select-none leading-none">
-                  "
-                </span>
-                <p className="relative pl-3 text-gray-600 font-montserrat text-xs leading-relaxed italic">
-                  {member.quote}
-                </p>
               </div>
             </div>
           </div>

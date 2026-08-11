@@ -87,7 +87,6 @@ export const boardMembersData = [
     role: "Presidente",
     name: "Alexis Sklate",
     image: "/images/comision/alexis.jpg",
-    quote: "Liderar con el ejemplo para inspirar a cada joven a dejar una huella imborrable en nuestra ciudad.",
     badgeColor: "bg-cranberry text-white",
   },
   {
@@ -95,7 +94,6 @@ export const boardMembersData = [
     role: "Vicepresidente",
     name: "Brisa Rodríguez",
     image: "/images/comision/brisa.png",
-    quote: "Trabajar mano a mano con la comisión para convertir cada idea en un proyecto transformador.",
     badgeColor: "bg-purple-600 text-white",
   },
   {
@@ -103,7 +101,6 @@ export const boardMembersData = [
     role: "Secretario",
     name: "Gianlucas Zabaleta",
     image: "/images/comision/gian.png",
-    quote: "Mantener la comunicación fluida y la memoria institucional ordenada para fortalecer el club.",
     badgeColor: "bg-blue-600 text-white",
   },
   {
@@ -111,7 +108,6 @@ export const boardMembersData = [
     role: "Tesorero",
     name: "Victoria Izquierdo",
     image: "/images/comision/vicky.png",
-    quote: "Garantizar la transparencia y optimizar cada recurso para maximizar el impacto de nuestras obras.",
     badgeColor: "bg-emerald-600 text-white",
   },
 ];
