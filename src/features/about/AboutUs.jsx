@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { youthIdentityData } from '../../data/aboutData';
 import { RotaryAreasSection } from './RotaryAreasSection';
@@ -11,7 +11,7 @@ const icons = {
   Misión: (
     <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-        d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m-9 9a9 9 0 019-9" />
     </svg>
   ),
   Visión: (
@@ -52,25 +52,27 @@ const ValueCard = ({ title, description, delay }) => {
   return (
     <div
       ref={ref}
-      className={`group relative bg-white rounded-3xl p-10 border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      className={`min-w-[82vw] max-w-[320px] md:min-w-0 md:max-w-none md:w-full shrink-0 md:shrink snap-start group relative bg-white rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-700 flex flex-col justify-between ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      {/* Subtle overlay effect on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cranberry/0 via-cranberry/0 to-cranberry/5 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+      <div>
+        {/* Subtle overlay effect on hover */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cranberry/0 via-cranberry/0 to-cranberry/5 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500 pointer-events-none" />
 
-      {/* Modern Icon Container */}
-      <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cranberry/10 text-cranberry mb-8 group-hover:scale-110 group-hover:bg-cranberry group-hover:text-white transition-all duration-400 shadow-inner">
-        {icons[title]}
+        {/* Modern Icon Container */}
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cranberry/10 text-cranberry mb-8 group-hover:scale-110 group-hover:bg-cranberry group-hover:text-white transition-all duration-400 shadow-inner">
+          {icons[title]}
+        </div>
+
+        <h3 className="text-3xl font-garet text-gray-950 mb-5 tracking-tight group-hover:text-cranberry transition-colors">
+          {title}
+        </h3>
+
+        <p className="font-montserrat text-gray-600 leading-relaxed text-base font-medium">
+          {description}
+        </p>
       </div>
-
-      <h3 className="text-3xl font-garet text-gray-950 mb-5 tracking-tight group-hover:text-cranberry transition-colors">
-        {title}
-      </h3>
-
-      <p className="font-montserrat text-gray-600 leading-relaxed text-base font-medium">
-        {description}
-      </p>
 
       {/* Decorative full-width accent line on hover */}
       <div className="absolute bottom-0 left-0 right-0 h-1 rounded-b-full bg-gradient-to-r from-cranberry/0 via-cranberry to-cranberry/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -106,6 +108,48 @@ const metricIcons = [
 
 export const AboutUs = () => {
   const [headerRef, headerVisible] = useScrollAnimation({ threshold: 0.2 });
+  const valuesTrackRef = useRef(null);
+  const [activeValueIndex, setActiveValueIndex] = useState(0);
+
+  const handleValuesScroll = () => {
+    if (!valuesTrackRef.current) return;
+    const track = valuesTrackRef.current;
+    const scrollPosition = track.scrollLeft;
+    const firstCard = track.firstElementChild;
+    if (!firstCard) return;
+    const cardWidth = firstCard.getBoundingClientRect().width;
+    const index = Math.round(scrollPosition / (cardWidth + 24));
+    setActiveValueIndex(Math.min(Math.max(0, index), values.length - 1));
+  };
+
+  useEffect(() => {
+    const track = valuesTrackRef.current;
+    if (track) {
+      track.addEventListener('scroll', handleValuesScroll, { passive: true });
+      return () => track.removeEventListener('scroll', handleValuesScroll);
+    }
+  }, []);
+
+  const scrollToValueIndex = (index) => {
+    if (!valuesTrackRef.current) return;
+    const track = valuesTrackRef.current;
+    const firstCard = track.firstElementChild;
+    if (!firstCard) return;
+    const cardWidth = firstCard.getBoundingClientRect().width;
+    const targetScroll = index * (cardWidth + 24);
+    track.scrollTo({ left: targetScroll, behavior: 'smooth' });
+    setActiveValueIndex(index);
+  };
+
+  const nextValueSlide = () => {
+    const newIndex = (activeValueIndex + 1) % values.length;
+    scrollToValueIndex(newIndex);
+  };
+
+  const prevValueSlide = () => {
+    const newIndex = (activeValueIndex - 1 + values.length) % values.length;
+    scrollToValueIndex(newIndex);
+  };
 
   return (
     <section
@@ -161,16 +205,59 @@ export const AboutUs = () => {
           </div>
         </div>
 
-        {/* Value cards grid (Misión, Visión, Valores) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
-          {values.map((v, i) => (
-            <ValueCard
-              key={v.title}
-              title={v.title}
-              description={v.description}
-              delay={i * 150}
-            />
-          ))}
+        {/* Value cards container (Misión, Visión, Valores): Carousel on Mobile, Grid on Desktop */}
+        <div className="relative">
+          {/* Mobile Left Arrow (Vertically Centered to Cards) */}
+          <button
+            onClick={prevValueSlide}
+            aria-label="Tarjeta anterior"
+            className="flex md:hidden absolute left-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-200 shadow-lg items-center justify-center active:scale-95 transition-all hover:text-cranberry"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Mobile Right Arrow (Vertically Centered to Cards) */}
+          <button
+            onClick={nextValueSlide}
+            aria-label="Siguiente tarjeta"
+            className="flex md:hidden absolute right-1 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm text-gray-800 border border-gray-200 shadow-lg items-center justify-center active:scale-95 transition-all hover:text-cranberry"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <div
+            ref={valuesTrackRef}
+            className="carousel-track flex md:grid overflow-x-auto md:overflow-x-visible gap-6 md:gap-8 lg:gap-10 md:grid-cols-3 pb-6 md:pb-0 pt-2 -mx-6 px-6 md:mx-0 md:px-0 scroll-smooth snap-x snap-mandatory md:snap-none"
+          >
+            {values.map((v, i) => (
+              <ValueCard
+                key={v.title}
+                title={v.title}
+                description={v.description}
+                delay={i * 150}
+              />
+            ))}
+          </div>
+
+          {/* Mobile Pagination Dots */}
+          <div className="flex md:hidden items-center justify-center gap-1.5 mt-4">
+            {values.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => scrollToValueIndex(idx)}
+                aria-label={`Ir a tarjeta ${idx + 1}`}
+                className={`transition-all duration-300 rounded-full ${
+                  idx === activeValueIndex
+                    ? 'w-6 h-2 bg-cranberry'
+                    : 'w-2 h-2 bg-gray-300'
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Remaining Sections (kept for structure) */}
