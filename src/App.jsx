@@ -11,6 +11,7 @@ import { PastProjects } from './features/projects/PastProjects'
 // Lazy loading de rutas secundarias → no se descargan hasta que el usuario navega allí
 const AllProjectsPage = lazy(() => import('./features/home/AllProjectsPage').then(m => ({ default: m.AllProjectsPage })))
 const ProjectDetailPage = lazy(() => import('./features/projects/ProjectDetailPage').then(m => ({ default: m.ProjectDetailPage })))
+const JobsPage = lazy(() => import('./features/jobs/JobsPage').then(m => ({ default: m.JobsPage })))
 
 // HomePage: maneja el scroll a una sección si viene con state.scrollTo
 const HomePage = () => {
@@ -44,6 +45,7 @@ function App() {
         <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/empleos" element={<JobsPage />} />
             <Route path="/proyectos" element={<AllProjectsPage />} />
             <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
           </Routes>

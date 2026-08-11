@@ -1,0 +1,56 @@
+export const jobsData = [
+  {
+    id: 'job-001',
+    title: 'Vendedor/a de Salón',
+    company: 'Comercio Céntrico',
+    category: 'Comercio / Ventas',
+    type: 'Full-time',
+    experience: 'Sin experiencia / Primer Empleo',
+    modality: 'Presencial',
+    description: 'Buscamos persona proactiva para atención al público, reposición de mercadería y control de stock. Buen clima laboral y oportunidades de crecimiento.',
+    requirements: [
+      'Secundario completo',
+      'Buena predisposición y trato con el público',
+      'Disponibilidad para trabajar sábados por la mañana',
+    ],
+    schedule: 'Lunes a Viernes de 8:30 a 12:30 y de 16:30 a 20:30 hs. Sábados medio día.',
+    applyVia: 'mailto:cv@ejemplo.com',
+    deadline: '2026-09-15',
+  },
+  {
+    id: 'job-002',
+    title: 'Administrativo/a Contable',
+    company: 'Empresa Agropecuaria local',
+    category: 'Administración / Oficina',
+    type: 'Part-time',
+    experience: 'Con experiencia previa',
+    modality: 'Presencial',
+    description: 'Tareas de carga de comprobantes, conciliaciones bancarias, atención telefónica y soporte general a la administración.',
+    requirements: [
+      'Estudiante de ciencias económicas o carreras afines (no excluyente)',
+      'Experiencia mínima de 1 año en posiciones similares',
+      'Manejo de paquete Office (Excel excluyente)',
+    ],
+    schedule: 'Lunes a Viernes de 8:00 a 12:00 hs.',
+    applyVia: 'https://wa.me/5492478513553', // Example phone
+    deadline: '2026-08-30',
+  },
+  {
+    id: 'job-003',
+    title: 'Desarrollador/a Web Frontend',
+    company: 'Agencia de Marketing Digital',
+    category: 'Tecnología / Diseño',
+    type: 'Full-time',
+    experience: 'Junior / Semi-Senior',
+    modality: 'Remoto',
+    description: 'Sumate a nuestro equipo para maquetar sitios web y crear interfaces dinámicas para clientes locales y de la zona.',
+    requirements: [
+      'Conocimientos sólidos en HTML, CSS, JavaScript (React es un plus)',
+      'Capacidad para trabajar de forma autónoma',
+      'Se valora portfolio de proyectos previos',
+    ],
+    schedule: 'Horario flexible (orientado a objetivos)',
+    applyVia: 'mailto:rrhh@agenciaejemplo.com',
+    deadline: '2026-09-10',
+  }
+];

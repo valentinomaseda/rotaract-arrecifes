@@ -15,6 +15,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '#', label: 'Inicio', sectionId: null },
+    { href: '/empleos', label: 'Bolsa de Trabajo', isDirectRoute: true },
     { href: '#proyectos', label: 'Proyectos', sectionId: 'proyectos' },
     { href: '#quienes-somos', label: 'Quiénes Somos', sectionId: 'quienes-somos' },
   ];
@@ -25,6 +26,12 @@ const Navbar = () => {
   const handleNavClick = (e, link) => {
     e.preventDefault();
     setIsOpen(false);
+
+    if (link.isDirectRoute) {
+      navigate(link.href);
+      window.scrollTo(0, 0);
+      return;
+    }
 
     if (!link.sectionId) {
       // "Inicio" → ir al top de la home
