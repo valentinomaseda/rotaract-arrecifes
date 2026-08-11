@@ -1,30 +1,8 @@
-import React, { useState, useMemo } from 'react';
-import { jobsData } from '../../data/jobsData';
-import { JobCard } from './JobCard';
+import React from 'react';
 
 export const JobsPage = () => {
-  // Estados para los filtros
-  const [selectedCategory, setSelectedCategory] = useState('Todas');
-  const [selectedType, setSelectedType] = useState('Todos');
-  const [selectedExperience, setSelectedExperience] = useState('Todos');
-
-  // Obtener opciones únicas para los filtros basados en los datos actuales
-  const categories = ['Todas', ...new Set(jobsData.map(job => job.category))];
-  const types = ['Todos', ...new Set(jobsData.map(job => job.type))];
-  const experiences = ['Todos', ...new Set(jobsData.map(job => job.experience))];
-
-  // Filtrar los trabajos
-  const filteredJobs = useMemo(() => {
-    return jobsData.filter((job) => {
-      const matchCategory = selectedCategory === 'Todas' || job.category === selectedCategory;
-      const matchType = selectedType === 'Todos' || job.type === selectedType;
-      const matchExperience = selectedExperience === 'Todos' || job.experience === selectedExperience;
-      return matchCategory && matchType && matchExperience;
-    });
-  }, [selectedCategory, selectedType, selectedExperience]);
-
   return (
-    <div className="pb-20 bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen">
 
       {/* ── Hero Section ── */}
       <section className="bg-cranberry text-white py-16 px-6 lg:px-8 text-center relative overflow-hidden">
@@ -37,69 +15,103 @@ export const JobsPage = () => {
           <h1 className="font-garet text-4xl md:text-5xl lg:text-6xl leading-tight">
             Encontrá tu próximo trabajo en Arrecifes
           </h1>
-          <p className="font-montserrat text-lg md:text-xl text-cranberry-light opacity-90 max-w-2xl mx-auto">
-            Conectamos el talento de nuestra ciudad con las mejores oportunidades locales. Explora las búsquedas activas.
+          <p className="font-montserrat text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
+            Conectamos el talento de nuestra ciudad con las mejores oportunidades locales.
           </p>
         </div>
       </section>
 
-      {/* ── Main Content ── */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 flex flex-col lg:flex-row gap-10">
+      {/* ── Coming Soon ── */}
+      <div className="max-w-3xl mx-auto px-6 py-24 flex flex-col items-center text-center">
 
-        {/* ── Sidebar: Filtros ── */}
-        <aside className="w-full lg:w-1/4 lg:shrink-0">
-          <FilterSidebar
-            categories={categories}
-            types={types}
-            experiences={experiences}
-            selectedCategory={selectedCategory}
-            selectedType={selectedType}
-            selectedExperience={selectedExperience}
-            setSelectedCategory={setSelectedCategory}
-            setSelectedType={setSelectedType}
-            setSelectedExperience={setSelectedExperience}
+        {/* Animated icon */}
+        <div className="relative mb-10">
+          {/* Outer pulsing ring */}
+          <span
+            className="absolute inset-0 rounded-full bg-cranberry/10 animate-ping"
+            style={{ animationDuration: '2.4s' }}
+            aria-hidden="true"
           />
-        </aside>
-
-        {/* ── Lista de Trabajos ── */}
-        <main className="w-full lg:w-3/4">
-          <div className="mb-6 flex justify-between items-end">
-            <h2 className="font-garet text-2xl text-gray-900">Ofertas Activas</h2>
-            <span className="font-montserrat text-sm text-gray-500">
-              {filteredJobs.length} {filteredJobs.length === 1 ? 'resultado' : 'resultados'}
-            </span>
+          <div className="relative w-28 h-28 rounded-full bg-white border border-gray-100 shadow-lg flex items-center justify-center">
+            <svg
+              className="w-12 h-12 text-cranberry"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"
+              />
+            </svg>
           </div>
+        </div>
 
-          {filteredJobs.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filteredJobs.map(job => (
-                <JobCard key={job.id} job={job} />
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white rounded-3xl p-12 text-center border border-gray-100 shadow-sm flex flex-col items-center justify-center min-h-[400px]">
-              <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        {/* Badge */}
+        <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-xs font-montserrat font-bold tracking-widest uppercase bg-cranberry/10 text-cranberry">
+          Próximamente
+        </span>
+
+        <h2 className="font-garet text-4xl md:text-5xl text-gray-900 mb-5 leading-tight">
+          Estamos preparando<br />algo especial
+        </h2>
+
+        <p className="font-montserrat text-gray-500 text-lg max-w-xl leading-relaxed">
+          La bolsa de trabajo de Rotaract Arrecifes estará disponible muy pronto. 
+          Vamos a conectar el talento local con las mejores oportunidades de nuestra ciudad.
+        </p>
+
+        {/* Divider dots */}
+        <div className="flex gap-2 mt-10 mb-10" aria-hidden="true">
+          <span className="w-2 h-2 rounded-full bg-cranberry/30" />
+          <span className="w-2 h-2 rounded-full bg-cranberry/60" />
+          <span className="w-2 h-2 rounded-full bg-cranberry" />
+          <span className="w-2 h-2 rounded-full bg-cranberry/60" />
+          <span className="w-2 h-2 rounded-full bg-cranberry/30" />
+        </div>
+
+        {/* Feature preview cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mt-2">
+          {[
+            {
+              icon: (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              ),
+              label: 'Ofertas locales',
+              desc: 'Empleos de empresas de Arrecifes',
+            },
+            {
+              icon: (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              ),
+              label: 'Filtros inteligentes',
+              desc: 'Por rubro, jornada y experiencia',
+            },
+            {
+              icon: (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              ),
+              label: 'Alertas de empleo',
+              desc: 'Notificaciones de nuevas búsquedas',
+            },
+          ].map(({ icon, label, desc }) => (
+            <div
+              key={label}
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col items-center gap-3 opacity-60"
+            >
+              <div className="w-10 h-10 rounded-full bg-cranberry/10 flex items-center justify-center">
+                <svg className="w-5 h-5 text-cranberry" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  {icon}
                 </svg>
               </div>
-              <h3 className="font-garet text-2xl text-gray-900 mb-2">No encontramos ofertas</h3>
-              <p className="font-montserrat text-gray-500 max-w-md mx-auto">
-                No hay búsquedas activas que coincidan con los filtros seleccionados. Probá cambiando alguna opción.
-              </p>
-              <button
-                onClick={() => {
-                  setSelectedCategory('Todas');
-                  setSelectedType('Todos');
-                  setSelectedExperience('Todos');
-                }}
-                className="mt-6 px-6 py-2 bg-cranberry/10 text-cranberry font-montserrat font-semibold rounded-full hover:bg-cranberry/20 transition-colors"
-              >
-                Ver todas las ofertas
-              </button>
+              <p className="font-montserrat font-semibold text-gray-700 text-sm">{label}</p>
+              <p className="font-montserrat text-gray-400 text-xs leading-snug">{desc}</p>
             </div>
-          )}
-        </main>
+          ))}
+        </div>
       </div>
     </div>
   );
