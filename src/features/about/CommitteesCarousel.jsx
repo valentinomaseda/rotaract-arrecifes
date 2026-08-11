@@ -124,9 +124,8 @@ export const CommitteesCarousel = () => {
       {/* Section Header */}
       <div
         ref={ref}
-        className={`flex flex-col md:flex-row md:items-end justify-between max-w-6xl mx-auto mb-12 space-y-4 md:space-y-0 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
+        className={`flex flex-col md:flex-row md:items-end justify-between max-w-6xl mx-auto mb-12 space-y-4 md:space-y-0 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
       >
         <div className="space-y-3">
           <span className="inline-block text-xs font-montserrat font-semibold tracking-[0.2em] uppercase text-cranberry">
@@ -174,9 +173,8 @@ export const CommitteesCarousel = () => {
           return (
             <div
               key={committee.id}
-              className={`min-w-[290px] sm:min-w-[340px] md:min-w-[360px] group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 card-hover flex flex-col justify-between ${
-                idx === activeIndex ? 'ring-2 ring-cranberry/30' : ''
-              }`}
+              className={`min-w-[290px] sm:min-w-[340px] md:min-w-[360px] group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 card-hover flex flex-col justify-between ${idx === activeIndex ? 'ring-2 ring-cranberry/30' : ''
+                }`}
             >
               {/* Committee Icon Header (Gradient Box + Icon) */}
               <div className={`relative h-44 p-6 bg-gradient-to-br ${gradient} text-white flex flex-col justify-between overflow-hidden`}>
@@ -202,18 +200,6 @@ export const CommitteesCarousel = () => {
                 <p className="text-gray-600 font-montserrat text-sm leading-relaxed">
                   {committee.description}
                 </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-gray-100">
-                  {committee.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-1 bg-gray-50 text-gray-600 rounded-md text-[11px] font-montserrat font-medium"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
               </div>
             </div>
           );
@@ -227,11 +213,10 @@ export const CommitteesCarousel = () => {
             key={idx}
             onClick={() => scrollToIndex(idx)}
             aria-label={`Ir al comité ${idx + 1}`}
-            className={`transition-all duration-300 rounded-full ${
-              idx === activeIndex
+            className={`transition-all duration-300 rounded-full ${idx === activeIndex
                 ? 'w-8 h-2.5 bg-cranberry'
                 : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'
-            }`}
+              }`}
           />
         ))}
       </div>

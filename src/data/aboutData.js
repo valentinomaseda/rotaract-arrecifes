@@ -119,7 +119,6 @@ export const committeesData = [
     category: "Comunicación & Prensa",
     description: "Difunde el trabajo del club, gestiona redes sociales, comunicación de eventos y proyecta la identidad de Rotaract Arrecifes.",
     image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80",
-    tags: ["Redes Sociales", "Prensa", "Diseño", "Estrategia"],
     icon: "Megaphone",
   },
   {
@@ -128,7 +127,6 @@ export const committeesData = [
     category: "Juventud & Interact",
     description: "Conecta con clubes Interact, apoya el liderazgo juvenil temprano y fomenta puentes con estudiantes y jóvenes en formación.",
     image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80",
-    tags: ["Interact", "Escuelas", "Talleres", "Liderazgo Joven"],
     icon: "Sparkles",
   },
   {
@@ -137,7 +135,6 @@ export const committeesData = [
     category: "Crecimiento & Fidelización",
     description: "Se encarga del reclutamiento, integración, motivación y acompañamiento continuo de los nuevos y antiguos socios.",
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
-    tags: ["Integración", "Desarrollo", "Capacitaciones", "Socios"],
     icon: "Users",
   },
   {
@@ -146,7 +143,6 @@ export const committeesData = [
     category: "Recursos & Beneficios",
     description: "Organiza eventos de recaudación de fondos, convenios y administra responsablemente los ingresos presupuestarios para los proyectos.",
     image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80",
-    tags: ["Eventos", "Presupuesto", "Recaudación", "Transparencia"],
     icon: "DollarSign",
   },
   {
@@ -155,7 +151,6 @@ export const committeesData = [
     category: "Ecología & Sustentabilidad",
     description: "Desarrolla iniciativas verdes como 'Tu huella, no tu colilla', reciclaje comunitario, reforestación y concientización ambiental.",
     image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80",
-    tags: ["Sustentabilidad", "Ceniceros Eco", "Reciclaje", "Educación Verde"],
     icon: "Leaf",
   },
   {
@@ -164,7 +159,6 @@ export const committeesData = [
     category: "Alianzas Globales",
     description: "Promueve intercambios culturales, hermanamientos con otros clubes del mundo y proyectos con impacto internacional.",
     image: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80",
-    tags: ["Distrito", "Hermanamientos", "Paz Global", "Intercambio"],
     icon: "Globe",
   },
   {
@@ -173,7 +167,6 @@ export const committeesData = [
     category: "Compañerismo & Cultura",
     description: "Fortalece los lazos entre socios a través de reuniones dinámicas, festejos, integraciones y actividades de compañerismo.",
     image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80",
-    tags: ["Compañerismo", "Reuniones", "Festejos", "Cultura Club"],
     icon: "Heart",
   },
   {
@@ -182,7 +175,6 @@ export const committeesData = [
     category: "Acción Social Directa",
     description: "Identifica necesidades locales en Arrecifes para diseñar e implementar proyectos solidarios directos y sostenibles.",
     image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80",
-    tags: ["Barrios", "Colectas", "Donaciones", "Servicio Directo"],
     icon: "HandsHolding",
   },
   {
@@ -191,7 +183,6 @@ export const committeesData = [
     category: "Capacitación & Empleabilidad",
     description: "Organiza charlas, talleres de oratoria, currículum, herramientas de trabajo y mentorías para potenciar la carrera de los socios.",
     image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80",
-    tags: ["Capacitación", "Oratoria", "Mentoring", "Habilidades"],
     icon: "Briefcase",
   },
 ];
