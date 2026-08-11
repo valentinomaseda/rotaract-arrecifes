@@ -205,9 +205,8 @@ const GalleryView = ({ images, title }) => {
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`flex-none w-20 h-14 rounded-xl overflow-hidden border-2 transition-all duration-200 ${
-                i === active ? 'border-cranberry shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
-              }`}
+              className={`flex-none w-20 h-14 rounded-xl overflow-hidden border-2 transition-all duration-200 ${i === active ? 'border-cranberry shadow-md' : 'border-transparent opacity-60 hover:opacity-100'
+                }`}
               aria-label={`Ver foto ${i + 1}`}
             >
               <img src={src} alt="" className="w-full h-full object-cover" />
@@ -317,20 +316,6 @@ export const ProjectDetailPage = () => {
             {/* Info lateral */}
             <div className="lg:col-span-5 space-y-8">
 
-              {/* Stats cards */}
-              {project.stats?.length > 0 && (
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
-                  <h2 className="font-garet text-lg text-gray-900">Impacto del proyecto</h2>
-                  <div className="divide-y divide-gray-100">
-                    {project.stats.map((stat) => (
-                      <div key={stat.label} className="flex items-center justify-between py-3">
-                        <span className="font-montserrat text-sm text-gray-500">{stat.label}</span>
-                        <span className="font-garet text-xl text-cranberry font-bold">{stat.value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* Descripción completa */}
               <div className="space-y-4">
