@@ -58,7 +58,7 @@ export const PastProjects = () => {
   return (
     <section
       id="proyectos"
-      className="relative bg-gray-50 py-24 md:py-32 overflow-hidden"
+      className="relative bg-gray-50 py-20 md:py-18 overflow-hidden"
       aria-labelledby="past-projects-title"
     >
       {/* Decorative blobs */}

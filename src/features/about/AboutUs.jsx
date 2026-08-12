@@ -154,7 +154,7 @@ export const AboutUs = () => {
   return (
     <section
       id="quienes-somos"
-      className="scroll-mt-20 relative bg-gray-50 py-28 md:py-36 px-6 lg:px-10 overflow-hidden"
+      className="scroll-mt-20 relative bg-gray-50 py-20 md:py-18 px-6 lg:px-10 overflow-hidden"
       aria-labelledby="about-us-title"
     >
       {/* Enhanced Decorative Elements */}
@@ -169,7 +169,7 @@ export const AboutUs = () => {
       {/* Subtle grid pattern for texture */}
       <div className="absolute inset-0 bg-grid-gray-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))]" aria-hidden="true" />
 
-      <div className="relative z-10 max-w-7xl mx-auto space-y-28">
+      <div className="relative z-10 max-w-7xl mx-auto space-y-20 md:space-y-16">
 
         {/* Main Header with a more impactful layout */}
         <div

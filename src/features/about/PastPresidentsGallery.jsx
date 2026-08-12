@@ -48,11 +48,11 @@ export const PastPresidentsGallery = () => {
   };
 
   return (
-    <div className="py-16 border-t border-gray-100">
+    <div className="py-12 md:py-10 border-t border-gray-100">
       {/* Section Header */}
       <div
         ref={ref}
-        className={`text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        className={`text-center max-w-3xl mx-auto mb-10 md:mb-8 space-y-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
       >
         <span className="inline-block text-xs font-montserrat font-semibold tracking-[0.2em] uppercase text-cranberry">
