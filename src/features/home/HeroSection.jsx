@@ -58,15 +58,6 @@ export const HeroSection = () => {
         {/* ── Columna de Texto ── */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:col-span-7 order-1">
 
-          {/* Badge */}
-          <span
-            className="animate-hidden inline-flex items-center gap-2 rounded-full bg-cranberry/10 px-4 py-1.5 text-sm font-montserrat font-semibold text-cranberry ring-1 ring-inset ring-cranberry/20 mb-6"
-            style={{ transitionDelay: '0ms' }}
-          >
-            <span className="w-2 h-2 rounded-full bg-cranberry animate-pulse-dot" aria-hidden="true" />
-            Rotaract Club Arrecifes
-          </span>
-
           {/* Título */}
           <h1
             className="animate-hidden font-garet text-5xl md:text-6xl lg:text-[4.5rem] text-gray-900 leading-[1.08] tracking-tight mb-6"
