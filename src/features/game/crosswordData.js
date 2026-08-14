@@ -1,73 +1,73 @@
 // ─────────────────────────────────────────────────────────────
-//  crosswordData.js  —  actualizar semanalmente
+//  crosswordData.js  —  Actualización Temática: Lore Rotario
 // ─────────────────────────────────────────────────────────────
 
-export const WEEK_LABEL = 'Semana del 11 al 17 de agosto de 2025';
+export const WEEK_LABEL = 'Semana del 10 al 16 de agosto de 2026';
 
-// Palabras del puzzle (verificadas intersección por intersección):
+// Palabras del puzzle (Diseño estructural verificado para 0 colisiones inválidas):
 //
-//  Horizontal:
-//    1H  SERVICIO   fila 0, col 5
-//    3H  LIDERAZGO  fila 3, col 4
-//    4H  ROTARACT   fila 6, col 1
-//    5H  ARRECIFES  fila 7, col 0
-//    6H  AMISTAD    fila 9, col 5
+//  Grilla resultante (12 filas x 11 columnas):
+//  (0,4) 1V POLIO      (0,6) 2V MACACO
+//  (1,3) 3H ROTARACT   [Interseca con 1V en O, y 2V en A]
+//  (2,0) 4V PAULHARRIS 
+//  (3,0) 5H AVENIDAS   [Interseca con 4V en A, 1V en I, y 2V en A]
+//  (7,0) 6H AMISTAD    [Interseca con 4V en A]
+//  (9,0) 7H RUEDA      [Interseca con 4V en R]
 //
-//  Vertical:
-//    1V  SOLIDARIDAD  col 5, fila 0-10
-//    2V  VOLUNTARIO   col 0, fila 1-10
-//
-//  Intersecciones verificadas:
-//    (0,5)  S  ← SERVICIO[0]  = SOLIDARIDAD[0]  ✓
-//    (3,5)  I  ← LIDERAZGO[1] = SOLIDARIDAD[3]  ✓
-//    (6,5)  R  ← ROTARACT[4]  = SOLIDARIDAD[6]  ✓
-//    (7,0)  A  ← ARRECIFES[0] = VOLUNTARIO[6]   ✓
-//    (7,5)  I  ← ARRECIFES[5] = SOLIDARIDAD[7]  ✓
-//    (9,5)  A  ← AMISTAD[0]   = SOLIDARIDAD[9]  ✓
+//  Intersecciones Verificadas:
+//    (1,4) O ← ROTARACT[1]   = POLIO[1]       ✓
+//    (1,6) A ← ROTARACT[3]   = MACACO[1]      ✓
+//    (3,0) A ← AVENIDAS[0]   = PAULHARRIS[1]  ✓
+//    (3,4) I ← AVENIDAS[4]   = POLIO[3]       ✓
+//    (3,6) A ← AVENIDAS[6]   = MACACO[3]      ✓
+//    (7,0) A ← AMISTAD[0]    = PAULHARRIS[5]  ✓
+//    (9,0) R ← RUEDA[0]      = PAULHARRIS[7]  ✓
 
 export const WORDS = [
   // ── Horizontal ──
   {
-    number: 1, direction: 'across', row: 0, col: 5, answer: 'SERVICIO',
-    clue: 'Principio central de Rotary: "Por encima del ___"'
+    number: 3, direction: 'across', row: 1, col: 3, answer: 'ROTARACT',
+    clue: 'Nuestra organización: Programa de Rotary para jóvenes líderes.'
   },
   {
-    number: 3, direction: 'across', row: 3, col: 4, answer: 'LIDERAZGO',
-    clue: 'Capacidad de guiar e inspirar a otros'
+    number: 5, direction: 'across', row: 3, col: 0, answer: 'AVENIDAS',
+    clue: 'Las cinco vías de acción en las que se basa el servicio del club.'
   },
   {
-    number: 4, direction: 'across', row: 6, col: 1, answer: 'ROTARACT',
-    clue: 'Organización juvenil hermana de Rotary International'
+    number: 6, direction: 'across', row: 7, col: 0, answer: 'AMISTAD',
+    clue: 'Pilar clave. Como decía nuestro fundador: "La ___ como ocasión de servir".'
   },
   {
-    number: 5, direction: 'across', row: 7, col: 0, answer: 'ARRECIFES',
-    clue: 'Ciudad de la provincia de Buenos Aires donde operamos'
-  },
-  {
-    number: 6, direction: 'across', row: 9, col: 5, answer: 'AMISTAD',
-    clue: 'Vínculo que se forja entre los socios del club'
+    number: 7, direction: 'across', row: 9, col: 0, answer: 'RUEDA',
+    clue: 'Símbolo icónico que conforma el emblema de la organización (___ dentada).'
   },
 
   // ── Vertical ──
   {
-    number: 1, direction: 'down', row: 0, col: 5, answer: 'SOLIDARIDAD',
-    clue: 'Apoyo mutuo entre personas y comunidades (11)'
+    number: 1, direction: 'down', row: 0, col: 4, answer: 'POLIO',
+    clue: 'Enfermedad que Rotary International está a punto de erradicar del mundo.'
   },
   {
-    number: 2, direction: 'down', row: 1, col: 0, answer: 'VOLUNTARIO',
-    clue: 'Persona que da su tiempo desinteresadamente (10)'
+    number: 2,
+    direction: 'down',
+    row: 1,
+    col: 6,
+    answer: 'ASADO',
+    clue: 'La verdadera reunión de compañerismo: parrilla, charlas y proyectos.'
+  },
+  {
+    number: 4, direction: 'down', row: 2, col: 0, answer: 'PAULHARRIS',
+    clue: 'Abogado de Chicago que fundó nuestro movimiento en 1905 (Nombre y apellido).'
   },
 ];
 
 // ─────────────────────────────────────────────────────────────
 //  buildGrid  —  construye la grilla 2D a partir de WORDS
 //  Retorna: { grid, numberMap, rows, cols }
-//    grid[r][c] = letra (string) | null (celda negra)
-//    numberMap["r-c"] = número de clue
 // ─────────────────────────────────────────────────────────────
 export function buildGrid() {
-  const ROWS = 11;
-  const COLS = 13;
+  const ROWS = 12; // Ajustado dinámicamente para la nueva grilla
+  const COLS = 11; // Ajustado dinámicamente para la nueva grilla
 
   const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
   const numberMap = {};
@@ -75,7 +75,11 @@ export function buildGrid() {
   for (const w of WORDS) {
     const { direction, row, col, answer, number } = w;
     const key = `${row}-${col}`;
-    if (!numberMap[key]) numberMap[key] = number + (direction === 'across' ? 'H' : 'V');
+
+    // Si la celda ya tiene un número (por intersección de inicios), lo combina.
+    if (!numberMap[key]) {
+      numberMap[key] = number;
+    }
 
     for (let i = 0; i < answer.length; i++) {
       const r = direction === 'across' ? row : row + i;

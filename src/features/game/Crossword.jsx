@@ -136,11 +136,10 @@ export default function Crossword() {
   const acrossClues = WORDS.filter(w => w.direction === 'across');
   const downClues = WORDS.filter(w => w.direction === 'down');
 
-  // feedback banner config
+  // feedback banner config (only for non-success states)
   const feedbackMap = {
-    allCorrect: { bg: 'bg-green-50 border-green-200', icon: '🎉', text: 'text-green-700', msg: '¡Todo correcto! ¡Excelente!', sub: 'Completaste el crucigrama de la semana.' },
-    hasErrors:  { bg: 'bg-red-50 border-red-200',   icon: '❌', text: 'text-red-700',   msg: 'Hay algunas respuestas incorrectas.',  sub: 'Las celdas en rojo tienen un error. ¡Seguí intentando!' },
-    incomplete: { bg: 'bg-yellow-50 border-yellow-200', icon: '⚠️', text: 'text-yellow-700', msg: 'Faltan algunas respuestas.', sub: 'Completá todas las celdas antes de verificar.' },
+    hasErrors:  { bg: 'bg-red-50 border-red-200',        icon: '❌', text: 'text-red-700',    msg: 'Hay algunas respuestas incorrectas.',  sub: 'Las celdas en rojo tienen un error. ¡Seguí intentando!' },
+    incomplete: { bg: 'bg-yellow-50 border-yellow-200',  icon: '⚠️', text: 'text-yellow-700', msg: 'Faltan algunas respuestas.',             sub: 'Completá todas las celdas antes de verificar.' },
   };
   const feedback = feedbackMap[checkResult];
 
@@ -168,6 +167,62 @@ export default function Crossword() {
 
   return (
     <div className="w-full">
+
+      {/* ── SUCCESS MODAL ── */}
+      {solved && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)' }}
+          onClick={() => setSolved(false)}
+        >
+          <div
+            className="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 text-center relative"
+            style={{ animation: 'scaleIn 0.35s cubic-bezier(0.22,1,0.36,1) both' }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* close */}
+            <button
+              onClick={() => setSolved(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Cerrar"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* confetti emoji ring */}
+            <div className="text-5xl mb-4 select-none">🎉</div>
+
+            {/* badge */}
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-montserrat font-bold tracking-widest uppercase bg-cranberry/10 text-cranberry mb-4">
+              ¡Crucigrama completado!
+            </span>
+
+            <h2 className="font-garet text-2xl text-gray-900 mb-2 leading-tight">
+              ¡Excelente!
+            </h2>
+            <p className="font-montserrat text-gray-500 text-sm leading-relaxed mb-6">
+              Completaste el crucigrama de la semana. ¡Hasta el próximo juego!
+            </p>
+
+            <div className="flex flex-col gap-3">
+              <button
+                onClick={() => setSolved(false)}
+                className="btn-cranberry text-white py-3 rounded-2xl font-montserrat font-semibold text-sm"
+              >
+                ¡Ver el crucigrama! 🔍
+              </button>
+              <button
+                onClick={() => { handleReset(); setSolved(false); }}
+                className="bg-gray-100 hover:bg-gray-200 text-gray-600 py-3 rounded-2xl font-montserrat font-semibold text-sm transition-colors"
+              >
+                Jugar de nuevo
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* ── TOP LAYOUT: grid left, clues right ── */}
       <div className="flex flex-col lg:flex-row gap-6 items-start">
 
@@ -251,8 +306,8 @@ export default function Crossword() {
             </button>
           </div>
 
-          {/* Feedback banner */}
-          {feedback && (
+          {/* Feedback banner — only errors / incomplete */}
+          {feedback && !solved && (
             <div className={`mt-4 border rounded-2xl p-4 ${feedback.bg}`}>
               <p className={`font-garet text-base ${feedback.text} flex items-center gap-2`}>
                 <span>{feedback.icon}</span>{feedback.msg}
