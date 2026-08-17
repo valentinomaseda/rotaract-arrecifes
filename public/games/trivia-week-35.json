@@ -1,0 +1,61 @@
+{
+    "title": "Trivia Rotaract",
+    "timePerQuestion": 15,
+    "questions": [
+        {
+            "id": 1,
+            "question": "¿En qué año fundó Paul Harris Rotary International?",
+            "options": [
+                "1900",
+                "1905",
+                "1910",
+                "1915"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 2,
+            "question": "¿Cuántas Avenidas de Servicio tiene Rotary?",
+            "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+            ],
+            "correct": 2
+        },
+        {
+            "id": 3,
+            "question": "¿Qué enfermedad está a punto de erradicar Rotary International?",
+            "options": [
+                "Sarampión",
+                "Tuberculosis",
+                "La Polio",
+                "El Cólera"
+            ],
+            "correct": 2
+        },
+        {
+            "id": 4,
+            "question": "¿Cuál es el lema oficial de Rotary International?",
+            "options": [
+                "Servir antes que uno mismo",
+                "Dar de sí antes de pensar en sí",
+                "El servicio une a la comunidad",
+                "Actuar con ética y compromiso"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 5,
+            "question": "¿Qué símbolo icónico forma el logo de Rotary?",
+            "options": [
+                "Un globo terráqueo",
+                "Una paloma de la paz",
+                "Una rueda dentada",
+                "Una antorcha"
+            ],
+            "correct": 2
+        }
+    ]
+}
