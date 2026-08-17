@@ -210,7 +210,7 @@ export default function ConexionesGame({ dataPath }) {
                   onClick={() => toggleWord(word)}
                   className={`h-14 flex items-center justify-center rounded-xl border-2 text-xs font-montserrat font-bold uppercase text-center px-1
                     cursor-pointer transition-all duration-150
-                    ${isSelected ? `${c.sel} scale-95 shadow-md ring-2 ${c.ring}` : `bg-white border-gray-200 text-gray-800 hover:border-gray-400 hover:shadow-sm`}`}
+                    ${isSelected ? `bg-gray-800 text-white border-gray-700 scale-95 shadow-md ring-2 ring-gray-600` : `bg-white border-gray-200 text-gray-800 hover:border-gray-400 hover:shadow-sm`}`}
                 >
                   {word}
                 </button>

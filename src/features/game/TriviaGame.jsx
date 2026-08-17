@@ -43,7 +43,7 @@ export default function TriviaGame({ dataPath }) {
   const [answered,   setAnswered]   = useState(null); // selected option index or null
   const [timedOut,   setTimedOut]   = useState(false);
   const [score,      setScore]      = useState(0);
-  const [status,     setStatus]     = useState('playing'); // playing | finished
+  const [status,     setStatus]     = useState('idle');    // idle | playing | finished
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function TriviaGame({ dataPath }) {
     }
   }, [qIndex, totalQ, timePerQ]);
 
-  // Countdown timer
+  // Countdown timer — only runs when 'playing'
   useEffect(() => {
     if (loading || status !== 'playing' || answered !== null || timedOut) return;
     setTimeLeft(timePerQ);
@@ -101,6 +101,11 @@ export default function TriviaGame({ dataPath }) {
     setTimeout(advance, 1800);
   };
 
+  const handleStart = () => {
+    setQIndex(0); setScore(0); setAnswered(null);
+    setTimedOut(false); setTimeLeft(timePerQ); setStatus('playing');
+  };
+
   // Option button color
   const optionStyle = (optIdx) => {
     if (answered === null && !timedOut) {
@@ -114,6 +119,40 @@ export default function TriviaGame({ dataPath }) {
   };
 
   if (loading) return <TriviaSkeleton />;
+
+  // ── Idle / Start screen ──────────────────────────────────────────────────
+  if (status === 'idle') {
+    return (
+      <div className="flex flex-col items-center gap-8 py-10 max-w-sm mx-auto text-center">
+        <div className="text-6xl select-none">🧠</div>
+        <div className="space-y-2">
+          <p className="font-garet text-2xl text-gray-800">
+            Trivia Rotaract
+          </p>
+          <p className="font-montserrat text-sm text-gray-500 leading-relaxed">
+            {gameData?.questions?.length ?? 0} preguntas · {gameData?.timePerQuestion ?? 15} segundos por pregunta
+          </p>
+        </div>
+        <ul className="text-left space-y-3 w-full">
+          {[
+            { icon: '⏱️', text: 'Cada pregunta tiene un tiempo límite' },
+            { icon: '✅', text: 'Al responder se muestra la opción correcta' },
+            { icon: '⭐', text: 'Al final ves tu puntaje en estrellas' },
+          ].map(({ icon, text }) => (
+            <li key={text} className="flex items-center gap-3 font-montserrat text-sm text-gray-600">
+              <span className="text-xl">{icon}</span>{text}
+            </li>
+          ))}
+        </ul>
+        <button
+          onClick={handleStart}
+          className="w-full py-4 rounded-full bg-cranberry text-white font-montserrat font-semibold text-base shadow-md hover:shadow-lg active:scale-95 transition-all"
+        >
+          ¡Comenzar! 🚀
+        </button>
+      </div>
+    );
+  }
 
   // ── Finished screen ──────────────────────────────────────────────────────
   if (status === 'finished') {
@@ -134,7 +173,7 @@ export default function TriviaGame({ dataPath }) {
         <button
           onClick={() => {
             setQIndex(0); setScore(0); setAnswered(null);
-            setTimedOut(false); setTimeLeft(timePerQ); setStatus('playing');
+            setTimedOut(false); setTimeLeft(timePerQ); setStatus('idle');
           }}
           className="btn-cranberry text-white px-8 py-3 rounded-full font-montserrat font-semibold text-sm"
         >

@@ -6,15 +6,22 @@ export function GamePage() {
   // Single hook call — state flows down to WeeklyGameView as props.
   const { status, gameConfig, isoWeek } = useWeeklyGameManager();
 
-  const weekLabel =
-    status === 'found' && gameConfig?.label
-      ? gameConfig.label
-      : `Semana ${isoWeek}`;
+  const GAME_LABELS = {
+    crossword:  'Crucigrama',
+    wordle:     'Wordle',
+    conexiones: 'Conexiones',
+    trivia:     'Trivia',
+  };
 
-  const gameTypeLabel =
-    status === 'found' && gameConfig?.type === 'crossword'
-      ? 'Crucigrama'
-      : 'Juego';
+  const GAME_DESCRIPTIONS = {
+    crossword:  'Completá el crucigrama con palabras del mundo Rotaract y Rotary.',
+    wordle:     'Adiviná la palabra rotaria de 5 letras en 6 intentos.',
+    conexiones: 'Agrupá las palabras en 4 categorías. ¡Encontrá las conexiones!',
+    trivia:     'Poné a prueba tus conocimientos sobre Rotaract y Rotary.',
+  };
+
+  const gameTypeLabel   = GAME_LABELS[gameConfig?.type]       ?? 'Juego';
+  const gameDescription = GAME_DESCRIPTIONS[gameConfig?.type] ?? '¡El desafío de esta semana te espera!';
 
   const showCrosswordInstructions =
     status === 'found' && gameConfig?.type === 'crossword';
@@ -28,13 +35,13 @@ export function GamePage() {
         <div className="absolute w-[300px] h-[300px] bg-white/10 rounded-full blur-2xl bottom-0 right-0" aria-hidden="true" />
         <div className="relative z-10 max-w-3xl mx-auto space-y-4">
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-montserrat font-bold tracking-widest uppercase bg-white/20">
-            {gameTypeLabel} · {weekLabel}
+            {gameTypeLabel}
           </span>
           <h1 className="font-garet text-4xl md:text-5xl lg:text-6xl leading-tight">
             Juego de la Semana
           </h1>
           <p className="font-montserrat text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
-            Poné a prueba tus conocimientos sobre Rotaract y Rotary. ¡Completá el crucigrama!
+            {gameDescription}
           </p>
         </div>
       </section>

@@ -1,22 +1,17 @@
 {
     "33": {
-        "type": "wordle",
-        "dataPath": "/games/wordle-week-33.json",
+        "type": "conexiones",
+        "dataPath": "/games/conexiones-week-34.json",
         "label": "Semana del 17 al 23 de agosto de 2026"
     },
     "34": {
-        "type": "conexiones",
-        "dataPath": "/games/conexiones-week-34.json",
+        "type": "trivia",
+        "dataPath": "/games/trivia-week-35.json",
         "label": "Semana del 24 al 30 de agosto de 2026"
     },
     "35": {
-        "type": "trivia",
-        "dataPath": "/games/trivia-week-35.json",
-        "label": "Semana del 31 de agosto al 6 de septiembre de 2026"
-    },
-    "36": {
         "type": "crossword",
         "dataPath": "/games/crossword-week-36.json",
-        "label": "Semana del 7 al 13 de septiembre de 2026"
+        "label": "Semana del 31 de agosto al 6 de septiembre de 2026"
     }
 }
