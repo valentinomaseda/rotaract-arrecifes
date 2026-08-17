@@ -1,5 +1,6 @@
 import React, { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
@@ -39,22 +40,25 @@ const HomePage = () => {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
-        <Navbar />
-        <Suspense fallback={null}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/empleos" element={<JobsPage />} />
-            <Route path="/proyectos" element={<AllProjectsPage />} />
-            <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
-            <Route path="/juego" element={<GamePage />} />
-          </Routes>
-        </Suspense>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <ScrollToTop />
+        <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+          <Navbar />
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/empleos" element={<JobsPage />} />
+              <Route path="/proyectos" element={<AllProjectsPage />} />
+              <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
+              <Route path="/juego" element={<GamePage />} />
+            </Routes>
+          </Suspense>
+          <Footer />
+        </div>
+      </BrowserRouter>
+      <Analytics />
+    </>
   )
 }
 
