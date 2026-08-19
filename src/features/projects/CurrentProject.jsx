@@ -132,7 +132,7 @@ const ProjectCard = ({ badge, title, description, stats, cta, active, autoplayKe
           href={cta.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center w-full sm:w-auto gap-3 px-6 sm:px-8 py-3.5 rounded-2xl bg-gray-900 text-white font-montserrat font-medium text-sm sm:text-base hover:bg-cranberry shadow-[0_8px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_25px_rgba(200,20,50,0.25)] transition-all duration-300 group"
+          className="inline-flex items-center justify-center w-full sm:w-auto gap-3 px-6 sm:px-8 py-3.5 rounded-2xl bg-cranberry text-white font-montserrat font-medium text-sm sm:text-base hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_25px_rgba(212,19,103,0.4)] transition-all duration-300 group"
           aria-label={cta.ariaLabel}
           tabIndex={active ? 0 : -1}
         >
