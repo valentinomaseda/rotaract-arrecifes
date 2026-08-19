@@ -29,19 +29,19 @@ export const projectsData = [
     id: 'debate-candidatos-2023',
     title: 'Debate entre Candidatos a Intendente',
     description: 'Organizamos el debate público entre candidatos a intendente de Arrecifes, fomentando la participación ciudadana y la democracia.',
-    imageUrl: '/hero-image.jpeg',
+    imageUrl: '/images/proyectos/debate-candidatos-2023/portada.jpeg',
     date: 'Octubre 2023',
     category: 'Ciudadanía',
     impact: 'Toda la comunidad',
     longDescription: `En el marco de las elecciones municipales de 2023, el Rotaract Club Arrecifes tomó la iniciativa de organizar un debate público entre los candidatos a intendente de la ciudad. El objetivo fue brindarle a la ciudadanía un espacio de información directa, transparente y respetuosa.\n\nEl evento convocó a los principales candidatos y fue transmitido en vivo para toda la comunidad. El formato fue moderado por miembros del club con reglas claras de participación y tiempos igualitarios para cada candidato.\n\nFue una instancia histórica para Arrecifes: un espacio donde la juventud tomó un rol protagónico en el fortalecimiento de la vida democrática local.`,
     images: [
+      '/hero-image.jpeg',
       '/images/proyectos/debate-candidatos-2023/foto-1.jpg',
       '/images/proyectos/debate-candidatos-2023/foto-2.jpg',
       '/images/proyectos/debate-candidatos-2023/foto-3.jpg',
       '/images/proyectos/debate-candidatos-2023/foto-4.jpg',
       '/images/proyectos/debate-candidatos-2023/foto-5.jpg',
       '/images/proyectos/debate-candidatos-2023/foto-6.jpg',
-
     ],
     stats: [
       { value: '4+', label: 'Candidatos participantes' },
@@ -59,11 +59,12 @@ export const projectsData = [
     impact: 'Adultos mayores beneficiados',
     longDescription: `Junto al RDR Jeremías y los chicos de Interact Arrecifes, tuvimos la oportunidad de visitar el Hogar de Ancianos Municipal. Disfrutamos de conversaciones encantadoras, risas y momentos inolvidables en compañía de los abuelos del hogar.\n\nMuchos de los adultos mayores reciben pocas visitas, por lo que la presencia de los jóvenes del club generó un impacto emocional muy significativo. El intercambio intergeneracional fue enriquecedor para ambas partes.\n\nEsta visita nos llenó el corazón con tanto cariño y sabiduría, y nos motivó a repetir la experiencia de forma periódica. ¡Esperamos volver pronto!`,
     images: [
-      '/images/proyectos/visita-asilo-2024/foto-1.jpg',
+      '/images/proyectos/visita-asilo-2024/foto-1.png',
       '/images/proyectos/visita-asilo-2024/foto-2.jpg',
       '/images/proyectos/visita-asilo-2024/foto-3.jpg',
       '/images/proyectos/visita-asilo-2024/foto-4.jpg',
       '/images/proyectos/visita-asilo-2024/foto-5.jpg',
+      '/images/proyectos/visita-asilo-2024/foto-6.jpg',
     ],
     stats: [
       { value: '30+', label: 'Adultos mayores visitados' },

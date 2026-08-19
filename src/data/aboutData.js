@@ -207,7 +207,7 @@ export const pastPresidentsData = [
     name: "Alexis Sklate",
     periods: ["2026 - 2027"],
     isCurrent: true,
-    image: "/images/galeria-presidentes/alexis.jpg",
-    achievement: "Impulsor de importantes reformas estructurales, nuevos comités y proyectos comunitarios de gran escala. RDI (Representante Distrital de Interact) en el período 2018 - 2019.",
+    image: "/images/galeria-presidentes/imagen_alexis_galeriaPresidentes.png",
+    achievement: "Impulsor de importantes reformas estructurales, nuevas metodologías de trabajo, nuevos comités y proyectos de servicio a la comunidad. RDI (Representante Distrital de Interact) en el período 2018 - 2019.",
   },
 ];

@@ -53,19 +53,10 @@ export const HeroSection = () => {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 lg:py-32 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-18 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
         {/* ── Columna de Texto ── */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:col-span-7 order-1">
-
-          {/* Badge */}
-          <span
-            className="animate-hidden inline-flex items-center gap-2 rounded-full bg-cranberry/10 px-4 py-1.5 text-sm font-montserrat font-semibold text-cranberry ring-1 ring-inset ring-cranberry/20 mb-6"
-            style={{ transitionDelay: '0ms' }}
-          >
-            <span className="w-2 h-2 rounded-full bg-cranberry animate-pulse-dot" aria-hidden="true" />
-            Rotaract Club Arrecifes
-          </span>
 
           {/* Título */}
           <h1

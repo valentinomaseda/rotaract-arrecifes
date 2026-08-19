@@ -120,11 +120,11 @@ export const CommitteesCarousel = () => {
   };
 
   return (
-    <div className="py-16 border-t border-gray-100 bg-gradient-to-b from-white via-gray-50/50 to-white">
+    <div className="py-12 md:py-10 border-t border-gray-100 bg-gradient-to-b from-white via-gray-50/50 to-white">
       {/* Section Header */}
       <div
         ref={ref}
-        className={`flex flex-col md:flex-row md:items-end justify-between max-w-6xl mx-auto mb-12 space-y-4 md:space-y-0 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        className={`flex flex-col md:flex-row md:items-end justify-between max-w-6xl mx-auto mb-10 md:mb-8 space-y-4 md:space-y-0 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
       >
         <div className="space-y-3">

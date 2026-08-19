@@ -95,11 +95,11 @@ export const RotaryAreasSection = () => {
   };
 
   return (
-    <div className="py-12 border-t border-gray-100">
+    <div className="py-10 md:py-8 border-t border-gray-100">
       {/* Section Header with Navigation Controls */}
       <div
         ref={ref}
-        className={`flex flex-col md:flex-row md:items-end justify-between max-w-6xl mx-auto mb-12 space-y-4 md:space-y-0 transition-all duration-700 ${
+        className={`flex flex-col md:flex-row md:items-end justify-between max-w-6xl mx-auto mb-10 md:mb-8 space-y-4 md:space-y-0 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
