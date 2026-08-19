@@ -93,6 +93,15 @@ export const HeroSection = () => {
               </svg>
             </a>
             <a
+              href="#proyecto-actual"
+              className="inline-flex justify-center items-center gap-2 px-8 py-4 rounded-full bg-gray-50 text-gray-700 font-montserrat font-medium text-base border border-gray-200 hover:border-cranberry hover:text-cranberry hover:bg-cranberry/5 transition-all duration-300"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Proyectos en curso
+            </a>
+            <a
               href="#proyectos"
               className="inline-flex justify-center items-center gap-2 px-8 py-4 rounded-full bg-gray-50 text-gray-700 font-montserrat font-medium text-base border border-gray-200 hover:border-cranberry hover:text-cranberry hover:bg-cranberry/5 transition-all duration-300"
             >
