@@ -74,8 +74,8 @@ const PROJECTS = [
 const ProjectCard = ({ badge, title, description, stats, cta, active, autoplayKey, autoplayDuration, paused }) => (
   <div
     className={`relative flex flex-col h-full bg-white/70 backdrop-blur-2xl rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border transition-all duration-700 ${active
-        ? 'border-white/80 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] opacity-100 scale-100'
-        : 'border-white/20 shadow-none opacity-40 scale-[0.95]'
+      ? 'border-white/80 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] opacity-100 scale-100'
+      : 'border-white/20 shadow-none opacity-40 scale-[0.95]'
       }`}
     style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
     aria-hidden={!active}
@@ -238,6 +238,19 @@ export const CurrentProject = () => {
           onTouchStart={() => setPaused(true)}
           onTouchEnd={() => setPaused(false)}
         >
+          {/* Hint de deslizamiento — solo mobile, se oculta cuando el usuario interactúa */}
+          {!paused && (
+            <div className="flex md:hidden items-center justify-center gap-2 mb-4 text-gray-400 pointer-events-none select-none">
+              <svg className="w-4 h-4 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+              </svg>
+              <span className="font-montserrat text-xs tracking-wide">Deslizá para ver más</span>
+              <svg className="w-4 h-4 animate-bounce-x-reverse" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+          )}
+
           <div className="relative group">
             <div className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <NavArrow direction="prev" onClick={prev} label="Proyecto anterior" />
