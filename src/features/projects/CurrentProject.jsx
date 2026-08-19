@@ -73,9 +73,9 @@ const PROJECTS = [
 ];
 
 /* ─── Card individual ─── */
-const ProjectCard = ({ badge, title, description, stats, cta, active }) => (
+const ProjectCard = ({ badge, title, description, stats, cta, active, autoplayKey, autoplayDuration, paused }) => (
   <div
-    className={`flex flex-col h-full bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl p-5 sm:p-8 md:p-10 border border-gray-100 shadow-xl transition-all duration-500 ${
+    className={`flex flex-col h-full bg-gradient-to-b from-gray-50 via-white to-gray-50/50 rounded-3xl overflow-hidden border border-gray-100 shadow-xl transition-all duration-500 ${
       active
         ? 'opacity-100 scale-100 shadow-xl'
         : 'opacity-40 scale-[0.97] shadow-md'
@@ -83,6 +83,22 @@ const ProjectCard = ({ badge, title, description, stats, cta, active }) => (
     style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
     aria-hidden={!active}
   >
+    {/* Barra de progreso — parte superior de la card */}
+    <div className="h-1 w-full bg-gray-100" aria-hidden="true">
+      {active && (
+        <div
+          key={autoplayKey}
+          className="h-full bg-cranberry/70 rounded-full"
+          style={{
+            animation: `carouselProgress ${autoplayDuration}ms linear forwards`,
+            animationPlayState: paused ? 'paused' : 'running',
+          }}
+        />
+      )}
+    </div>
+
+    {/* Contenido de la card */}
+    <div className="flex flex-col flex-1 p-5 sm:p-8 md:p-10">
     {/* Badge */}
     <span className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full text-[10px] sm:text-xs font-montserrat font-semibold tracking-widest uppercase bg-cranberry/10 text-cranberry border border-cranberry/20 mb-3 sm:mb-5">
       <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cranberry animate-pulse" aria-hidden="true" />
@@ -123,6 +139,7 @@ const ProjectCard = ({ badge, title, description, stats, cta, active }) => (
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
       </a>
+    </div>
     </div>
   </div>
 
@@ -262,7 +279,13 @@ export const CurrentProject = () => {
                     aria-roledescription="slide"
                     aria-label={`Proyecto ${idx + 1} de ${total}: ${project.title}`}
                   >
-                    <ProjectCard {...project} active={idx === current} />
+                    <ProjectCard
+                      {...project}
+                      active={idx === current}
+                      autoplayKey={current}
+                      autoplayDuration={AUTOPLAY_INTERVAL}
+                      paused={paused}
+                    />
                   </div>
                 ))}
               </div>
@@ -274,20 +297,7 @@ export const CurrentProject = () => {
             </div>
           </div>
 
-          {/* Barra de progreso — centrada bajo la card activa */}
-          <div
-            className="mt-3 h-0.5 bg-gray-100 overflow-hidden rounded-full mx-auto"
-            style={{ width: cardW > 0 ? `${cardW}px` : `${CARD_RATIO * 100}%` }}
-          >
-            <div
-              key={current}
-              className="h-full bg-cranberry/60 rounded-full"
-              style={{
-                animation: `carouselProgress ${AUTOPLAY_INTERVAL}ms linear forwards`,
-                animationPlayState: paused ? 'paused' : 'running',
-              }}
-            />
-          </div>
+
 
           {/* Dots — centrados debajo del carrusel */}
           <div className="flex items-center justify-center gap-2 mt-5" role="tablist" aria-label="Proyectos">
