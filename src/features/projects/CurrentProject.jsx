@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { useSwipe } from '../../hooks/useSwipe';
 
 const FORM_VOTACION_URL = 'https://forms.gle/Wtm3uDqYNu33eSUB7';
 const AUTOPLAY_INTERVAL = 8000;
@@ -201,14 +202,11 @@ export const CurrentProject = () => {
     return () => clearTimeout(t);
   }, [current, paused, next]);
 
-  const touchStartX = useRef(null);
-  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
-  const handleTouchEnd = (e) => {
-    if (touchStartX.current === null) return;
-    const delta = e.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(delta) > 40) delta < 0 ? next() : prev();
-    touchStartX.current = null;
-  };
+  const { handlers: swipeHandlers } = useSwipe({
+    onSwipeLeft: next,
+    onSwipeRight: prev,
+    threshold: 40,
+  });
 
   return (
     <section
@@ -238,18 +236,16 @@ export const CurrentProject = () => {
           onTouchStart={() => setPaused(true)}
           onTouchEnd={() => setPaused(false)}
         >
-          {/* Hint de deslizamiento — solo mobile, se oculta cuando el usuario interactúa */}
-          {!paused && (
-            <div className="flex md:hidden items-center justify-center gap-2 mb-4 text-gray-400 pointer-events-none select-none">
-              <svg className="w-4 h-4 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-              </svg>
-              <span className="font-montserrat text-xs tracking-wide">Deslizá para ver más</span>
-              <svg className="w-4 h-4 animate-bounce-x-reverse" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </div>
-          )}
+          {/* Hint de deslizamiento — solo mobile, siempre renderizado para evitar saltos de layout */}
+          <div className="flex md:hidden items-center justify-center gap-2 mb-4 text-gray-400 pointer-events-none select-none">
+            <svg className="w-4 h-4 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+            </svg>
+            <span className="font-montserrat text-xs tracking-wide">Deslizá para ver más</span>
+            <svg className="w-4 h-4 animate-bounce-x-reverse" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </div>
 
           <div className="relative group">
             <div className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -261,9 +257,9 @@ export const CurrentProject = () => {
 
             <div
               ref={clipRef}
-              className="overflow-hidden pb-4 md:pb-8"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
+              className="overflow-hidden pb-4 md:pb-8 select-none"
+              style={{ touchAction: 'pan-y' }}
+              {...swipeHandlers}
             >
               <div
                 className="flex transition-transform duration-700"
