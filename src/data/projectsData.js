@@ -134,12 +134,12 @@ export const projectsData = [
   {
     id: 'kits-higiene-2025',
     title: 'Kits de Higiene — Sirve Ahora',
-    description: 'Armamos y entregamos kits de higiene personal a familias vulnerables de la ciudad en el marco del programa Sirve Ahora.',
+    description: 'Armamos y entregamos kits de higiene personal a familias de nuestra comunidad en el marco del programa Sirve Ahora.',
     imageUrl: '/images/proyectos/kits-higiene-2025/portada.jpg',
     date: 'Agosto 2025',
     category: 'Asistencia Social',
     impact: 'Familias vulnerables',
-    longDescription: `Junto a los chicos de Meriendas Compartidas, compartimos una tarde llena de juegos, risas y aprendizaje. Además, hicimos entrega de kits de higiene personal para seguir fomentando hábitos saludables y el cuidado diario.\n\nCada kit incluyó productos de higiene básica esenciales para las familias. Los paquetes fueron armados en jornadas de trabajo conjunto por los miembros del club.\n\nEste proyecto es parte de la iniciativa global del movimiento Rotaract "Sirve Ahora", que busca que los clubes del mundo actúen simultáneamente en sus comunidades, generando un impacto colectivo a escala mundial.`,
+    longDescription: `Junto a los chicos de Meriendas Compartidas, compartimos una tarde llena de juegos, risas y aprendizaje. Además, hicimos entrega de kits de higiene personal para seguir fomentando hábitos saludables y el cuidado diario.\n\nCada kit incluyó productos de higiene personal esenciales. Los paquetes fueron armados en jornadas de trabajo conjunto por los miembros del club.\n\nEsta actividad fue realizada en el marco de “Sirve Ahora”, una iniciativa que convocó a organizaciones de distintos lugares del mundo a desarrollar acciones de servicio de manera simultánea en sus comunidades, buscando generar un impacto colectivo a escala global.`,
     images: [
       '/images/proyectos/kits-higiene-2025/foto-1.jpg',
       '/images/proyectos/kits-higiene-2025/foto-2.jpg',
