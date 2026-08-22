@@ -4,7 +4,7 @@ export const youthIdentityData = {
   badge: "Jóvenes Líderes en Acción",
   title: "Somos un grupo de jóvenes de 18 a 30 años",
   description:
-    "En Rotaract Club Arrecifes unimos a jóvenes apasionados de entre 18 y 30 años con el propósito común de impulsar el cambio social, adquirir habilidades de liderazgo ejecutivo y servir activamente a la comunidad de Arrecifes.",
+    "En Rotaract Club Arrecifes unimos a jóvenes apasionados de entre 18 y 30 años con el propósito común de impulsar el cambio social, adquirir habilidades de liderazgo y servir activamente a la comunidad de Arrecifes.",
   stats: [
     { value: "18-30", label: "Rango de Edad" },
     { value: "9", label: "Comités de Trabajo" },
