@@ -94,13 +94,20 @@ export const projectsData = [
   },
   {
     id: 'foro-distrital-2024',
-    title: 'Foro Distrital Rotaract',
+    title: 'Foro Distrital de Rotaract',
     description: 'Organizamos y recibimos a más de 100 rotaractianos de Argentina, Uruguay y Paraguay para el Foro Distrital en Arrecifes.',
     imageUrl: '/images/proyectos/foro-distrital-2024/portada.jpeg',
     date: 'Diciembre 2024',
     category: 'Organizacional',
     impact: '+100 rotaractianos internacionales',
-    longDescription: `El 30 de noviembre y 1 de diciembre vivimos un evento inolvidable lleno de aprendizajes, trabajo en equipo y pura energía. Desde capacitaciones hasta momentos de camaradería, este foro lo tuvo todo.\n\nEl sábado arrancó con capacitaciones, la Asamblea de AIRAUP y una fiesta épica para cerrar el día con toda la actitud. El domingo fue el turno de la actividad de servicio —donde pintamos y ayudamos con reformas a la Escuela Nº29—, la Asamblea Distrital y un rico almuerzo para cerrar con broche de oro.\n\nFue una oportunidad única para mostrar Arrecifes al mundo rotaractiano y posicionar al club como referente en la región. La logística de alojar y coordinar a más de 100 personas de tres países distintos fue un desafío monumental que el club superó con creces.`,
+    longDescription: `El 30 de noviembre y 1 de diciembre vivimos un evento inolvidable lleno de aprendizajes, trabajo en equipo y pura energía rotaractiana.\n\nEl sábado arrancó con capacitaciones, la Asamblea de AIRAUP y una fiesta para cerrar el día con toda la actitud. El domingo fue el turno de la actividad de servicio colectivo: más de 100 rotaractianos pusieron manos a la obra para pintar y renovar la Escuela Primaria Nº29, dejando una huella concreta en la comunidad de Arrecifes.\n\nFue una oportunidad única para mostrar Arrecifes al mundo rotaractiano y posicionar al club como referente en la región. La logística de alojar y coordinar a más de 100 personas de tres países distintos fue un desafío monumental que el club superó con creces.`,
+    serviceHighlight: {
+      emoji: '🎨',
+      title: 'Actividad de Servicio: Escuela Nº29',
+      subtitle: 'Domingo del Foro Distrital',
+      description: 'Más de 100 rotaractianos de Argentina, Uruguay y Paraguay se sumaron a pintar y renovar la Escuela Primaria Nº29 de Arrecifes. Una jornada de servicio colectivo que dejó una huella real en la comunidad.',
+      tags: ['Servicio Comunitario', 'Escuela Nº29', '+100 voluntarios'],
+    },
     images: [
       '/images/proyectos/foro-distrital-2024/foto-1.jpeg',
       '/images/proyectos/foro-distrital-2024/foto-2.jpeg',
@@ -109,7 +116,7 @@ export const projectsData = [
     stats: [
       { value: '+100', label: 'Rotaractianos participantes' },
       { value: '3', label: 'Países representados' },
-      { value: '🌎', label: 'Argentina, Uruguay y Paraguay' },
+      { value: '�', label: 'Escuela Nº29 renovada' },
     ],
   },
   {

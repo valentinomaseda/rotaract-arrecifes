@@ -467,6 +467,119 @@ const GalleryView = ({ images, title }) => {
   );
 };
 
+/* ── Tarjeta de actividad de servicio destacada ── */
+const ServiceHighlightCard = ({ highlight }) => (
+  <div
+    style={{
+      background: 'linear-gradient(135deg, #8b0040 0%, #c0004e 60%, #e8005a 100%)',
+      borderRadius: '1.25rem',
+      padding: '1.5rem',
+      position: 'relative',
+      overflow: 'hidden',
+      boxShadow: '0 8px 32px rgba(139,0,64,0.25)',
+    }}
+  >
+    {/* Fondo decorativo */}
+    <div
+      aria-hidden="true"
+      style={{
+        position: 'absolute',
+        top: '-40px',
+        right: '-40px',
+        width: '160px',
+        height: '160px',
+        borderRadius: '50%',
+        background: 'rgba(255,255,255,0.06)',
+      }}
+    />
+    <div
+      aria-hidden="true"
+      style={{
+        position: 'absolute',
+        bottom: '-20px',
+        left: '-20px',
+        width: '100px',
+        height: '100px',
+        borderRadius: '50%',
+        background: 'rgba(255,255,255,0.04)',
+      }}
+    />
+
+    {/* Badge superior */}
+    <div className="relative z-10 flex items-center gap-2 mb-4">
+      <span
+        style={{
+          background: 'rgba(255,255,255,0.18)',
+          backdropFilter: 'blur(8px)',
+          border: '1px solid rgba(255,255,255,0.25)',
+          borderRadius: '9999px',
+          padding: '0.25rem 0.75rem',
+          fontSize: '0.7rem',
+          fontFamily: 'Montserrat, sans-serif',
+          fontWeight: 700,
+          color: '#fff',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+        }}
+      >
+        {highlight.subtitle}
+      </span>
+    </div>
+
+    {/* Emoji + Título */}
+    <div className="relative z-10 flex items-start gap-3 mb-3">
+      <span style={{ fontSize: '2rem', lineHeight: 1 }}>{highlight.emoji}</span>
+      <h3
+        style={{
+          fontFamily: 'Garet, sans-serif',
+          fontSize: '1.2rem',
+          fontWeight: 700,
+          color: '#fff',
+          lineHeight: 1.25,
+          margin: 0,
+        }}
+      >
+        {highlight.title}
+      </h3>
+    </div>
+
+    {/* Descripción */}
+    <p
+      className="relative z-10"
+      style={{
+        fontFamily: 'Montserrat, sans-serif',
+        fontSize: '0.88rem',
+        color: 'rgba(255,255,255,0.88)',
+        lineHeight: 1.6,
+        margin: '0 0 1rem 0',
+      }}
+    >
+      {highlight.description}
+    </p>
+
+    {/* Tags */}
+    <div className="relative z-10 flex flex-wrap gap-2">
+      {highlight.tags.map((tag) => (
+        <span
+          key={tag}
+          style={{
+            background: 'rgba(255,255,255,0.15)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            borderRadius: '9999px',
+            padding: '0.2rem 0.65rem',
+            fontSize: '0.72rem',
+            fontFamily: 'Montserrat, sans-serif',
+            fontWeight: 600,
+            color: '#fff',
+          }}
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+);
+
 export const ProjectDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -555,6 +668,11 @@ export const ProjectDetailPage = () => {
 
             {/* Info lateral */}
             <div className="lg:col-span-5 space-y-8">
+              {/* Tarjeta de servicio destacada (opcional) */}
+              {project.serviceHighlight && (
+                <ServiceHighlightCard highlight={project.serviceHighlight} />
+              )}
+
               {/* Descripción completa */}
               <div className="space-y-4">
                 <h2 className="font-garet text-2xl text-gray-900">Sobre el proyecto</h2>
