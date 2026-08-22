@@ -1,5 +1,6 @@
 import React, { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import { ScrollToTop } from './components/ScrollToTop'
@@ -12,6 +13,7 @@ import { PastProjects } from './features/projects/PastProjects'
 const AllProjectsPage = lazy(() => import('./features/home/AllProjectsPage').then(m => ({ default: m.AllProjectsPage })))
 const ProjectDetailPage = lazy(() => import('./features/projects/ProjectDetailPage').then(m => ({ default: m.ProjectDetailPage })))
 const JobsPage = lazy(() => import('./features/jobs/JobsPage').then(m => ({ default: m.JobsPage })))
+const GamePage = lazy(() => import('./features/game/GamePage').then(m => ({ default: m.GamePage })))
 
 // HomePage: maneja el scroll a una sección si viene con state.scrollTo
 const HomePage = () => {
@@ -38,21 +40,25 @@ const HomePage = () => {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <div className="min-h-screen bg-white text-gray-800 flex flex-col">
-        <Navbar />
-        <Suspense fallback={null}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/empleos" element={<JobsPage />} />
-            <Route path="/proyectos" element={<AllProjectsPage />} />
-            <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
-          </Routes>
-        </Suspense>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <ScrollToTop />
+        <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+          <Navbar />
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/empleos" element={<JobsPage />} />
+              <Route path="/proyectos" element={<AllProjectsPage />} />
+              <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
+              <Route path="/juego" element={<GamePage />} />
+            </Routes>
+          </Suspense>
+          <Footer />
+        </div>
+      </BrowserRouter>
+      <Analytics />
+    </>
   )
 }
 

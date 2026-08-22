@@ -16,6 +16,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '#', label: 'Inicio', sectionId: null },
     { href: '/empleos', label: 'Bolsa de Trabajo', isDirectRoute: true },
+    { href: '/juego', label: 'Juego de la Semana', isDirectRoute: true },
     { href: '#proyectos', label: 'Proyectos', sectionId: 'proyectos' },
     { href: '#quienes-somos', label: 'Quiénes Somos', sectionId: 'quienes-somos' },
   ];

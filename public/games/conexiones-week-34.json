@@ -1,0 +1,49 @@
+{
+    "title": "Conexiones Rotarias",
+    "categories": [
+        {
+            "id": "avenidas",
+            "label": "Avenidas de Servicio de Rotary",
+            "color": "yellow",
+            "words": [
+                "CLUB",
+                "PROFESIONAL",
+                "COMUNIDAD",
+                "INTERNACIONAL"
+            ]
+        },
+        {
+            "id": "valores",
+            "label": "Valores Fundamentales de Rotary",
+            "color": "green",
+            "words": [
+                "INTEGRIDAD",
+                "SERVICIO",
+                "DIVERSIDAD",
+                "LIDERAZGO"
+            ]
+        },
+        {
+            "id": "paulharris",
+            "label": "Paul Harris fue un...",
+            "color": "blue",
+            "words": [
+                "ABOGADO",
+                "FUNDADOR",
+                "VISIONARIO",
+                "FILÁNTROPO"
+            ]
+        },
+        {
+            "id": "arrecifes",
+            "label": "Actividades de Rotaract Arrecifes",
+            "color": "purple",
+            "words": [
+                "MARATÓN",
+                "SORTEO",
+                "ASADO",
+                "FERIA"
+            ]
+        }
+    ]
+}
