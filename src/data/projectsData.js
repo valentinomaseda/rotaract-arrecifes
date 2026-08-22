@@ -169,8 +169,6 @@ export const projectsData = [
       '/images/proyectos/merendero-2025/foto-5.jpg',
       '/images/proyectos/merendero-2025/foto-6.jpg',
       '/images/proyectos/merendero-2025/foto-7.jpg',
-      '/images/proyectos/merendero-2025/foto-8.jpg',
-      '/images/proyectos/merendero-2025/foto-9.jpg',
     ],
     stats: [
       { value: '🍵', label: 'Merienda completa' },
