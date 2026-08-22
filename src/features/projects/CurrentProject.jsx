@@ -14,7 +14,7 @@ const PROJECTS = [
     stats: [
       { value: '50', label: 'Colilleros' },
       { value: 'Activo', label: 'Estado' },
-      { value: 'QR', label: 'Educación' },
+      { value: 'Medio Ambiente', label: 'Área' },
     ],
     cta: {
       href: 'https://drive.google.com/file/d/1sWJZDwZ3C59xsntAB4VdBAK4M1R56G-Z/view',
@@ -34,7 +34,7 @@ const PROJECTS = [
       'Una vez al mes traemos a un orador invitado para compartir su experiencia. ¿Qué temáticas te gustaría que abordemos? ¡Ayudanos a definirlo!',
     stats: [
       { value: '1/mes', label: 'Frecuencia' },
-      { value: 'Múltiple', label: 'Oradores' },
+      { value: 'Múltiples', label: 'Oradores' },
       { value: 'Abierto', label: 'Público' },
     ],
     cta: {
@@ -54,7 +54,7 @@ const PROJECTS = [
     description:
       'Fortalecemos el banco de elementos de Rotary (sillas de ruedas, andadores) para facilitar recursos a personas que los necesitan temporalmente.',
     stats: [
-      { value: '25+', label: 'Elementos' },
+      { value: 'Salud', label: 'Área' },
       { value: 'Rotary', label: 'Sede' },
       { value: 'Activa', label: 'Campaña' },
     ],
