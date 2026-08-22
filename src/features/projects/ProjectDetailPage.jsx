@@ -611,7 +611,7 @@ export const ProjectDetailPage = () => {
       <div className="relative bg-white overflow-hidden">
         <div className="blob-decoration w-[400px] h-[400px] bg-cranberry/5 -top-32 -right-32" aria-hidden="true" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-24 pb-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-12 pb-12">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm font-montserrat text-gray-400 mb-8 flex-wrap" aria-label="Breadcrumb">
             <button onClick={() => navigate('/')} className="hover:text-cranberry transition-colors duration-200 bg-transparent border-0 p-0 cursor-pointer">
