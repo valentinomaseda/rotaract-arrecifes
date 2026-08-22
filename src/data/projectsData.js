@@ -51,13 +51,13 @@ export const projectsData = [
   },
   {
     id: 'visita-asilo-2024',
-    title: 'Visita al Asilo de Ancianos',
-    description: 'Compartimos una tarde con los adultos mayores del hogar de ancianos de Arrecifes, llevando compañía, actividades y mucho afecto.',
+    title: 'Visita al Hogar Sor María Roselló',
+    description: 'Compartimos una tarde con los adultos mayores del Hogar Sor María Roselló, llevando compañía, actividades y mucho afecto.',
     imageUrl: '/images/proyectos/visita-asilo-2024/portada.jpg',
     date: 'Abril 2024',
     category: 'Asistencia Social',
     impact: 'Adultos mayores beneficiados',
-    longDescription: `Junto al RDR Jeremías y los chicos de Interact Arrecifes, tuvimos la oportunidad de visitar el Hogar de Ancianos Municipal. Disfrutamos de conversaciones encantadoras, risas y momentos inolvidables en compañía de los abuelos del hogar.\n\nMuchos de los adultos mayores reciben pocas visitas, por lo que la presencia de los jóvenes del club generó un impacto emocional muy significativo. El intercambio intergeneracional fue enriquecedor para ambas partes.\n\nEsta visita nos llenó el corazón con tanto cariño y sabiduría, y nos motivó a repetir la experiencia de forma periódica. ¡Esperamos volver pronto!`,
+    longDescription: `Junto al RDR Jeremías y los chicos de Interact Arrecifes, tuvimos la oportunidad de visitar el Hogar Sor María Roselló. Disfrutamos de conversaciones encantadoras, risas y momentos inolvidables en compañía de los abuelos del hogar.\n\nMuchos de los adultos mayores reciben pocas visitas, por lo que la presencia de los jóvenes del club generó un impacto emocional muy significativo. El intercambio intergeneracional fue enriquecedor para ambas partes.\n\nEsta visita nos llenó el corazón con tanto cariño y sabiduría, y nos motivó a repetir la experiencia de forma periódica. ¡Esperamos volver pronto!`,
     images: [
       '/images/proyectos/visita-asilo-2024/foto-1.png',
       '/images/proyectos/visita-asilo-2024/foto-2.jpg',

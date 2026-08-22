@@ -1,5 +1,5 @@
-visita al asilo:
-Hoy, junto al RDR @jeremias.54 y los chicos de @interact_arrecifes, tuvimos la oportunidad de visitar el Hogar de Ancianos Municipal🫶🏻.
+visita al Hogar Sor María Roselló:
+Hoy, junto al RDR @jeremias.54 y los chicos de @interact_arrecifes, tuvimos la oportunidad de visitar el Hogar Sor María Roselló🫶🏻.
 Disfrutamos de conversaciones encantadoras, risas y momentos inolvidables en compañía de los abuelos del hogar🥰🙌🏻.
 Gracias por llenar nuestros corazones con tanto cariño y sabiduría🤗🩷.
 ¡Esperamos verlos pronto!
