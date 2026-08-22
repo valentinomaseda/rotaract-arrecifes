@@ -1,0 +1,47 @@
+{
+    "title": "Sopa de Letras Rotaract",
+    "label": "Semana del 31 de agosto al 6 de septiembre de 2026",
+    "size": 13,
+    "words": [
+        {
+            "word": "ROTARACT",
+            "hint": "Nuestra organización"
+        },
+        {
+            "word": "SERVICIO",
+            "hint": "La razón de ser"
+        },
+        {
+            "word": "LIDERAZGO",
+            "hint": "Lo que desarrollamos"
+        },
+        {
+            "word": "COMUNIDAD",
+            "hint": "A quien servimos"
+        },
+        {
+            "word": "AMISTAD",
+            "hint": "Valor fundamental"
+        },
+        {
+            "word": "ARRECIFES",
+            "hint": "Nuestra ciudad"
+        },
+        {
+            "word": "ROTARIO",
+            "hint": "Miembro adulto de Rotary"
+        },
+        {
+            "word": "DISTRITO",
+            "hint": "Agrupación regional de clubes"
+        },
+        {
+            "word": "PROYECTO",
+            "hint": "Acción concreta de impacto"
+        },
+        {
+            "word": "VALORES",
+            "hint": "Principios que nos guían"
+        }
+    ]
+}

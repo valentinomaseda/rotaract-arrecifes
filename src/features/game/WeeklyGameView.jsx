@@ -5,10 +5,11 @@ import GameSkeleton from './GameSkeleton';
 // Add new game types here. Each value is a React.lazy() result so the
 // corresponding chunk is only fetched when that type is resolved.
 const GAME_REGISTRY = {
-  crossword:  lazy(() => import('./CrosswordGame')),
-  wordle:     lazy(() => import('./WordleGame')),
-  conexiones: lazy(() => import('./ConexionesGame')),
-  trivia:     lazy(() => import('./TriviaGame')),
+  crossword:   lazy(() => import('./CrosswordGame')),
+  wordle:      lazy(() => import('./WordleGame')),
+  conexiones:  lazy(() => import('./ConexionesGame')),
+  trivia:      lazy(() => import('./TriviaGame')),
+  wordsearch:  lazy(() => import('./WordSearchGame')),
 };
 
 // ── Empty state ────────────────────────────────────────────────────────────
