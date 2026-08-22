@@ -155,7 +155,7 @@ export const projectsData = [
   {
     id: 'merendero-2025',
     title: 'Merendero Comunitario',
-    description: 'Organizamos un merendero para niños y familias de sectores vulnerables, brindando merienda y contención en nuestra comunidad.',
+    description: 'Compartimos una hermosa tarde junto a los niños de Meriendas Compartidas en el Circuito Costanero.',
     imageUrl: '/images/proyectos/merendero-2025/portada.jpg',
     date: 'Septiembre 2025',
     category: 'Asistencia Social',
