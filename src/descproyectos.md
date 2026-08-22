@@ -14,7 +14,7 @@ Nuestro objetivo es proporcionar herramientas prácticas y conocimientos valioso
 
 Contamos con el privilegio de aprender sobre el estrés y la ansiedad de la mano de Laura Casal, una increíble psicóloga que compartió con nosotros su conocimiento. 🙌🏼
 
-Fue una jornada llena de valiosos consejos y reflexiones que nos ayudarán a manejar mejor estos desafíos en nuestras vidas. ¡Gracias, Laura, por tu dedicación y sabiduría! 🫶🏼
+En un contexto donde la salud mental es cada vez más una prioridad, este proyecto reafirmó el compromiso del club con el bienestar integral de la comunidad. ¡Gracias, Laura, por tu dedicación y sabiduría! 🫶🏼
 
 plantio de arboles en ees6:
 El pasado viernes 18, estuvimos llevando a cabo el primer plantío de árboles en la Escuela EES6, como parte de nuestra campaña de reforestación. 🌳✨
