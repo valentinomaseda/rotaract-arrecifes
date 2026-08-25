@@ -1,432 +1,353 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 
-// ── Color Theme Mapping for Highlighted Words ──────────────────────────────
-const WORD_COLORS = {
-  rose:    { bg: 'bg-rose-100 text-rose-900 border-rose-300',       cell: 'bg-rose-200/80 text-rose-950 font-black', pill: 'bg-rose-50 border-rose-200 text-rose-800' },
-  amber:   { bg: 'bg-amber-100 text-amber-900 border-amber-300',     cell: 'bg-amber-200/80 text-amber-950 font-black', pill: 'bg-amber-50 border-amber-200 text-amber-800' },
-  emerald: { bg: 'bg-emerald-100 text-emerald-900 border-emerald-300', cell: 'bg-emerald-200/80 text-emerald-950 font-black', pill: 'bg-emerald-50 border-emerald-200 text-emerald-800' },
-  sky:     { bg: 'bg-sky-100 text-sky-900 border-sky-300',           cell: 'bg-sky-200/80 text-sky-950 font-black', pill: 'bg-sky-50 border-sky-200 text-sky-800' },
-  indigo:  { bg: 'bg-indigo-100 text-indigo-900 border-indigo-300',   cell: 'bg-indigo-200/80 text-indigo-950 font-black', pill: 'bg-indigo-50 border-indigo-200 text-indigo-800' },
-  fuchsia: { bg: 'bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300', cell: 'bg-fuchsia-200/80 text-fuchsia-950 font-black', pill: 'bg-fuchsia-50 border-fuchsia-200 text-fuchsia-800' },
-  teal:    { bg: 'bg-teal-100 text-teal-900 border-teal-300',       cell: 'bg-teal-200/80 text-teal-950 font-black', pill: 'bg-teal-50 border-teal-200 text-teal-800' },
-  orange:  { bg: 'bg-orange-100 text-orange-900 border-orange-300', cell: 'bg-orange-200/80 text-orange-950 font-black', pill: 'bg-orange-50 border-orange-200 text-orange-800' },
-  purple:  { bg: 'bg-purple-100 text-purple-900 border-purple-300', cell: 'bg-purple-200/80 text-purple-950 font-black', pill: 'bg-purple-50 border-purple-200 text-purple-800' },
-  blue:    { bg: 'bg-blue-100 text-blue-900 border-blue-300',       cell: 'bg-blue-200/80 text-blue-950 font-black', pill: 'bg-blue-50 border-blue-200 text-blue-800' },
-};
+// ── Directions (8 orientations) ─────────────────────────────────────────────
+const DIRS = [
+  [0, 1], [1, 0], [0, -1], [-1, 0],   // H / V
+  [1, 1], [1, -1], [-1, 1], [-1, -1], // Diagonals
+];
 
-function getLineCells(start, end) {
-  if (!start || !end) return [];
-  const [r1, c1] = start;
-  const [r2, c2] = end;
+// One distinct color per found word
+const PALETTE = [
+  '#c0004e', '#1d4ed8', '#15803d', '#c2410c',
+  '#7e22ce', '#0e7490', '#b91c1c', '#a16207',
+  '#86198f', '#065f46',
+];
 
-  const dr = r2 - r1;
-  const dc = c2 - c1;
+// ── Grid builder ─────────────────────────────────────────────────────────────
+function buildGrid(wordObjs, size) {
+  const grid = Array.from({ length: size }, () => Array(size).fill(''));
+  const placed = [];
 
-  const absDr = Math.abs(dr);
-  const absDc = Math.abs(dc);
+  // Longest words first to maximise placement success
+  const sorted = [...wordObjs].sort((a, b) => b.word.length - a.word.length);
 
-  // Must be horizontal, vertical, or 45-degree diagonal
-  if (dr !== 0 && dc !== 0 && absDr !== absDc) {
-    return [[r1, c1]];
+  for (const { word: raw, hint } of sorted) {
+    const word = raw
+      .toUpperCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // remove diacritics: é→e
+      .replace(/\u00D1/g, 'N');        // Ñ → N
+
+    let placed_ = false;
+    for (let attempt = 0; attempt < 300 && !placed_; attempt++) {
+      const [dr, dc] = DIRS[Math.floor(Math.random() * DIRS.length)];
+      const r0 = Math.floor(Math.random() * size);
+      const c0 = Math.floor(Math.random() * size);
+      const rE = r0 + dr * (word.length - 1);
+      const cE = c0 + dc * (word.length - 1);
+
+      if (rE < 0 || rE >= size || cE < 0 || cE >= size) continue;
+
+      let ok = true;
+      const cells = [];
+      for (let i = 0; i < word.length; i++) {
+        const r = r0 + dr * i;
+        const c = c0 + dc * i;
+        if (grid[r][c] !== '' && grid[r][c] !== word[i]) { ok = false; break; }
+        cells.push([r, c]);
+      }
+
+      if (ok) {
+        cells.forEach(([r, c], i) => { grid[r][c] = word[i]; });
+        placed.push({ word, hint: hint ?? '', cells });
+        placed_ = true;
+      }
+    }
   }
 
-  const steps = Math.max(absDr, absDc);
-  const stepR = dr === 0 ? 0 : dr / absDr;
-  const stepC = dc === 0 ? 0 : dc / absDc;
+  // Fill blanks with random letters
+  const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for (let r = 0; r < size; r++)
+    for (let c = 0; c < size; c++)
+      if (!grid[r][c]) grid[r][c] = ABC[Math.floor(Math.random() * 26)];
 
-  const cells = [];
-  for (let i = 0; i <= steps; i++) {
-    cells.push([r1 + i * stepR, c1 + i * stepC]);
-  }
-  return cells;
+  return { grid, placed };
 }
 
-function SopaSkeleton() {
-  return (
-    <div className="animate-pulse space-y-4 max-w-4xl mx-auto w-full">
-      <div className="h-6 bg-gray-200 rounded-md w-1/3 mx-auto" />
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 aspect-square max-w-[480px] mx-auto w-full bg-gray-200 rounded-2xl" />
-        <div className="space-y-2">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="h-10 bg-gray-100 rounded-xl" />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+// ── Helpers ──────────────────────────────────────────────────────────────────
+const rc = (r, c) => `${r},${c}`;
+
+/** Given a start/end cell, return all cells in the snapped straight line. */
+function snapLine(start, end) {
+  if (!start) return [];
+  if (!end) return [start];
+  const dr = end[0] - start[0];
+  const dc = end[1] - start[1];
+  const ar = Math.abs(dr), ac = Math.abs(dc);
+  if (!ar && !ac) return [start];
+
+  let sr = 0, sc = 0, len;
+  if (!ar)       { sc = dc > 0 ? 1 : -1; len = ac + 1; }
+  else if (!ac)  { sr = dr > 0 ? 1 : -1; len = ar + 1; }
+  else if (ar === ac) { sr = dr > 0 ? 1 : -1; sc = dc > 0 ? 1 : -1; len = ar + 1; }
+  else if (ar > ac)   { sr = dr > 0 ? 1 : -1; len = ar + 1; }
+  else                { sc = dc > 0 ? 1 : -1; len = ac + 1; }
+
+  return Array.from({ length: len }, (_, i) => [start[0] + sr * i, start[1] + sc * i]);
 }
 
-export default function WordSearchGame({ dataPath = '/games/sopa-week-35.json' }) {
+// ── Main component ────────────────────────────────────────────────────────────
+export default function WordSearchGame({ dataPath }) {
+  const [status, setStatus]     = useState('loading'); // loading|error|playing|done
   const [gameData, setGameData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [foundWords, setFoundWords] = useState([]); // array of matched word strings
-  const [foundPlacements, setFoundPlacements] = useState([]); // array of { word, cells: [[r,c]], color }
-  const [selection, setSelection] = useState(null); // { start: [r,c], end: [r,c] }
-  const [isSelecting, setIsSelecting] = useState(false);
-  const [solved, setSolved] = useState(false);
-  const [lastFound, setLastFound] = useState(null);
+  const [grid, setGrid]         = useState([]);
+  const [placed, setPlaced]     = useState([]);
+  const [found, setFound]       = useState([]);  // [{word, colorIdx, cells}]
+  const [sel, setSel]           = useState([]);  // [[r,c]]
+  const [shake, setShake]       = useState(false);
 
-  const gridRef = useRef(null);
+  // Refs to avoid stale closures in pointer handlers
+  const gridEl    = useRef(null);
+  const startRef  = useRef(null);
+  const dragging  = useRef(false);
+  const selRef    = useRef([]);
+  const foundRef  = useRef([]);
+  const placedRef = useRef([]);
 
+  useEffect(() => { selRef.current = sel; },    [sel]);
+  useEffect(() => { foundRef.current = found; },  [found]);
+  useEffect(() => { placedRef.current = placed; }, [placed]);
+
+  // Fetch data + build grid
   useEffect(() => {
-    let cancelled = false;
+    let dead = false;
     fetch(dataPath)
-      .then((r) => r.json())
-      .then((d) => {
-        if (!cancelled) {
-          setGameData(d);
-          setLoading(false);
-        }
+      .then(r => { if (!r.ok) throw 0; return r.json(); })
+      .then(data => {
+        if (dead) return;
+        const wordsList = data.words ?? [];
+        const { grid, placed } = buildGrid(wordsList, data.size ?? 13);
+        setGameData(data);
+        setGrid(grid);
+        setPlaced(placed);
+        setStatus('playing');
       })
-      .catch(() => {
-        if (!cancelled) setLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
+      .catch(() => { if (!dead) setStatus('error'); });
+    return () => { dead = true; };
   }, [dataPath]);
 
-  const words = useMemo(() => gameData?.words ?? [], [gameData]);
-  const grid = useMemo(() => gameData?.grid ?? [], [gameData]);
-  const totalWords = words.length;
+  // Hit-test: which cell is under (x,y)?
+  const cellAt = useCallback((x, y) => {
+    const els = gridEl.current?.querySelectorAll('[data-rc]');
+    if (!els) return null;
+    for (const el of els) {
+      const b = el.getBoundingClientRect();
+      if (x >= b.left && x <= b.right && y >= b.top && y <= b.bottom)
+        return el.dataset.rc.split(',').map(Number);
+    }
+    return null;
+  }, []);
 
-  // Compute selected cells from current drag line
-  const activeCells = useMemo(() => {
-    if (!selection) return [];
-    return getLineCells(selection.start, selection.end);
-  }, [selection]);
+  // Check if current selection matches any unmatched word
+  const commit = useCallback(() => {
+    const curSel    = selRef.current;
+    const curFound  = foundRef.current;
+    const curPlaced = placedRef.current;
 
-  const activeKeys = useMemo(() => {
-    return new Set(activeCells.map(([r, c]) => `${r}-${c}`));
-  }, [activeCells]);
+    if (curSel.length < 2) { setSel([]); return; }
 
-  // Map of cells already found with their respective colors
-  const foundCellMap = useMemo(() => {
-    const map = new Map();
-    for (const item of foundPlacements) {
-      const colorKey = item.color || 'rose';
-      const colorObj = WORD_COLORS[colorKey] || WORD_COLORS.rose;
-      for (const [r, c] of item.cells) {
-        const key = `${r}-${c}`;
-        map.set(key, colorObj.cell);
+    const fwd = curSel.map(([r, c]) => rc(r, c)).join('|');
+    const rev = [...curSel].reverse().map(([r, c]) => rc(r, c)).join('|');
+    const doneWords = curFound.map(f => f.word);
+
+    for (const pw of curPlaced) {
+      if (doneWords.includes(pw.word)) continue;
+      const pwStr = pw.cells.map(([r, c]) => rc(r, c)).join('|');
+      const pwRev = [...pw.cells].reverse().map(([r, c]) => rc(r, c)).join('|');
+      if (fwd === pwStr || fwd === pwRev) {
+        const colorIdx = curFound.length % PALETTE.length;
+        const next = [...curFound, { word: pw.word, colorIdx, cells: pw.cells }];
+        setFound(next);
+        setSel([]);
+        if (next.length === curPlaced.length) setStatus('done');
+        return;
       }
     }
-    return map;
-  }, [foundPlacements]);
 
-  // Check if active selection matches a word
-  const checkSelection = useCallback(
-    (cells) => {
-      if (!cells || cells.length < 2 || !grid.length) return false;
+    // Wrong selection
+    setShake(true);
+    setTimeout(() => { setShake(false); setSel([]); }, 400);
+  }, []);
 
-      const lettersForward = cells.map(([r, c]) => grid[r]?.[c] || '').join('');
-      const lettersReverse = [...lettersForward].reverse().join('');
+  // Pointer events (work on both desktop and mobile)
+  const onDown = useCallback((e) => {
+    e.preventDefault();
+    const pt = e.changedTouches ? e.changedTouches[0] : e;
+    const cell = cellAt(pt.clientX, pt.clientY);
+    if (!cell) return;
+    dragging.current = true;
+    startRef.current = cell;
+    setSel([cell]);
+  }, [cellAt]);
 
-      const matched = words.find(
-        (w) =>
-          !foundWords.includes(w.word) &&
-          (w.word === lettersForward || w.word === lettersReverse)
-      );
+  const onMove = useCallback((e) => {
+    if (!dragging.current) return;
+    e.preventDefault();
+    const pt = e.changedTouches ? e.changedTouches[0] : e;
+    const cell = cellAt(pt.clientX, pt.clientY);
+    if (cell) setSel(snapLine(startRef.current, cell));
+  }, [cellAt]);
 
-      if (matched) {
-        const newFound = [...foundWords, matched.word];
-        const newPlacements = [
-          ...foundPlacements,
-          {
-            word: matched.word,
-            cells,
-            color: matched.color || 'rose',
-          },
-        ];
-        setFoundWords(newFound);
-        setFoundPlacements(newPlacements);
-        setLastFound(matched.word);
-        setTimeout(() => setLastFound(null), 2000);
+  const onUp = useCallback((e) => {
+    if (!dragging.current) return;
+    e.preventDefault();
+    dragging.current = false;
+    commit();
+  }, [commit]);
 
-        if (newFound.length === totalWords) {
-          setSolved(true);
-        }
-        return true;
-      }
-      return false;
-    },
-    [foundWords, foundPlacements, grid, words, totalWords]
+  // ── Derived maps for rendering ────────────────────────────────────────────
+  const foundMap = {};
+  for (const f of found)
+    for (const [r, c] of f.cells) foundMap[rc(r, c)] = PALETTE[f.colorIdx];
+
+  const selSet = new Set(sel.map(([r, c]) => rc(r, c)));
+
+  // ── Render guards ─────────────────────────────────────────────────────────
+  if (status === 'loading') return (
+    <div className="flex justify-center items-center py-24">
+      <div className="w-9 h-9 border-[3px] border-cranberry border-t-transparent rounded-full animate-spin" />
+    </div>
   );
 
-  // ── Mouse Selection Handlers ─────────────────────────────────────────────
-  const handleCellMouseDown = (r, c) => {
-    setIsSelecting(true);
-    setSelection({ start: [r, c], end: [r, c] });
-  };
-
-  const handleCellMouseEnter = (r, c) => {
-    if (!isSelecting) return;
-    setSelection((prev) => (prev ? { ...prev, end: [r, c] } : null));
-  };
-
-  const handleMouseUp = useCallback(() => {
-    if (!isSelecting) return;
-    setIsSelecting(false);
-    if (selection) {
-      const cells = getLineCells(selection.start, selection.end);
-      checkSelection(cells);
-    }
-    setSelection(null);
-  }, [isSelecting, selection, checkSelection]);
-
-  // Global mouseup listener to catch releases outside grid
-  useEffect(() => {
-    window.addEventListener('mouseup', handleMouseUp);
-    return () => window.removeEventListener('mouseup', handleMouseUp);
-  }, [handleMouseUp]);
-
-  // ── Touch Selection Handlers ─────────────────────────────────────────────
-  const getCellCoordsFromTouch = (touch) => {
-    const el = document.elementFromPoint(touch.clientX, touch.clientY);
-    const cellEl = el?.closest('[data-cell-coords]');
-    if (!cellEl) return null;
-    const [r, c] = cellEl.getAttribute('data-cell-coords').split('-').map(Number);
-    return [r, c];
-  };
-
-  const handleTouchStart = (e) => {
-    if (!e.touches.length) return;
-    const coords = getCellCoordsFromTouch(e.touches[0]);
-    if (coords) {
-      setIsSelecting(true);
-      setSelection({ start: coords, end: coords });
-    }
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isSelecting || !e.touches.length) return;
-    const coords = getCellCoordsFromTouch(e.touches[0]);
-    if (coords) {
-      setSelection((prev) => (prev ? { ...prev, end: coords } : null));
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (!isSelecting) return;
-    setIsSelecting(false);
-    if (selection) {
-      const cells = getLineCells(selection.start, selection.end);
-      checkSelection(cells);
-    }
-    setSelection(null);
-  };
-
-  const handleReset = () => {
-    setFoundWords([]);
-    setFoundPlacements([]);
-    setSelection(null);
-    setSolved(false);
-    setLastFound(null);
-  };
-
-  if (loading) return <SopaSkeleton />;
-
-  const progressPct = Math.round((foundWords.length / totalWords) * 100);
+  if (status === 'error') return (
+    <div className="py-16 text-center font-montserrat text-gray-500">
+      No se pudo cargar el juego. Verificá tu conexión.
+    </div>
+  );
 
   return (
-    <div className="w-full flex flex-col items-center select-none">
-      {/* ── SUCCESS MODAL ── */}
-      {solved && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)' }}
-          onClick={() => setSolved(false)}
-        >
-          <div
-            className="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-8 text-center relative"
-            style={{ animation: 'scaleIn 0.35s cubic-bezier(0.22,1,0.36,1) both' }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setSolved(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-              aria-label="Cerrar"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+    <div className="font-montserrat select-none">
 
-            <div className="text-5xl mb-3 select-none">🎉</div>
-
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-montserrat font-bold tracking-widest uppercase bg-cranberry/10 text-cranberry mb-3">
-              ¡Sopa de Letras Completada!
-            </span>
-
-            <h2 className="font-garet text-2xl text-gray-900 mb-2 leading-tight">
-              ¡Felicitaciones!
-            </h2>
-            <p className="font-montserrat text-gray-500 text-sm leading-relaxed mb-6">
-              Encontraste las <strong>{totalWords} palabras</strong> rotarias ocultas en la grilla. ¡Excelente trabajo en equipo!
-            </p>
-
-            <div className="flex flex-col gap-3">
-              <button
-                onClick={() => setSolved(false)}
-                className="btn-cranberry text-white py-3 rounded-2xl font-montserrat font-semibold text-sm shadow-md"
-              >
-                Ver la sopa resuelta 🔍
-              </button>
-              <button
-                onClick={handleReset}
-                className="bg-gray-100 hover:bg-gray-200 text-gray-600 py-3 rounded-2xl font-montserrat font-semibold text-sm transition-colors"
-              >
-                Jugar de nuevo 🔄
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ── HEADER STATUS & PROGRESS ── */}
-      <div className="w-full max-w-4xl mb-6 text-center space-y-2">
-        <h2 className="font-garet text-2xl sm:text-3xl text-gray-800 tracking-tight">
-          {gameData?.title || 'Sopa de Letras Rotaract'}
+      {/* ── Header ── */}
+      <div className="text-center mb-6 space-y-1">
+        <h2 className="font-garet text-2xl text-gray-800">
+          {gameData?.title ?? 'Sopa de Letras'}
         </h2>
-        <p className="font-montserrat text-sm font-semibold text-cranberry">
-          {foundWords.length} / {totalWords} palabras encontradas
-        </p>
-
-        {/* Progress Bar */}
-        <div className="max-w-xs mx-auto w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-          <div
-            className="bg-cranberry h-full transition-all duration-500 ease-out"
-            style={{ width: `${progressPct}%` }}
-          />
-        </div>
-
-        <p className="font-montserrat text-xs text-gray-400 pt-1">
-          Arrastrá sobre las letras para encontrar las palabras ↕ ↔ ↗ ↘
+        <p className="text-sm text-gray-500">
+          <span
+            className="font-bold tabular-nums"
+            style={{ color: found.length === placed.length && placed.length > 0 ? '#15803d' : '#c0004e' }}
+          >
+            {found.length}
+          </span>
+          {' / '}{placed.length} palabras encontradas
         </p>
       </div>
 
-      {/* ── TOAST NOTIFICATION ── */}
-      {lastFound && (
-        <div className="mb-4 bg-gray-900 text-white font-montserrat font-semibold text-xs px-4 py-2 rounded-full shadow-lg animate-bounce flex items-center gap-1.5">
-          <span>✨</span> ¡Encontraste <strong>{lastFound}</strong>!
-        </div>
-      )}
+      {/* ── Hint ── */}
+      <p className="text-center text-xs text-gray-400 mb-5">
+        Arrastrá sobre las letras para encontrar las palabras ↕ ↔ ↗ ↘
+      </p>
 
-      {/* ── MAIN LAYOUT: Grid Left + Words List Right ── */}
-      <div className="w-full max-w-5xl flex flex-col lg:flex-row gap-8 items-center lg:items-start justify-center">
-        {/* ── GRID CONTAINER ── */}
-        <div className="flex-shrink-0 flex flex-col items-center">
-          <div
-            ref={gridRef}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            className="touch-none select-none inline-grid gap-1 p-2 sm:p-3 bg-gray-50 border-2 border-gray-200 rounded-3xl shadow-inner"
-            style={{
-              gridTemplateColumns: `repeat(${grid.length || 13}, minmax(1.55rem, 2.3rem))`,
-            }}
-          >
-            {grid.map((row, r) =>
-              row.map((letter, c) => {
-                const cellKey = `${r}-${c}`;
-                const isActive = activeKeys.has(cellKey);
-                const foundClass = foundCellMap.get(cellKey);
+      {/* ── Body: grid + word list ── */}
+      <div className="flex flex-col lg:flex-row gap-6 items-start justify-center">
 
-                let cellBg = 'bg-white text-gray-700 hover:bg-gray-100';
-
-                if (foundClass) {
-                  cellBg = foundClass;
-                }
-
-                if (isActive) {
-                  cellBg = 'bg-cranberry text-white font-black shadow-md scale-105 z-10';
-                }
+        {/* Grid */}
+        <div
+          ref={gridEl}
+          className="mx-auto flex-shrink-0"
+          style={{ touchAction: 'none', WebkitUserSelect: 'none', userSelect: 'none', cursor: 'crosshair' }}
+          onPointerDown={onDown}
+          onPointerMove={onMove}
+          onPointerUp={onUp}
+          onPointerLeave={onUp}
+        >
+          {grid.map((row, r) => (
+            <div key={r} className="flex">
+              {row.map((letter, c) => {
+                const k = rc(r, c);
+                const foundColor = foundMap[k];
+                const isSel   = selSet.has(k);
+                const isFound = !!foundColor;
 
                 return (
                   <div
-                    key={cellKey}
-                    data-cell-coords={cellKey}
-                    onMouseDown={() => handleCellMouseDown(r, c)}
-                    onMouseEnter={() => handleCellMouseEnter(r, c)}
-                    className={`aspect-square flex items-center justify-center rounded-lg sm:rounded-xl text-xs sm:text-base font-montserrat font-bold transition-all duration-150 cursor-pointer ${cellBg}`}
+                    key={c}
+                    data-rc={`${r},${c}`}
+                    className={[
+                      'flex items-center justify-center m-[1.5px] rounded font-bold',
+                      // Responsive size
+                      'w-[22px] h-[22px] text-[9px]',
+                      'sm:w-[27px] sm:h-[27px] sm:text-[11px]',
+                      'md:w-[31px] md:h-[31px] md:text-xs',
+                      // States
+                      isFound
+                        ? 'text-white shadow-sm'
+                        : isSel
+                        ? shake
+                          ? 'bg-red-100 text-red-500 ring-1 ring-red-400 rounded scale-110 z-10 relative'
+                          : 'bg-cranberry/20 text-cranberry ring-1 ring-cranberry/50 scale-110 z-10 relative'
+                        : 'text-gray-600 hover:bg-gray-100',
+                      'transition-all duration-100',
+                    ].join(' ')}
+                    style={isFound ? { backgroundColor: foundColor } : undefined}
                   >
                     {letter}
                   </div>
                 );
-              })
-            )}
-          </div>
-
-          {/* Reset / Actions */}
-          <div className="flex gap-3 mt-4">
-            <button
-              onClick={handleReset}
-              className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 px-5 py-2 rounded-full text-xs font-semibold font-montserrat inline-flex items-center gap-1.5 transition-colors shadow-sm"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              Reiniciar sopa
-            </button>
-          </div>
-        </div>
-
-        {/* ── WORDS LIST (RIGHT COLUMN) ── */}
-        <div className="w-full max-w-sm flex-1">
-          <div className="bg-gray-50/70 border border-gray-100 rounded-3xl p-5 space-y-3">
-            <div className="flex items-center justify-between pb-1 border-b border-gray-200/60">
-              <h3 className="font-garet text-sm uppercase tracking-wider text-gray-600">
-                Palabras a encontrar
-              </h3>
-              <span className="font-montserrat text-xs text-gray-400 font-semibold">
-                {totalWords - foundWords.length} restantes
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
-              {words.map((item) => {
-                const isFound = foundWords.includes(item.word);
-                const colorObj = WORD_COLORS[item.color || 'rose'] || WORD_COLORS.rose;
-
-                return (
-                  <div
-                    key={item.word}
-                    className={`flex items-center justify-between p-3 rounded-2xl border transition-all duration-300 ${
-                      isFound
-                        ? `${colorObj.pill} opacity-75 shadow-none`
-                        : 'bg-white border-gray-100 text-gray-800 shadow-sm hover:border-cranberry/30'
-                    }`}
-                  >
-                    <div className="space-y-0.5 min-w-0 pr-2">
-                      <p
-                        className={`font-montserrat font-bold text-sm uppercase tracking-wide leading-none ${
-                          isFound ? 'line-through opacity-80' : 'text-gray-800'
-                        }`}
-                      >
-                        {item.word}
-                      </p>
-                      <p className="font-montserrat text-xs text-gray-400 truncate">
-                        {item.clue}
-                      </p>
-                    </div>
-
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                        isFound
-                          ? 'bg-green-500 text-white'
-                          : 'bg-gray-100 text-gray-300'
-                      }`}
-                    >
-                      {isFound ? '✓' : '•'}
-                    </div>
-                  </div>
-                );
               })}
             </div>
+          ))}
+        </div>
+
+        {/* Word list */}
+        <div className="w-full lg:w-52 flex-shrink-0">
+          <p className="text-[10px] uppercase tracking-widest text-gray-400 font-semibold mb-3 text-center lg:text-left">
+            Palabras a encontrar
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-1.5">
+            {placed.map(pw => {
+              const fw = found.find(f => f.word === pw.word);
+              const color = fw ? PALETTE[fw.colorIdx] : undefined;
+              return (
+                <div
+                  key={pw.word}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-xl border transition-all duration-300 ${
+                    fw ? 'border-transparent' : 'border-gray-100'
+                  }`}
+                  style={fw ? { backgroundColor: color + '18', borderColor: color + '44' } : undefined}
+                >
+                  {/* Color dot */}
+                  <span
+                    className="w-2 h-2 rounded-full flex-shrink-0 transition-colors"
+                    style={{ backgroundColor: color ?? '#d1d5db' }}
+                  />
+                  <div className="min-w-0">
+                    <p
+                      className={`text-[11px] font-bold uppercase tracking-wide leading-tight truncate transition-all ${
+                        fw ? 'line-through text-gray-400' : 'text-gray-700'
+                      }`}
+                    >
+                      {pw.word}
+                    </p>
+                    {pw.hint && (
+                      <p className="text-[10px] text-gray-400 leading-tight truncate">{pw.hint}</p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
+
+      {/* ── Completed banner ── */}
+      {status === 'done' && (
+        <div className="mt-10 flex justify-center">
+          <div
+            className="rounded-2xl px-10 py-8 text-center max-w-sm border"
+            style={{ background: '#c0004e0d', borderColor: '#c0004e33' }}
+          >
+            <div className="text-5xl mb-3">🎉</div>
+            <h3 className="font-garet text-2xl mb-1" style={{ color: '#c0004e' }}>
+              ¡Completaste la sopa!
+            </h3>
+            <p className="text-gray-500 text-sm">
+              Encontraste todas las palabras. ¡Muy bien jugado!
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
