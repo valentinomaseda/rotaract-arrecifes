@@ -1,0 +1,31 @@
+{
+  "title": "Sopa de Letras Rotaract",
+  "subtitle": "Buscá las palabras rotarias escondidas en la grilla. ¡Encontrá todas!",
+  "grid": [
+    ["N", "M", "O", "P", "O", "L", "I", "O", "T", "F", "T", "D", "M"],
+    ["Q", "S", "U", "O", "S", "A", "D", "I", "N", "E", "V", "A", "N"],
+    ["L", "I", "A", "U", "F", "D", "B", "R", "I", "M", "G", "F", "P"],
+    ["H", "R", "A", "O", "I", "C", "I", "V", "R", "E", "S", "A", "S"],
+    ["U", "R", "D", "H", "A", "E", "P", "P", "E", "H", "Q", "R", "E"],
+    ["I", "A", "E", "L", "M", "U", "F", "G", "Q", "C", "O", "H", "F"],
+    ["M", "H", "U", "M", "I", "Z", "Q", "R", "P", "T", "R", "G", "I"],
+    ["S", "L", "R", "A", "S", "O", "R", "V", "A", "Z", "A", "Z", "C"],
+    ["Z", "U", "I", "N", "T", "E", "G", "R", "I", "D", "A", "D", "E"],
+    ["Z", "A", "M", "U", "A", "A", "A", "V", "E", "O", "R", "G", "R"],
+    ["C", "P", "F", "Q", "D", "C", "Z", "V", "P", "P", "D", "Q", "R"],
+    ["M", "L", "D", "V", "T", "C", "O", "I", "P", "F", "H", "I", "A"],
+    ["Q", "C", "T", "E", "O", "G", "Z", "A", "R", "E", "D", "I", "L"]
+  ],
+  "words": [
+    { "word": "LIDERAZGO", "clue": "Lo que desarrollamos", "color": "rose" },
+    { "word": "SERVICIO", "clue": "Nuestro lema principal", "color": "amber" },
+    { "word": "ROTARACT", "clue": "Jóvenes líderes en acción", "color": "emerald" },
+    { "word": "AMISTAD", "clue": "La ocasión de servir", "color": "sky" },
+    { "word": "AVENIDAS", "clue": "Vías de servicio del club", "color": "indigo" },
+    { "word": "POLIO", "clue": "Causa global a erradicar", "color": "fuchsia" },
+    { "word": "RUEDA", "clue": "Emblema icónico de Rotary", "color": "teal" },
+    { "word": "ARRECIFES", "clue": "Nuestra querida ciudad", "color": "orange" },
+    { "word": "INTEGRIDAD", "clue": "Valor fundamental rotario", "color": "purple" },
+    { "word": "PAULHARRIS", "clue": "Fundador de Rotary", "color": "blue" }
+  ]
+}

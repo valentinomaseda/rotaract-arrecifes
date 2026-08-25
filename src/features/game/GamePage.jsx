@@ -11,6 +11,8 @@ export function GamePage() {
     wordle:     'Wordle',
     conexiones: 'Conexiones',
     trivia:     'Trivia',
+    wordsearch: 'Sopa de Letras',
+    sopa:       'Sopa de Letras',
   };
 
   const GAME_DESCRIPTIONS = {
@@ -18,6 +20,8 @@ export function GamePage() {
     wordle:     'Adiviná la palabra rotaria de 5 letras en 6 intentos.',
     conexiones: 'Agrupá las palabras en 4 categorías. ¡Encontrá las conexiones!',
     trivia:     'Poné a prueba tus conocimientos sobre Rotaract y Rotary.',
+    wordsearch: 'Buscá las palabras rotarias escondidas en la grilla. ¡Encontrá todas!',
+    sopa:       'Buscá las palabras rotarias escondidas en la grilla. ¡Encontrá todas!',
   };
 
   const gameTypeLabel   = GAME_LABELS[gameConfig?.type]       ?? 'Juego';

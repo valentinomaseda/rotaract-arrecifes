@@ -9,6 +9,8 @@ const GAME_REGISTRY = {
   wordle:     lazy(() => import('./WordleGame')),
   conexiones: lazy(() => import('./ConexionesGame')),
   trivia:     lazy(() => import('./TriviaGame')),
+  wordsearch: lazy(() => import('./WordSearchGame')),
+  sopa:       lazy(() => import('./WordSearchGame')),
 };
 
 // ── Empty state ────────────────────────────────────────────────────────────
