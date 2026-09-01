@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import GameResultModal from './GameResultModal';
 
 // ── Keyboard layout (Spanish QWERTY) ──────────────────────────────────────
 const KEYBOARD_ROWS = [
@@ -9,13 +10,14 @@ const KEYBOARD_ROWS = [
 
 // ── Guess evaluation ──────────────────────────────────────────────────────
 function evaluateGuess(guess, answer) {
-  const result = Array(5).fill('absent');
+  const len = answer.length;
+  const result = Array(len).fill('absent');
   const pool = {};
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < len; i++) {
     if (guess[i] === answer[i]) result[i] = 'correct';
     else pool[answer[i]] = (pool[answer[i]] || 0) + 1;
   }
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < len; i++) {
     if (result[i] !== 'correct' && pool[guess[i]] > 0) {
       result[i] = 'present';
       pool[guess[i]]--;
@@ -60,6 +62,7 @@ export default function WordleGame({ dataPath }) {
   const [current,  setCurrent]  = useState('');
   const [status,   setStatus]   = useState('playing'); // playing | won | lost
   const [warning,  setWarning]  = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   // Fetch game data
   useEffect(() => {
@@ -71,8 +74,9 @@ export default function WordleGame({ dataPath }) {
     return () => { cancelled = true; };
   }, [dataPath]);
 
-  const answer   = gameData?.answer   ?? '';
-  const maxTries = gameData?.maxTries ?? 6;
+  const answer    = gameData?.answer   ?? '';
+  const wordLen   = answer.length || 5;
+  const maxTries  = gameData?.maxTries ?? 6;
 
   // Flash a warning message briefly
   const flash = useCallback((msg) => {
@@ -82,14 +86,14 @@ export default function WordleGame({ dataPath }) {
 
   const submitGuess = useCallback(() => {
     if (status !== 'playing') return;
-    if (current.length !== 5) { flash('La palabra debe tener 5 letras'); return; }
+    if (current.length !== wordLen) { flash(`La palabra debe tener ${wordLen} letras`); return; }
     const result    = evaluateGuess(current, answer);
     const newGuesses = [...guesses, { word: current, result }];
     setGuesses(newGuesses);
     setCurrent('');
-    if (current === answer) { setStatus('won'); }
-    else if (newGuesses.length >= maxTries) { setStatus('lost'); }
-  }, [status, current, answer, guesses, maxTries, flash]);
+    if (current === answer) { setStatus('won');  setTimeout(() => setShowModal(true), 400); }
+    else if (newGuesses.length >= maxTries) { setStatus('lost'); setTimeout(() => setShowModal(true), 400); }
+  }, [status, current, answer, wordLen, guesses, maxTries, flash]);
 
   const pressKey = useCallback((key) => {
     if (status !== 'playing') return;
@@ -97,7 +101,7 @@ export default function WordleGame({ dataPath }) {
       setCurrent(g => g.slice(0, -1));
     } else if (key === 'ENTER') {
       submitGuess();
-    } else if (/^[A-ZÑ]$/.test(key) && current.length < 5) {
+    } else if (/^[A-ZÑ]$/.test(key) && current.length < wordLen) {
       setCurrent(g => g + key);
     }
   }, [status, current, submitGuess]);
@@ -154,7 +158,7 @@ export default function WordleGame({ dataPath }) {
 
           return (
             <div key={rowIdx} className="flex gap-1.5">
-              {Array.from({ length: 5 }).map((_, colIdx) => {
+              {Array.from({ length: wordLen }).map((_, colIdx) => {
                 const letter   = rowWord[colIdx] ?? '';
                 const evalState = guess?.result[colIdx];
                 const isFilled  = isCurrentRow && letter;
@@ -180,21 +184,22 @@ export default function WordleGame({ dataPath }) {
         })}
       </div>
 
-      {/* Result banners */}
-      {status === 'won' && (
-        <div className="bg-green-50 border border-green-200 rounded-2xl px-6 py-4 text-center w-full max-w-sm">
-          <p className="font-garet text-xl text-green-700">🎉 ¡Excelente! Adivinaste la palabra</p>
-          <p className="font-montserrat text-sm text-green-600 mt-1">
-            en {guesses.length} {guesses.length === 1 ? 'intento' : 'intentos'}
-          </p>
-        </div>
-      )}
-      {status === 'lost' && (
-        <div className="bg-red-50 border border-red-200 rounded-2xl px-6 py-4 text-center w-full max-w-sm">
-          <p className="font-garet text-xl text-red-700">😔 ¡Sin intentos! La palabra era</p>
-          <p className="font-montserrat text-2xl font-bold tracking-widest text-red-600 mt-1">{answer}</p>
-        </div>
-      )}
+      {/* Result modal */}
+      <GameResultModal
+        open={showModal}
+        type={status}
+        title={
+          status === 'won'
+            ? '¡Adivinaste la palabra!'
+            : `La palabra era ${answer}`
+        }
+        subtitle={
+          status === 'won'
+            ? `La encontraste en ${guesses.length} ${guesses.length === 1 ? 'intento' : 'intentos'}. ¡Muy bien jugado!`
+            : 'Se acabaron los intentos. ¡La próxima la rompés!'
+        }
+        onClose={() => setShowModal(false)}
+      />
 
       {/* On-screen keyboard */}
       <div className="flex flex-col items-center gap-1.5 w-full max-w-md pt-1">

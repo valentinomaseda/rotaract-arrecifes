@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
+import GameResultModal from './GameResultModal';
 
 // ── Directions (8 orientations) ─────────────────────────────────────────────
 const DIRS = [
@@ -95,6 +96,7 @@ export default function WordSearchGame({ dataPath }) {
   const [found, setFound]       = useState([]);  // [{word, colorIdx, cells}]
   const [sel, setSel]           = useState([]);  // [[r,c]]
   const [shake, setShake]       = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   // Refs to avoid stale closures in pointer handlers
   const gridEl    = useRef(null);
@@ -159,7 +161,10 @@ export default function WordSearchGame({ dataPath }) {
         const next = [...curFound, { word: pw.word, colorIdx, cells: pw.cells }];
         setFound(next);
         setSel([]);
-        if (next.length === curPlaced.length) setStatus('done');
+        if (next.length === curPlaced.length) {
+          setStatus('done');
+          setTimeout(() => setShowModal(true), 500);
+        }
         return;
       }
     }
@@ -331,23 +336,14 @@ export default function WordSearchGame({ dataPath }) {
         </div>
       </div>
 
-      {/* ── Completed banner ── */}
-      {status === 'done' && (
-        <div className="mt-10 flex justify-center">
-          <div
-            className="rounded-2xl px-10 py-8 text-center max-w-sm border"
-            style={{ background: '#c0004e0d', borderColor: '#c0004e33' }}
-          >
-            <div className="text-5xl mb-3">🎉</div>
-            <h3 className="font-garet text-2xl mb-1" style={{ color: '#c0004e' }}>
-              ¡Completaste la sopa!
-            </h3>
-            <p className="text-gray-500 text-sm">
-              Encontraste todas las palabras. ¡Muy bien jugado!
-            </p>
-          </div>
-        </div>
-      )}
+      {/* ── Result modal ── */}
+      <GameResultModal
+        open={showModal}
+        type="done"
+        title="¡Completaste la sopa!"
+        subtitle="Encontraste todas las palabras. ¡Muy bien jugado!"
+        onClose={() => setShowModal(false)}
+      />
     </div>
   );
 }

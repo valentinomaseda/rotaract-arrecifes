@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import GameResultModal from './GameResultModal';
 
 // ── Color palette per difficulty ──────────────────────────────────────────
 const COLOR = {
@@ -68,6 +69,7 @@ export default function ConexionesGame({ dataPath }) {
   const [status,   setStatus]     = useState('playing');  // playing | won | lost
   const [message,  setMessage]    = useState('');
   const [wrong,    setWrong]      = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -120,6 +122,7 @@ export default function ConexionesGame({ dataPath }) {
       setSelected(new Set());
       if (newSolved.length === gameData.categories.length) {
         setStatus('won');
+        setTimeout(() => setShowModal(true), 500);
       }
     } else {
       // Wrong guess
@@ -129,7 +132,7 @@ export default function ConexionesGame({ dataPath }) {
       setTimeout(() => setWrong(false), 600);
       if (newLives === 0) {
         setStatus('lost');
-        flash('¡Se acabaron los intentos! Revelando categorías...');
+        setTimeout(() => setShowModal(true), 800);
       } else {
         flash(newLives === 1 ? '¡Un intento más!' : 'Incorrecto, seguí intentando');
       }
@@ -234,7 +237,24 @@ export default function ConexionesGame({ dataPath }) {
         </button>
       )}
 
-      {/* Win state */}
+      {/* Result modal */}
+      <GameResultModal
+        open={showModal}
+        type={status}
+        title={
+          status === 'won'
+            ? '¡Encontraste todas las conexiones!'
+            : '¡Se acabaron los intentos!'
+        }
+        subtitle={
+          status === 'won'
+            ? `Con ${lives} ${lives === 1 ? 'vida' : 'vidas'} restante${lives !== 1 ? 's' : ''}. ¡Excelente!`
+            : 'Las categorías se revelan a continuación.'
+        }
+        onClose={() => setShowModal(false)}
+      />
+
+      {/* Win state inline (kept for context after modal closes) */}
       {status === 'won' && (
         <div className="bg-green-50 border border-green-200 rounded-2xl px-6 py-5 text-center w-full max-w-sm">
           <p className="text-3xl mb-2">🎉</p>

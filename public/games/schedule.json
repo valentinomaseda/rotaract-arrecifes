@@ -12,11 +12,15 @@
         "dataPath": "/games/wordsearch-week-36.json"
     },
     "36": {
-        "type": "trivia",
-        "dataPath": "/games/trivia-week-35.json"
+        "type": "wordle",
+        "dataPath": "/games/wordle-week-36.json"
     },
     "37": {
         "type": "crossword",
         "dataPath": "/games/crossword-week-36.json"
+    },
+    "38": {
+        "type": "wordle",
+        "dataPath": "/games/wordle-week-38.json"
     }
 }

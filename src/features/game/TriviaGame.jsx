@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import GameResultModal from './GameResultModal';
 
 // ── Star rating thresholds ────────────────────────────────────────────────
 function getStars(score, total) {
@@ -45,6 +46,7 @@ export default function TriviaGame({ dataPath }) {
   const [score,      setScore]      = useState(0);
   const [status,     setStatus]     = useState('idle');    // idle | playing | finished
   const timerRef = useRef(null);
+  const [showModal, setShowModal]   = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -65,6 +67,7 @@ export default function TriviaGame({ dataPath }) {
     clearInterval(timerRef.current);
     if (qIndex + 1 >= totalQ) {
       setStatus('finished');
+      setTimeout(() => setShowModal(true), 300);
     } else {
       setQIndex(i => i + 1);
       setAnswered(null);
@@ -120,6 +123,15 @@ export default function TriviaGame({ dataPath }) {
 
   if (loading) return <TriviaSkeleton />;
 
+  // ── Finished modal ──────────────────────────────────────────────────────
+  const stars   = status === 'finished' ? getStars(score, totalQ) : 0;
+  const message = MESSAGES[stars] ?? '';
+  const starsDisplay = Array.from({ length: 5 }).map((_, i) =>
+    <span key={i} className={i < stars ? 'text-yellow-400' : 'text-gray-200'}>★</span>
+  );
+  const finishedTitle    = `${score}/${totalQ} respuestas correctas`;
+  const finishedSubtitle = message;
+
   // ── Idle / Start screen ──────────────────────────────────────────────────
   if (status === 'idle') {
     return (
@@ -154,40 +166,27 @@ export default function TriviaGame({ dataPath }) {
     );
   }
 
-  // ── Finished screen ──────────────────────────────────────────────────────
-  if (status === 'finished') {
-    const stars   = getStars(score, totalQ);
-    const message = MESSAGES[stars];
-    return (
-      <div className="flex flex-col items-center gap-6 py-6 max-w-sm mx-auto text-center">
-        <div className="text-5xl select-none">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i} className={i < stars ? 'text-yellow-400' : 'text-gray-200'}>★</span>
-          ))}
-        </div>
-        <div>
-          <p className="font-garet text-4xl text-gray-800">{score}<span className="text-gray-400 text-2xl">/{totalQ}</span></p>
-          <p className="font-montserrat text-sm text-gray-500 mt-1">respuestas correctas</p>
-        </div>
-        <p className="font-montserrat text-base text-gray-600 leading-relaxed">{message}</p>
-        <button
-          onClick={() => {
-            setQIndex(0); setScore(0); setAnswered(null);
-            setTimedOut(false); setTimeLeft(timePerQ); setStatus('idle');
-          }}
-          className="btn-cranberry text-white px-8 py-3 rounded-full font-montserrat font-semibold text-sm"
-        >
-          Jugar de nuevo 🔄
-        </button>
-      </div>
-    );
-  }
+  // ── Finished screen → now handled by modal ─────────────────────────────
+  // (kept as fallback for screen readers / no-JS)
 
   // ── Question screen ──────────────────────────────────────────────────────
   const progress = (timeLeft / timePerQ) * 100;
 
   return (
     <div className="flex flex-col gap-6 max-w-lg mx-auto w-full">
+
+      {/* Result modal — shown after trivia finishes */}
+      <GameResultModal
+        open={showModal}
+        type="finished"
+        title={finishedTitle}
+        subtitle={finishedSubtitle}
+        onClose={() => setShowModal(false)}
+        onReplay={() => {
+          setQIndex(0); setScore(0); setAnswered(null);
+          setTimedOut(false); setTimeLeft(timePerQ); setStatus('idle');
+        }}
+      />
 
       {/* Progress header */}
       <div className="flex items-center justify-between">
