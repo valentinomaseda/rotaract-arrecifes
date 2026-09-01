@@ -1,63 +1,55 @@
 // ─────────────────────────────────────────────────────────────
-//  crosswordData.js  —  Actualización Temática: Lore Rotario
+//  crosswordData.js  —  Semana 37: Conceptos Clave del Club
 // ─────────────────────────────────────────────────────────────
 
-export const WEEK_LABEL = 'Semana del 10 al 16 de agosto de 2026';
+export const WEEK_LABEL = 'Semana 37';
 
-// Palabras del puzzle (Diseño estructural verificado para 0 colisiones inválidas):
+// Palabras del puzzle — diseño de grilla 13 filas x 11 columnas
 //
-//  Grilla resultante (12 filas x 11 columnas):
-//  (0,4) 1V POLIO      (0,6) 2V MACACO
-//  (1,3) 3H ROTARACT   [Interseca con 1V en O, y 2V en A]
-//  (2,0) 4V PAULHARRIS 
-//  (3,0) 5H AVENIDAS   [Interseca con 4V en A, 1V en I, y 2V en A]
-//  (7,0) 6H AMISTAD    [Interseca con 4V en A]
-//  (9,0) 7H RUEDA      [Interseca con 4V en R]
-//
-//  Intersecciones Verificadas:
-//    (1,4) O ← ROTARACT[1]   = POLIO[1]       ✓
-//    (1,6) A ← ROTARACT[3]   = MACACO[1]      ✓
-//    (3,0) A ← AVENIDAS[0]   = PAULHARRIS[1]  ✓
-//    (3,4) I ← AVENIDAS[4]   = POLIO[3]       ✓
-//    (3,6) A ← AVENIDAS[6]   = MACACO[3]      ✓
-//    (7,0) A ← AMISTAD[0]    = PAULHARRIS[5]  ✓
-//    (9,0) R ← RUEDA[0]      = PAULHARRIS[7]  ✓
+//  Intersecciones verificadas:
+//    (0,3)  R  ← SERVICIO[2]  = ROTARY[0]       ✓
+//    (0,6)  C  ← SERVICIO[5]  = COMPAÑERISMO[0] ✓
+//    (3,3)  A  ← PASE[1]      = ROTARY[3]       ✓
+//    (3,5)  E  ← PASE[3]      = LEMA[1]         ✓
+//    (7,6)  R  ← LIDERAZGO[4] = COMPAÑERISMO[7] ✓
+//    (7,10) O  ← LIDERAZGO[8] = PROYECTO[2]     ✓
+//    (8,6)  I  ← DISTRITO[5]  = COMPAÑERISMO[8] ✓
 
 export const WORDS = [
-  // ── Horizontal ──
+  // ── Horizontales ──
   {
-    number: 3, direction: 'across', row: 1, col: 3, answer: 'ROTARACT',
-    clue: 'Nuestra organización: Programa de Rotary para jóvenes líderes.'
+    number: 1, direction: 'across', row: 0, col: 1, answer: 'SERVICIO',
+    clue: 'Conjunto de acciones o labores realizadas con el fin de beneficiar a la comunidad y responder a sus necesidades sin buscar rédito económico.'
   },
   {
-    number: 5, direction: 'across', row: 3, col: 0, answer: 'AVENIDAS',
-    clue: 'Las cinco vías de acción en las que se basa el servicio del club.'
+    number: 3, direction: 'across', row: 8, col: 1, answer: 'DISTRITO',
+    clue: 'División territorial y administrativa que agrupa a múltiples clubes de una misma región para coordinar proyectos e intercambios.'
   },
   {
-    number: 6, direction: 'across', row: 7, col: 0, answer: 'AMISTAD',
-    clue: 'Pilar clave. Como decía nuestro fundador: "La ___ como ocasión de servir".'
+    number: 7, direction: 'across', row: 7, col: 2, answer: 'LIDERAZGO',
+    clue: 'Capacidad de guiar, motivar e influir positivamente en un grupo de personas para alcanzar objetivos comunes de alto impacto.'
   },
   {
-    number: 7, direction: 'across', row: 9, col: 0, answer: 'RUEDA',
-    clue: 'Símbolo icónico que conforma el emblema de la organización (___ dentada).'
+    number: 8, direction: 'across', row: 3, col: 2, answer: 'PASE',
+    clue: 'Transición o cambio formal de la junta directiva y entrega de roles que se realiza anualmente dentro de la estructura institucional.'
   },
 
-  // ── Vertical ──
+  // ── Verticales ──
   {
-    number: 1, direction: 'down', row: 0, col: 4, answer: 'POLIO',
-    clue: 'Enfermedad que Rotary International está a punto de erradicar del mundo.'
+    number: 2, direction: 'down', row: 0, col: 3, answer: 'ROTARY',
+    clue: 'Organización internacional de servicio cuyo propósito es reunir a líderes empresariales y profesionales para prestar servicios humanitarios y promover la paz.'
   },
   {
-    number: 2,
-    direction: 'down',
-    row: 1,
-    col: 6,
-    answer: 'ASADO',
-    clue: 'La verdadera reunión de compañerismo: parrilla, charlas y proyectos.'
+    number: 4, direction: 'down', row: 5, col: 10, answer: 'PROYECTO',
+    clue: 'Planificación y ejecución organizada de un conjunto de actividades diseñadas para resolver un problema específico o generar valor social.'
   },
   {
-    number: 4, direction: 'down', row: 2, col: 0, answer: 'PAULHARRIS',
-    clue: 'Abogado de Chicago que fundó nuestro movimiento en 1905 (Nombre y apellido).'
+    number: 5, direction: 'down', row: 0, col: 6, answer: 'COMPAÑERISMO',
+    clue: 'Vínculo de camaradería, apoyo mutuo y trabajo en equipo que fortalece las relaciones interpersonales entre los miembros.'
+  },
+  {
+    number: 6, direction: 'down', row: 2, col: 5, answer: 'LEMA',
+    clue: 'Frase u oración breve que expresa la motivación, los valores o el enfoque de gestión que guía las acciones de un período determinado.'
   },
 ];
 
@@ -66,8 +58,8 @@ export const WORDS = [
 //  Retorna: { grid, numberMap, rows, cols }
 // ─────────────────────────────────────────────────────────────
 export function buildGrid() {
-  const ROWS = 12; // Ajustado dinámicamente para la nueva grilla
-  const COLS = 11; // Ajustado dinámicamente para la nueva grilla
+  const ROWS = 13;
+  const COLS = 11;
 
   const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
   const numberMap = {};
