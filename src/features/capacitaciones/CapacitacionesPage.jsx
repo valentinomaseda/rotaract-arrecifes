@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import {
   getUpcomingCapacitacion,
@@ -71,6 +72,252 @@ const UsersIcon = () => (
   </svg>
 );
 
+/* ─────────────────────────────────────────────────────────────/* ────────────────────────────────────────────────────────────
+   Modal Card del orador
+──────────────────────────────────────────────────────────── */
+const SpeakerModalCard = ({ cap }) => {
+  const [open, setOpen] = useState(false);
+  const cardRef = useRef(null);
+  const modalRef = useRef(null);
+
+  // Bloquear scroll al abrir el modal
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+
+  // Cerrar con Escape
+  useEffect(() => {
+    const handleKey = (e) => { if (e.key === 'Escape') setOpen(false); };
+    if (open) window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [open]);
+
+  return (
+    <>
+      {/* ――― CARD COMPACTA (clickeable) ――― */}
+      <div
+        ref={cardRef}
+        id="speaker-modal-card"
+        role="button"
+        tabIndex={0}
+        aria-label={`Ver información sobre ${cap.speaker}`}
+        onClick={() => setOpen(true)}
+        onKeyDown={(e) => e.key === 'Enter' && setOpen(true)}
+        className="group relative cursor-pointer select-none"
+      >
+        {/* Glow de fondo */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cranberry/10 to-transparent rounded-[2rem] blur-xl" aria-hidden="true" />
+
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/80 shadow-[0_20px_60px_-10px_rgba(212,19,103,0.12)] bg-white/60 backdrop-blur-xl">
+          {/* Foto del orador — ocupa todo el ancho */}
+          {cap.speakerPhoto && (
+            <div className="relative h-64 md:h-72 overflow-hidden">
+              <img
+                src={cap.speakerPhoto}
+                alt={`Foto de ${cap.speaker}`}
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              />
+              {/* Gradiente inferior */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              {/* Nombre sobre la foto */}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="font-montserrat text-white/70 text-xs uppercase tracking-widest mb-1">Orador/a • Ed. #{cap.edition}</p>
+                <p className="font-garet text-white text-xl md:text-2xl leading-tight">{cap.speaker}</p>
+              </div>
+              {/* Badge hover: "Ver más" */}
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm text-white text-xs font-montserrat font-semibold px-3 py-1.5 rounded-full border border-white/30">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                  Ver perfil
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* Info rápida debajo de la foto */}
+          <div className="p-6 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry flex-shrink-0">
+                <CalendarIcon />
+              </div>
+              <div>
+                <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Fecha</p>
+                <p className="font-montserrat text-gray-800 font-medium text-sm capitalize">{formatDate(cap.date)}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry flex-shrink-0">
+                <ClockIcon />
+              </div>
+              <div>
+                <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Horario</p>
+                <p className="font-montserrat text-gray-800 font-medium text-sm">{cap.time} hs</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry flex-shrink-0">
+                <VideoIcon />
+              </div>
+              <div>
+                <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Plataforma</p>
+                <p className="font-montserrat text-gray-800 font-medium text-sm">{cap.platform}</p>
+              </div>
+            </div>
+
+            {/* Indicador de click */}
+            <div className="pt-2 border-t border-gray-100 flex items-center justify-center gap-2 text-xs font-montserrat text-cranberry font-semibold group-hover:gap-3 transition-all duration-300">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+              Ver perfil del orador
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ――― MODAL via Portal (escapa stacking context del padre) ――― */}
+      {createPortal(
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Perfil de ${cap.speaker}`}
+          className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8 transition-all duration-500 ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}
+        >
+          {/* Backdrop */}
+          <div
+            className={`absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-500 ${open ? 'opacity-100' : 'opacity-0'
+              }`}
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Contenido del modal */}
+          <div
+            ref={modalRef}
+            className={`relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem] bg-white shadow-2xl transform transition-all duration-500 ${open ? 'scale-100 translate-y-0 opacity-100' : 'scale-95 translate-y-8 opacity-0'
+              }`}
+            style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
+          >
+            {/* Botón cerrar */}
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Cerrar perfil"
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center text-gray-600 hover:text-cranberry hover:bg-white transition-all duration-200 border border-gray-100"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Foto grande */}
+            {cap.speakerPhoto && (
+              <div className="relative h-72 md:h-96 overflow-hidden rounded-t-[2rem]">
+                <img
+                  src={cap.speakerPhoto}
+                  alt={`Foto de ${cap.speaker}`}
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+            )}
+
+            {/* Nombre y badge — fuera de la foto para no tapar el rostro */}
+            <div className="px-8 pt-6 pb-0 flex items-center gap-3 flex-wrap">
+              <span className="inline-flex items-center gap-1.5 bg-cranberry/10 text-cranberry text-xs font-montserrat font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">
+                <MicIcon />
+                Orador invitado
+              </span>
+              <h3 className="font-garet text-gray-900 text-2xl md:text-3xl leading-tight">{cap.speaker}</h3>
+            </div>
+
+            {/* Cuerpo del modal */}
+            <div className="p-8 space-y-6">
+              {/* Bio */}
+              {cap.speakerBio && (
+                <div>
+                  <p className="font-montserrat text-xs text-cranberry uppercase tracking-widest font-bold mb-3">Sobre el orador</p>
+                  <p className="font-montserrat text-gray-600 text-base leading-relaxed">{cap.speakerBio}</p>
+                </div>
+              )}
+
+              {/* Detalles de la charla */}
+              <div className="bg-gray-50 rounded-2xl p-6 space-y-4">
+                <p className="font-montserrat text-xs text-gray-400 uppercase tracking-widest font-bold">Detalles de la charla</p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry flex-shrink-0">
+                      <CalendarIcon />
+                    </div>
+                    <div>
+                      <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Fecha</p>
+                      <p className="font-montserrat text-gray-800 font-semibold text-sm capitalize">{formatDate(cap.date)}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry flex-shrink-0">
+                      <ClockIcon />
+                    </div>
+                    <div>
+                      <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Horario</p>
+                      <p className="font-montserrat text-gray-800 font-semibold text-sm">{cap.time} hs</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry flex-shrink-0">
+                      <VideoIcon />
+                    </div>
+                    <div>
+                      <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Plataforma</p>
+                      <p className="font-montserrat text-gray-800 font-semibold text-sm">{cap.platform}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTAs dentro del modal */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                {cap.registrationLink ? (
+                  <a
+                    href={cap.registrationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl btn-cranberry text-white font-montserrat font-semibold text-sm"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    Inscribirme
+                  </a>
+                ) : (
+                  <div className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gray-100 text-gray-400 font-montserrat font-semibold text-sm cursor-default">
+                    Inscripciones próximamente
+                  </div>
+                )}
+                <button
+                  onClick={() => setOpen(false)}
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-gray-200 text-gray-600 font-montserrat font-semibold text-sm hover:border-cranberry hover:text-cranberry transition-all duration-200"
+                >
+                  Cerrar
+                </button>
+              </div>
+
+              {/* Footer */}
+              <div className="flex items-center gap-2 text-xs font-montserrat text-gray-400 justify-center pt-2">
+                <svg className="w-3.5 h-3.5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                Entrada libre y gratuita · Abierto a toda la comunidad
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
+  );
+};
+
 /* ─────────────────────────────────────────────────────────────
    Sección: Próxima charla
 ───────────────────────────────────────────────────────────── */
@@ -140,113 +387,36 @@ const UpcomingTalk = ({ cap }) => {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4">
-                {cap.meetLink ? (
+                {cap.registrationLink ? (
                   <a
-                    href={cap.meetLink}
+                    href={cap.registrationLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    id="btn-unirse-capacitacion"
+                    id="btn-inscribirse-capacitacion"
                     className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl btn-cranberry text-white font-montserrat font-semibold text-base group"
                   >
-                    <VideoIcon />
-                    Unirme a la charla
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    Inscribirme
                     <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </a>
                 ) : (
                   <div className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gray-100 text-gray-500 font-montserrat font-semibold text-base cursor-default select-none">
-                    <VideoIcon />
-                    Link próximamente
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    Inscripciones próximamente
                   </div>
                 )}
-                <a
-                  href="https://wa.me/5492478513553"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id="btn-notificarme-capacitacion"
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl border border-gray-200 text-gray-700 font-montserrat font-semibold text-base hover:border-cranberry hover:text-cranberry hover:bg-cranberry/4 transition-all duration-300"
-                >
-                  Avisame por WhatsApp
-                </a>
               </div>
             </div>
 
-            {/* Columna derecha: card de detalles */}
+            {/* Columna derecha: Modal Card del orador */}
             <div className="relative">
-              {/* Glow de fondo */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cranberry/10 to-transparent rounded-[2rem] blur-xl" aria-hidden="true" />
-
-              <div className="relative bg-white/80 backdrop-blur-xl border border-white shadow-[0_20px_60px_-10px_rgba(0,0,0,0.08)] rounded-[2rem] p-8 md:p-10 space-y-6">
-                {/* Header de la card */}
-                <div className="flex items-center gap-3 pb-6 border-b border-gray-100">
-                  <div className="w-10 h-10 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry">
-                    <MicIcon />
-                  </div>
-                  <div>
-                    <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Charla</p>
-                    <p className="font-garet text-gray-900 font-bold">{cap.topic}</p>
-                  </div>
-                </div>
-
-                {/* Detalles */}
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-xl bg-cranberry/8 flex items-center justify-center text-cranberry flex-shrink-0 mt-0.5">
-                      <CalendarIcon />
-                    </div>
-                    <div>
-                      <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider mb-0.5">Fecha</p>
-                      <p className="font-montserrat text-gray-800 font-medium capitalize">{formatDate(cap.date)}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-xl bg-cranberry/8 flex items-center justify-center text-cranberry flex-shrink-0 mt-0.5">
-                      <ClockIcon />
-                    </div>
-                    <div>
-                      <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider mb-0.5">Horario</p>
-                      <p className="font-montserrat text-gray-800 font-medium">{cap.time} hs (Argentina)</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-xl bg-cranberry/8 flex items-center justify-center text-cranberry flex-shrink-0 mt-0.5">
-                      <VideoIcon />
-                    </div>
-                    <div>
-                      <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider mb-0.5">Plataforma</p>
-                      <p className="font-montserrat text-gray-800 font-medium">{cap.platform}</p>
-                    </div>
-                  </div>
-
-                  {cap.speaker && (
-                    <div className="flex items-start gap-4">
-                      <div className="w-9 h-9 rounded-xl bg-cranberry/8 flex items-center justify-center text-cranberry flex-shrink-0 mt-0.5">
-                        <MicIcon />
-                      </div>
-                      <div>
-                        <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider mb-0.5">Orador/a</p>
-                        <p className="font-montserrat text-gray-800 font-medium">{cap.speaker}</p>
-                        {cap.speakerBio && (
-                          <p className="font-montserrat text-gray-500 text-sm mt-1">{cap.speakerBio}</p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Footer */}
-                <div className="pt-4 border-t border-gray-100">
-                  <div className="flex items-center gap-2 text-xs font-montserrat text-gray-400">
-                    <svg className="w-3.5 h-3.5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    Entrada libre y gratuita · Abierto a toda la comunidad
-                  </div>
-                </div>
-              </div>
+              <SpeakerModalCard cap={cap} />
             </div>
           </div>
         </div>
@@ -264,9 +434,8 @@ const PastTalkCard = ({ cap, index }) => {
   return (
     <article
       ref={ref}
-      className={`group bg-white rounded-[1.5rem] border border-gray-100 shadow-sm hover:shadow-[0_20px_40px_-10px_rgba(212,19,103,0.1)] hover:-translate-y-1.5 transition-all duration-500 overflow-hidden ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+      className={`group bg-white rounded-[1.5rem] border border-gray-100 shadow-sm hover:shadow-[0_20px_40px_-10px_rgba(212,19,103,0.1)] hover:-translate-y-1.5 transition-all duration-500 overflow-hidden ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
       style={{
         transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
         transitionDelay: `${index * 80}ms`,
@@ -410,7 +579,7 @@ const PageHero = () => {
 
   return (
     <section
-      className="relative bg-gradient-to-b from-gray-50 to-white pt-16 pb-8 md:pt-20 md:pb-10 overflow-hidden"
+      className="relative bg-gradient-to-b from-gray-50 to-white pt-8 pb-6 md:pt-12 md:pb-8 overflow-hidden"
       aria-labelledby="capacitaciones-hero-title"
     >
       {/* Blob decorativo */}
@@ -421,15 +590,10 @@ const PageHero = () => {
 
       <div
         ref={ref}
-        className={`relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center transition-all duration-800 ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
+        className={`relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
         style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
       >
-        <span className="inline-flex items-center gap-2 bg-cranberry/8 text-cranberry text-xs md:text-sm font-montserrat font-semibold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
-          <MicIcon />
-          Rotaract Arrecifes
-        </span>
         <h1
           id="capacitaciones-hero-title"
           className="font-garet text-4xl md:text-6xl lg:text-7xl text-gray-900 tracking-tight leading-[1.1] mb-6"

@@ -2,11 +2,13 @@
  * Datos del Ciclo de Capacitaciones de Rotaract Arrecifes.
  * Cada edición tiene:
  *   - id, edition, status: 'upcoming' | 'past'
- *   - topic, speaker, speakerBio, date (ISO), time, platform, meetLink
+ *   - topic, speaker, speakerBio, speakerPhoto, date (ISO), time, platform, meetLink, registrationLink
  *   - summary (para charlas pasadas): breve descripción de lo que se vio
  *   - keyTakeaways (para charlas pasadas): array de puntos aprendidos
  *   - attendees (para charlas pasadas): cantidad de asistentes
  */
+
+
 
 export const CAPACITACIONES = [
   {
@@ -17,12 +19,15 @@ export const CAPACITACIONES = [
     tagline: 'Tomá el control de tu plata',
     description:
       'Aprenderemos conceptos clave de finanzas personales: presupuesto, ahorro, inversión y cómo construir un fondo de emergencia. Pensado para quienes quieren empezar desde cero o mejorar sus hábitos financieros.',
-    speaker: 'A confirmar',
-    speakerBio: null,
+    speaker: 'Luciano Gilabert',
+    speakerPhoto: '/images/oradores/luciano.jpeg',
+    speakerBio:
+      'Contador Público, Licenciado en Administración y director de su propio estudio contable. Además de haber sido socio fundador de Rotaract y Gobernador del Distrito 4895, cuenta con una sólida trayectoria como orador y capacitador internacional. Junto a él, nos llevaremos herramientas prácticas para ordenar y potenciar la economía del día a día.',
     date: '2026-09-30',
-    time: '20:00',
+    time: '19:30',
     platform: 'Google Meet',
-    meetLink: null, // se agrega cuando esté disponible
+    meetLink: null,         // se agrega cuando esté disponible
+    registrationLink: null, // link del Google Forms de inscripción
     area: 'Economía Personal',
     votedFirst: true,
   },
