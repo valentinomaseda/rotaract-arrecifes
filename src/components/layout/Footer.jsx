@@ -26,6 +26,8 @@ const navLinks = [
   { href: '#quienes-somos', label: 'Quiénes Somos' },
   { href: '#proyectos', label: 'Proyectos' },
   { href: '#contacto', label: 'Contacto' },
+  { href: '/capacitaciones', label: 'Capacitaciones' },
+  { href: '/juego', label: 'Juego de la semana' },
 ];
 
 const contactItems = [
@@ -63,32 +65,135 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="contacto" className="scroll-mt-20 bg-gray-900 text-white" aria-label="Pie de página">
-      {/* CTA Banner */}
-      <div className="bg-gradient-to-r from-cranberry to-pink-500 py-12 px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center space-y-5">
-          <h2 className="font-garet text-3xl md:text-4xl text-white">
-            ¿Querés ser parte del cambio?
-          </h2>
-          <p className="font-montserrat text-white/85 text-lg">
-            Únete a nuestro equipo y ayudanos a construir una Arrecifes mejor.
-          </p>
-          <a
-            href="https://wa.me/5492478513553"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-white text-cranberry font-montserrat font-bold px-8 py-3.5 rounded-full hover:shadow-xl hover:scale-105 transition-all duration-300 text-sm"
+    <footer
+      id="contacto"
+      className="scroll-mt-20 relative overflow-hidden text-white"
+      aria-label="Pie de página"
+      style={{
+        background: 'linear-gradient(135deg, #0a0a0f 0%, #12071a 40%, #0f0a1a 70%, #080810 100%)',
+      }}
+    >
+      {/* ── Glow blobs de fondo ── */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        {/* Blob cranberry — izquierda */}
+        <div
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full opacity-25"
+          style={{
+            background: 'radial-gradient(circle, #d41367 0%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+        />
+        {/* Blob magenta — derecha */}
+        <div
+          className="absolute -bottom-20 -right-20 w-[500px] h-[500px] rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, #e91e8c 0%, transparent 70%)',
+            filter: 'blur(100px)',
+          }}
+        />
+        {/* Blob azul-morado tenue — centro */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-10"
+          style={{
+            background: 'radial-gradient(ellipse, #6d28d9 0%, transparent 70%)',
+            filter: 'blur(120px)',
+          }}
+        />
+        {/* Grid sutil */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+      </div>
+
+      {/* ── CTA Banner (glassmorphism) ── */}
+      <div className="relative z-10 px-6 lg:px-8 pt-20 pb-16">
+        <div className="max-w-3xl mx-auto">
+          <div
+            className="relative overflow-hidden rounded-3xl px-8 py-12 md:px-14 md:py-14 text-center"
+            style={{
+              background: 'linear-gradient(135deg, rgba(212,19,103,0.18) 0%, rgba(233,30,140,0.10) 100%)',
+              border: '1px solid rgba(212,19,103,0.30)',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 0 60px rgba(212,19,103,0.15), inset 0 1px 0 rgba(255,255,255,0.08)',
+            }}
           >
-            Contacto por WhatsApp
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+            {/* Destellos de la card */}
+            <div
+              aria-hidden="true"
+              className="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-30 pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle, #d41367 0%, transparent 70%)',
+                filter: 'blur(40px)',
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full opacity-20 pointer-events-none"
+              style={{
+                background: 'radial-gradient(circle, #e91e8c 0%, transparent 70%)',
+                filter: 'blur(40px)',
+              }}
+            />
+
+            <span className="relative inline-flex items-center gap-2 bg-cranberry/20 text-cranberry border border-cranberry/30 text-xs font-montserrat font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cranberry opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cranberry" />
+              </span>
+              Unite al equipo
+            </span>
+
+            <h2 className="relative font-garet text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-4">
+              ¿Querés ser parte{' '}
+              <span
+                className="inline-block"
+                style={{
+                  background: 'linear-gradient(90deg, #d41367, #ff6eb0)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                de esta red global?
+              </span>
+            </h2>
+            <p className="relative font-montserrat text-white/60 text-base md:text-lg max-w-md mx-auto mb-8">
+              Únete a nuestro equipo y ayudanos a construir una Arrecifes mejor.
+            </p>
+            <a
+              href="https://wa.me/5492478513553"
+              target="_blank"
+              rel="noopener noreferrer"
+              id="footer-cta-whatsapp"
+              className="relative inline-flex items-center gap-2.5 font-montserrat font-bold px-8 py-4 rounded-2xl text-sm text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(212,19,103,0.6)]"
+              style={{
+                background: 'linear-gradient(135deg, #d41367 0%, #e91e8c 100%)',
+                boxShadow: '0 4px 24px rgba(212,19,103,0.4)',
+              }}
+            >
+              Contacto por WhatsApp
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Main footer content */}
-      <div className="max-w-7xl mx-auto py-16 px-6 lg:px-8">
+      {/* ── Divisor ── */}
+      <div
+        aria-hidden="true"
+        className="relative z-10 mx-6 lg:mx-16"
+        style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(212,19,103,0.3), rgba(255,255,255,0.08), rgba(212,19,103,0.3), transparent)' }}
+      />
+
+      {/* ── Main footer content ── */}
+      <div className="relative z-10 max-w-7xl mx-auto py-16 px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
 
           {/* Brand */}
@@ -96,7 +201,7 @@ const Footer = () => {
             <div className="flex items-center gap-3">
               <img className="h-10 w-auto brightness-0 invert" src="/logo.png" alt="Rotaract Arrecifes" />
             </div>
-            <p className="font-montserrat text-gray-400 text-sm leading-relaxed max-w-xs">
+            <p className="font-montserrat text-white/40 text-sm leading-relaxed max-w-xs">
               Trabajamos incansablemente para mejorar nuestra comunidad a través de proyectos sustentables y trabajo en equipo.
             </p>
             {/* Social links */}
@@ -107,10 +212,24 @@ const Footer = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 text-gray-300 hover:bg-cranberry hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  style={{
+                    background: 'rgba(255,255,255,0.06)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(212,19,103,0.3)';
+                    e.currentTarget.style.borderColor = 'rgba(212,19,103,0.5)';
+                    e.currentTarget.style.boxShadow = '0 0 16px rgba(212,19,103,0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
                   aria-label={name}
                 >
-                  {icon}
+                  <span className="text-white/50 hover:text-white transition-colors duration-300">{icon}</span>
                 </a>
               ))}
             </div>
@@ -118,7 +237,7 @@ const Footer = () => {
 
           {/* Nav links */}
           <div>
-            <h3 className="text-xs font-montserrat font-semibold text-gray-400 tracking-[0.15em] uppercase mb-5">
+            <h3 className="text-xs font-montserrat font-semibold text-white/30 tracking-[0.15em] uppercase mb-5">
               Navegación
             </h3>
             <ul className="space-y-3">
@@ -126,9 +245,13 @@ const Footer = () => {
                 <li key={label}>
                   <a
                     href={href}
-                    className="font-montserrat text-sm text-gray-400 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
+                    className="font-montserrat text-sm text-white/40 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
                   >
-                    <span className="w-4 h-px bg-gray-600 group-hover:w-6 group-hover:bg-cranberry transition-all duration-300" aria-hidden="true" />
+                    <span
+                      className="h-px bg-cranberry/40 group-hover:bg-cranberry transition-all duration-300"
+                      style={{ width: '16px' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.width = '24px'; }}
+                    />
                     {label}
                   </a>
                 </li>
@@ -138,12 +261,12 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-xs font-montserrat font-semibold text-gray-400 tracking-[0.15em] uppercase mb-5">
+            <h3 className="text-xs font-montserrat font-semibold text-white/30 tracking-[0.15em] uppercase mb-5">
               Contacto Directo
             </h3>
             <ul className="space-y-4">
               {contactItems.map(({ icon, text, href }) => (
-                <li key={text} className="flex items-start gap-3 text-gray-400 font-montserrat text-sm">
+                <li key={text} className="flex items-start gap-3 text-white/40 font-montserrat text-sm">
                   {icon}
                   {href ? (
                     <a
@@ -165,9 +288,15 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="font-montserrat text-sm text-gray-500">
+        <div
+          className="mt-14 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+        >
+          <p className="font-montserrat text-sm text-white/20">
             © {year} Rotaract Club Arrecifes. Todos los derechos reservados.
+          </p>
+          <p className="font-montserrat text-xs text-white/15">
+            Distrito 4895 · Rotary International
           </p>
         </div>
       </div>

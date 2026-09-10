@@ -579,35 +579,52 @@ const PageHero = () => {
 
   return (
     <section
-      className="relative bg-gradient-to-b from-gray-50 to-white pt-8 pb-6 md:pt-12 md:pb-8 overflow-hidden"
+      className="relative text-white py-20 md:py-24 px-6 lg:px-8 text-center overflow-hidden"
       aria-labelledby="capacitaciones-hero-title"
+      style={{ background: 'linear-gradient(135deg, #0a0a0f 0%, #12071a 40%, #0f0a1a 70%, #080810 100%)' }}
     >
-      {/* Blob decorativo */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-cranberry/5 rounded-full mix-blend-multiply filter blur-[80px] pointer-events-none"
-        aria-hidden="true"
-      />
+      {/* Blobs de luz */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full opacity-30"
+          style={{ background: 'radial-gradient(ellipse, #d41367 0%, transparent 65%)', filter: 'blur(80px)' }} />
+        <div className="absolute bottom-0 -left-20 w-[350px] h-[350px] rounded-full opacity-15"
+          style={{ background: 'radial-gradient(circle, #e91e8c 0%, transparent 70%)', filter: 'blur(80px)' }} />
+        <div className="absolute bottom-0 -right-20 w-[300px] h-[300px] rounded-full opacity-15"
+          style={{ background: 'radial-gradient(circle, #6d28d9 0%, transparent 70%)', filter: 'blur(80px)' }} />
+        {/* Grid sutil */}
+        <div className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }} />
+      </div>
 
       <div
         ref={ref}
-        className={`relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        className={`relative z-10 max-w-4xl mx-auto transition-all duration-800 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
       >
+
         <h1
           id="capacitaciones-hero-title"
-          className="font-garet text-4xl md:text-6xl lg:text-7xl text-gray-900 tracking-tight leading-[1.1] mb-6"
+          className="font-garet text-4xl md:text-6xl lg:text-7xl tracking-tight leading-[1.1] mb-6"
         >
           Ciclo de{' '}
-          <span className="text-gradient-animated">Capacitaciones</span>
+          <span style={{
+            background: 'linear-gradient(90deg, #d41367, #ff6eb0)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>Capacitaciones</span>
         </h1>
-        <p className="font-montserrat text-gray-500 text-base md:text-xl max-w-2xl mx-auto leading-relaxed">
+
+        <p className="font-montserrat text-white/60 text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-8">
           Una vez por mes, una charla virtual gratuita sobre temáticas de interés para la comunidad.
           Oradores invitados, conocimiento real y acceso libre para todos.
         </p>
 
-        {/* Pills de info rápida */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+        {/* Pills de info rápida — adaptadas al fondo oscuro */}
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {[
             { icon: <CalendarIcon />, text: 'Último miércoles del mes' },
             { icon: <ClockIcon />, text: 'Tarde / noche' },
@@ -615,7 +632,12 @@ const PageHero = () => {
           ].map(({ icon, text }) => (
             <div
               key={text}
-              className="inline-flex items-center gap-2 bg-white border border-gray-100 shadow-sm px-4 py-2.5 rounded-full font-montserrat text-sm text-gray-600"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full font-montserrat text-sm text-white/70"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.10)',
+                backdropFilter: 'blur(8px)',
+              }}
             >
               <span className="text-cranberry">{icon}</span>
               {text}

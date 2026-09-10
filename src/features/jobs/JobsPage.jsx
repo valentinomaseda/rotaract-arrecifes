@@ -5,17 +5,51 @@ export const JobsPage = () => {
     <div className="bg-gray-50 min-h-screen">
 
       {/* ── Hero Section ── */}
-      <section className="bg-cranberry text-white py-16 px-6 lg:px-8 text-center relative overflow-hidden">
-        <div className="absolute w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl -top-20 -left-20" aria-hidden="true" />
-        <div className="absolute w-[300px] h-[300px] bg-white/10 rounded-full blur-2xl bottom-0 right-0" aria-hidden="true" />
-        <div className="relative z-10 max-w-3xl mx-auto space-y-4">
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-montserrat font-bold tracking-widest uppercase bg-white/20">
+      <section
+        className="relative text-white py-20 px-6 lg:px-8 text-center overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #0a0a0f 0%, #12071a 40%, #0f0a1a 70%, #080810 100%)' }}
+      >
+        {/* Blobs de luz */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full opacity-30"
+            style={{ background: 'radial-gradient(ellipse, #d41367 0%, transparent 65%)', filter: 'blur(80px)' }} />
+          <div className="absolute bottom-0 -left-20 w-[350px] h-[350px] rounded-full opacity-15"
+            style={{ background: 'radial-gradient(circle, #e91e8c 0%, transparent 70%)', filter: 'blur(80px)' }} />
+          <div className="absolute bottom-0 -right-20 w-[300px] h-[300px] rounded-full opacity-15"
+            style={{ background: 'radial-gradient(circle, #6d28d9 0%, transparent 70%)', filter: 'blur(80px)' }} />
+          {/* Grid sutil */}
+          <div className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+              backgroundSize: '60px 60px',
+            }} />
+        </div>
+
+        <div className="relative z-10 max-w-3xl mx-auto space-y-5">
+          {/* Badge glassmorphism */}
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-montserrat font-bold tracking-widest uppercase"
+            style={{
+              background: 'rgba(212,19,103,0.18)',
+              border: '1px solid rgba(212,19,103,0.35)',
+              backdropFilter: 'blur(12px)',
+            }}>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cranberry opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cranberry" />
+            </span>
             Bolsa de Trabajo Local
           </span>
+
           <h1 className="font-garet text-4xl md:text-5xl lg:text-6xl leading-tight">
-            Encontrá tu próximo trabajo en Arrecifes
+            Encontrá tu próximo{' '}
+            <span style={{
+              background: 'linear-gradient(90deg, #d41367, #ff6eb0)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>trabajo en Arrecifes</span>
           </h1>
-          <p className="font-montserrat text-lg md:text-xl opacity-90 max-w-2xl mx-auto">
+          <p className="font-montserrat text-lg md:text-xl text-white/60 max-w-2xl mx-auto">
             Conectamos el talento de nuestra ciudad con las mejores oportunidades locales.
           </p>
         </div>
