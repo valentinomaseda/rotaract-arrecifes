@@ -1,0 +1,61 @@
+{
+    "title": "Trivia Rotaract y Juventud",
+    "timePerQuestion": 15,
+    "questions": [
+        {
+            "id": 1,
+            "question": "¿En qué año se fundó el primer club Rotaract del mundo?",
+            "options": [
+                "1960",
+                "1968",
+                "1975",
+                "1982"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 2,
+            "question": "¿Cuál es el programa de Rotary para jóvenes de 12 a 18 años?",
+            "options": [
+                "Rotaract",
+                "Interact",
+                "RYLA",
+                "Intercambio"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 3,
+            "question": "¿Qué significan las siglas RYLA en Rotary?",
+            "options": [
+                "Rotary Youth Leadership Awards",
+                "Rotary Young Leaders Association",
+                "Regional Youth Leadership Action",
+                "Rotary Youth Learning Academy"
+            ],
+            "correct": 0
+        },
+        {
+            "id": 4,
+            "question": "¿Cómo se llama la famosa prueba ética de 4 preguntas de Rotary?",
+            "options": [
+                "La Regla de Oro",
+                "La Prueba Cuádruple",
+                "El Código Rotario",
+                "El Decálogo de Servicio"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 5,
+            "question": "¿Cuál es el color tradicional asociado a Rotaract en su identidad visual?",
+            "options": [
+                "Azul Rotary",
+                "Cranberry / Rosa Arándano",
+                "Verde Esmeralda",
+                "Amarillo Dorado"
+            ],
+            "correct": 1
+        }
+    ]
+}

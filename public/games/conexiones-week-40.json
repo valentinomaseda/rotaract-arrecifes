@@ -1,0 +1,49 @@
+{
+    "title": "Conexiones Rotarias",
+    "categories": [
+        {
+            "id": "cuadruple",
+            "label": "Conceptos de la Prueba Cuádruple",
+            "color": "yellow",
+            "words": [
+                "VERDAD",
+                "EQUITATIVO",
+                "AMISTAD",
+                "BENEFICIO"
+            ]
+        },
+        {
+            "id": "juventud",
+            "label": "Programas de Juventud de Rotary",
+            "color": "green",
+            "words": [
+                "INTERACT",
+                "ROTARACT",
+                "RYLA",
+                "INTERCAMBIO"
+            ]
+        },
+        {
+            "id": "areas",
+            "label": "Áreas de Interés de la Fundación Rotaria",
+            "color": "blue",
+            "words": [
+                "PAZ",
+                "EDUCACIÓN",
+                "SALUD",
+                "AMBIENTE"
+            ]
+        },
+        {
+            "id": "junta",
+            "label": "Cargos en la Junta Directiva de un Club",
+            "color": "purple",
+            "words": [
+                "PRESIDENTE",
+                "SECRETARIO",
+                "TESORERO",
+                "MACERO"
+            ]
+        }
+    ]
+}

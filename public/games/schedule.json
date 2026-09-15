@@ -22,5 +22,25 @@
     "38": {
         "type": "wordle",
         "dataPath": "/games/wordle-week-38.json"
+    },
+    "39": {
+        "type": "trivia",
+        "dataPath": "/games/trivia-week-39.json"
+    },
+    "40": {
+        "type": "conexiones",
+        "dataPath": "/games/conexiones-week-40.json"
+    },
+    "41": {
+        "type": "wordsearch",
+        "dataPath": "/games/wordsearch-week-41.json"
+    },
+    "42": {
+        "type": "wordle",
+        "dataPath": "/games/wordle-week-42.json"
+    },
+    "43": {
+        "type": "trivia",
+        "dataPath": "/games/trivia-week-43.json"
     }
 }

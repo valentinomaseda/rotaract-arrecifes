@@ -1,0 +1,47 @@
+{
+    "title": "Sopa de Letras Rotaract",
+    "label": "Semana 41",
+    "size": 13,
+    "words": [
+        {
+            "word": "SOLIDARIDAD",
+            "hint": "Compromiso y apoyo mutuo"
+        },
+        {
+            "word": "VOLUNTARIO",
+            "hint": "Quien dona su tiempo por una causa"
+        },
+        {
+            "word": "MACERO",
+            "hint": "Encargado del orden y protocolo en reuniones"
+        },
+        {
+            "word": "INTERACT",
+            "hint": "Programa de jóvenes de 12 a 18 años"
+        },
+        {
+            "word": "FUNDACION",
+            "hint": "Brazo solidario de Rotary"
+        },
+        {
+            "word": "ECOLOGIA",
+            "hint": "Cuidado del medio ambiente"
+        },
+        {
+            "word": "DONACION",
+            "hint": "Aporte para causas benéficas"
+        },
+        {
+            "word": "EQUIPO",
+            "hint": "Trabajo conjunto para lograr metas"
+        },
+        {
+            "word": "ACCION",
+            "hint": "Poner las ideas en marcha"
+        },
+        {
+            "word": "FUTURO",
+            "hint": "Lo que construyen las nuevas generaciones"
+        }
+    ]
+}

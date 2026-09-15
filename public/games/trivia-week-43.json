@@ -1,0 +1,61 @@
+{
+    "title": "Trivia Historia y Rotary",
+    "timePerQuestion": 15,
+    "questions": [
+        {
+            "id": 1,
+            "question": "¿En qué ciudad se fundó el primer club Rotary de la historia en 1905?",
+            "options": [
+                "Nueva York",
+                "Chicago",
+                "Londres",
+                "Boston"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 2,
+            "question": "¿Cómo se llama la campaña histórica de Rotary contra la poliomielitis?",
+            "options": [
+                "End Polio Now",
+                "Polio Free World",
+                "Stop Polio",
+                "Health First"
+            ],
+            "correct": 0
+        },
+        {
+            "id": 3,
+            "question": "¿Cuál es el reconocimiento de socio benefactor más conocido de la Fundación Rotaria?",
+            "options": [
+                "Premio Paul Harris",
+                "Medalla de la Amistad",
+                "Socio Destacado",
+                "Mención Presidencial"
+            ],
+            "correct": 0
+        },
+        {
+            "id": 4,
+            "question": "¿En qué fecha se conmemora la Semana Mundial de Rotaract cada año?",
+            "options": [
+                "En enero",
+                "En marzo (alrededor del 13 de marzo)",
+                "En julio",
+                "En octubre"
+            ],
+            "correct": 1
+        },
+        {
+            "id": 5,
+            "question": "¿Cuál es uno de los principales objetivos de Rotaract en sus miembros?",
+            "options": [
+                "Desarrollo de habilidades profesionales y liderazgo",
+                "Competir en torneos internacionales",
+                "Exclusivamente recaudación financiera",
+                "Capacitación empresarial privada"
+            ],
+            "correct": 0
+        }
+    ]
+}
