@@ -37,7 +37,7 @@ Junto a él, vamos a incorporar herramientas prácticas para ordenar y potenciar
     time: '19:30',
     platform: 'Google Meet',
     meetLink: null,         // se agrega cuando esté disponible
-    registrationLink: null, // link del Google Forms de inscripción
+    registrationLink: 'https://docs.google.com/forms/d/e/1FAIpQLSf5EnWUZZfib9GEz4iast19zAoaZQKU8nb1cPQL6B5SXSUpxA/viewform?usp=header', // link del Google Forms de inscripción
     area: 'Economía Personal',
     votedFirst: true,
   },
