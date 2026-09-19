@@ -18,11 +18,21 @@ export const CAPACITACIONES = [
     topic: 'Finanzas Personales',
     tagline: 'Tomá el control de tu plata',
     description:
-      'Aprenderemos conceptos clave de finanzas personales: presupuesto, ahorro, inversión y cómo construir un fondo de emergencia. Pensado para quienes quieren empezar desde cero o mejorar sus hábitos financieros.',
+      `En esta primera capacitación del ciclo vamos a abordar las finanzas personales desde una mirada práctica y cercana, buscando generar un espacio para aprender, reflexionar e incorporar nuevas herramientas.
+
+La propuesta está pensada para que cada participante pueda comprender mejor su relación con el dinero, revisar sus hábitos y adquirir conocimientos que le permitan desenvolverse con mayor claridad y tomar decisiones más conscientes en su vida cotidiana.
+
+No importa cuánto sepas previamente sobre el tema: la charla está abierta a toda la comunidad y busca acercar las finanzas personales de una manera simple y accesible.`,
     speaker: 'Luciano Gilabert',
     speakerPhoto: '/images/oradores/luciano.jpeg',
     speakerBio:
-      'Contador Público, Licenciado en Administración y director de su propio estudio contable. Además de haber sido socio fundador de Rotaract y Gobernador del Distrito 4895, cuenta con una sólida trayectoria como orador y capacitador internacional. Junto a él, nos llevaremos herramientas prácticas para ordenar y potenciar la economía del día a día.',
+      `Contador Público y Licenciado en Administración de Empresas.
+
+Luciano se desempeñó como Gobernador del Distrito 4895 de Rotary International y como Auditor Financiero Voluntario de la Fundación Rotaria (CADRE). Cuenta con una amplia trayectoria como orador y capacitador internacional, habiendo brindado conferencias en Uruguay, Brasil, Perú, Ecuador, Bolivia, Chile, República Dominicana y Estados Unidos.
+
+Es múltiple socio Paul Harris y en mayo de 2022 recibió el premio “Dar de sí antes de pensar en sí”, máximo galardón que otorga Rotary International a los 150 rotarios más destacados del mundo.
+
+Junto a él, vamos a incorporar herramientas prácticas para ordenar y potenciar nuestra economía del día a día.`,
     date: '2026-09-30',
     time: '19:30',
     platform: 'Google Meet',
