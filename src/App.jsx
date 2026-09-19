@@ -14,6 +14,7 @@ const AllProjectsPage = lazy(() => import('./features/home/AllProjectsPage').the
 const ProjectDetailPage = lazy(() => import('./features/projects/ProjectDetailPage').then(m => ({ default: m.ProjectDetailPage })))
 const JobsPage = lazy(() => import('./features/jobs/JobsPage').then(m => ({ default: m.JobsPage })))
 const GamePage = lazy(() => import('./features/game/GamePage').then(m => ({ default: m.GamePage })))
+const CapacitacionesPage = lazy(() => import('./features/capacitaciones/CapacitacionesPage').then(m => ({ default: m.CapacitacionesPage })))
 
 // HomePage: maneja el scroll a una sección si viene con state.scrollTo
 const HomePage = () => {
@@ -52,6 +53,7 @@ function App() {
               <Route path="/proyectos" element={<AllProjectsPage />} />
               <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
               <Route path="/juego" element={<GamePage />} />
+              <Route path="/capacitaciones" element={<CapacitacionesPage />} />
             </Routes>
           </Suspense>
           <Footer />
