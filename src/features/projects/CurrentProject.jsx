@@ -28,19 +28,19 @@ const PROJECTS = [
     },
   },
   {
-    badge: '¡Nuevo · 2026!',
-    title: 'Ciclo de Capacitaciones',
+    badge: 'Próxima Capacitación',
+    title: 'Ciclo de Capacitaciones: Finanzas Personales',
     description:
-      'Una vez al mes traemos a un orador invitado para compartir su experiencia. ¿Qué temáticas te gustaría que abordemos? ¡Ayudanos a definirlo!',
+      'En esta edición nos acompaña Luciano Gilabert para abordar las finanzas personales desde una mirada práctica. ¡No te lo pierdas!',
     stats: [
-      { value: '1/mes', label: 'Frecuencia' },
-      { value: 'Múltiples', label: 'Oradores' },
-      { value: 'Abierto', label: 'Público' },
+      { value: '30 Sep', label: 'Fecha' },
+      { value: '19:30', label: 'Hora' },
+      { value: 'Virtual', label: 'Modalidad' },
     ],
     cta: {
-      href: FORM_VOTACION_URL,
-      label: 'Votá las temáticas',
-      ariaLabel: 'Votar temáticas del Ciclo de Capacitaciones',
+      href: 'https://docs.google.com/forms/d/e/1FAIpQLSf5EnWUZZfib9GEz4iast19zAoaZQKU8nb1cPQL6B5SXSUpxA/viewform?usp=header',
+      label: '¡Inscribite acá!',
+      ariaLabel: 'Inscribirse a la capacitación de Finanzas Personales',
       icon: (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
