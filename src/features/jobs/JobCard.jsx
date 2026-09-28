@@ -20,11 +20,11 @@ export const JobCard = ({ job }) => {
       </div>
 
       {/* Título y Empresa */}
-      <div className="mb-4">
+      <div className="mb-4 text-center">
         <h3 className="font-garet text-2xl text-gray-900 mb-1 leading-tight">
           {job.title}
         </h3>
-        <p className="font-montserrat text-sm font-medium text-gray-500">
+        <p className="font-montserrat text-lg font-bold text-cranberry">
           {job.company}
         </p>
       </div>
@@ -34,6 +34,19 @@ export const JobCard = ({ job }) => {
         <p className="font-montserrat text-gray-600 text-sm leading-relaxed">
           {job.description}
         </p>
+
+        {job.responsibilities && job.responsibilities.length > 0 && (
+          <div>
+            <h4 className="font-montserrat text-xs font-semibold text-gray-900 uppercase tracking-wider mb-2">
+              Principales tareas y responsabilidades:
+            </h4>
+            <ul className="list-disc list-inside font-montserrat text-sm text-gray-600 space-y-1">
+              {job.responsibilities.map((resp, index) => (
+                <li key={index} className="pl-1 leading-snug">{resp}</li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {job.requirements && job.requirements.length > 0 && (
           <div>
@@ -48,32 +61,10 @@ export const JobCard = ({ job }) => {
           </div>
         )}
 
-        {/* Info adicional rápida */}
-        <div className="pt-4 mt-4 border-t border-gray-100 grid grid-cols-1 gap-2">
-          <div className="flex items-start gap-2">
-            <svg className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span className="font-montserrat text-xs text-gray-500 leading-tight">
-              {job.schedule}
-            </span>
-          </div>
-          <div className="flex items-start gap-2">
-            <svg className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <span className="font-montserrat text-xs text-gray-500 leading-tight">
-              Exp: {job.experience}
-            </span>
-          </div>
-        </div>
       </div>
 
       {/* Footer / CTA */}
-      <div className="mt-6 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-100">
-        <span className="font-montserrat text-xs text-gray-400">
-          Cierra: {new Date(job.deadline).toLocaleDateString('es-AR')}
-        </span>
+      <div className="mt-6 pt-4 flex flex-col sm:flex-row items-center justify-end gap-4 border-t border-gray-100">
         <a
           href={job.applyVia}
           target="_blank"
