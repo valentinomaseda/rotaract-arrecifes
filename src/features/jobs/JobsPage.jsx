@@ -70,13 +70,16 @@ export const JobsPage = () => {
   const [selectedJob, setSelectedJob] = useState(null);
 
   const categories = useMemo(() => Array.from(new Set(jobsData.map((j) => j.category))), []);
-  const types = useMemo(() => Array.from(new Set(jobsData.map((j) => j.type))), []);
+  const types = useMemo(() => {
+    const raw = jobsData.flatMap((j) => (j.type ? j.type.split(" / ") : []));
+    return Array.from(new Set(raw));
+  }, []);
 
   const filteredJobs = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return jobsData.filter((job) => {
       const matchCat = selectedCategories.length === 0 || selectedCategories.includes(job.category);
-      const matchType = selectedTypes.length === 0 || selectedTypes.includes(job.type);
+      const matchType = selectedTypes.length === 0 || selectedTypes.some((t) => job.type?.includes(t));
       const matchQ = !q || [job.title, job.company, job.description].some((f) => f?.toLowerCase().includes(q));
       return matchCat && matchType && matchQ;
     });
