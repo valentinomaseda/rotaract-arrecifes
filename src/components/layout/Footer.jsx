@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const socialLinks = [
   {
@@ -63,6 +64,8 @@ const contactItems = [
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const { pathname } = useLocation();
+  const isJobsPage = pathname === '/empleos';
 
   return (
     <footer
@@ -145,42 +148,68 @@ const Footer = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cranberry opacity-60" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cranberry" />
               </span>
-              Unite al equipo
+              {isJobsPage ? 'Para empresas y empleadores' : 'Unite al equipo'}
             </span>
 
             <h2 className="relative font-garet text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-4">
-              ¿Querés ser parte{' '}
-              <span
-                className="inline-block"
-                style={{
-                  background: 'linear-gradient(90deg, #d41367, #ff6eb0)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                de esta red global?
-              </span>
+              {isJobsPage ? (
+                <>
+                  ¿Tu empresa necesita{' '}
+                  <span
+                    className="inline-block"
+                    style={{
+                      background: 'linear-gradient(90deg, #d41367, #ff6eb0)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    incorporar personal?
+                  </span>
+                </>
+              ) : (
+                <>
+                  ¿Querés ser parte{' '}
+                  <span
+                    className="inline-block"
+                    style={{
+                      background: 'linear-gradient(90deg, #d41367, #ff6eb0)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    de esta red global?
+                  </span>
+                </>
+              )}
             </h2>
             <p className="relative font-montserrat text-white/60 text-base md:text-lg max-w-md mx-auto mb-8">
-              Únete a nuestro equipo y ayudanos a construir una Arrecifes mejor.
+              {isJobsPage
+                ? 'Publicá tu búsqueda de forma gratuita y llegá a toda la comunidad de Arrecifes.'
+                : 'Únete a nuestro equipo y ayudanos a construir una Arrecifes mejor.'}
             </p>
             <a
-              href="https://wa.me/5492478513553"
+              href={isJobsPage ? 'mailto:rotaractarrecifes@gmail.com' : 'https://wa.me/5492478513553'}
               target="_blank"
               rel="noopener noreferrer"
-              id="footer-cta-whatsapp"
+              id={isJobsPage ? 'footer-cta-publicar' : 'footer-cta-whatsapp'}
               className="relative inline-flex items-center gap-2.5 font-montserrat font-bold px-8 py-4 rounded-2xl text-sm text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(212,19,103,0.6)]"
               style={{
                 background: 'linear-gradient(135deg, #d41367 0%, #e91e8c 100%)',
                 boxShadow: '0 4px 24px rgba(212,19,103,0.4)',
               }}
             >
-              Contacto por WhatsApp
+              {isJobsPage ? 'Quiero publicar una búsqueda' : 'Contacto por WhatsApp'}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
+            {isJobsPage && (
+              <p className="relative mt-4 font-montserrat text-xs text-white/30">
+                Servicio gratuito · Solo para empresas y empleadores
+              </p>
+            )}
           </div>
         </div>
       </div>
