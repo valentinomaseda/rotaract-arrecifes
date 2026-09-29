@@ -5,7 +5,7 @@ export const jobsData = [
     company: 'La Gauchita',
     category: 'Oficios / Mantenimiento',
     type: 'Full-time',
-    experience: 'Con experiencia previa',
+
     modality: 'Presencial',
     description: 'Nuestra búsqueda se orienta a perfiles proactivos, organizados, dinámicos, responsables y criteriosos.',
     responsibilities: [

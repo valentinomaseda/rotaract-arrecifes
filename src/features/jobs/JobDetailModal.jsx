@@ -107,23 +107,13 @@ export const JobDetailModal = ({ job, onClose }) => {
             <p className="font-montserrat text-base font-bold text-cranberry">{job.company}</p>
           </div>
 
-          <div className="relative z-10 flex flex-wrap gap-x-5 gap-y-2 mt-4">
-            {job.modality && (
-              <span className="inline-flex items-center gap-1.5 text-xs font-montserrat text-white/60">
-                <MapPinIcon /> {job.modality}
-              </span>
-            )}
-            {job.schedule && (
-              <span className="inline-flex items-center gap-1.5 text-xs font-montserrat text-white/60">
-                <ClockIcon /> {job.schedule}
-              </span>
-            )}
-            {job.experience && (
+          {job.experience && (
+            <div className="relative z-10 flex flex-wrap gap-x-5 gap-y-2 mt-4">
               <span className="inline-flex items-center gap-1.5 text-xs font-montserrat text-white/60">
                 <StarIcon /> {job.experience}
               </span>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Scrollable body */}

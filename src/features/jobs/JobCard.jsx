@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 const ClockIcon = () => (
   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -48,23 +48,8 @@ export const JobCard = ({ job, onOpenDetail }) => {
         </p>
       )}
 
-      {/* Meta + CTA */}
-      <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
-        {/* Meta info */}
-        <div className="flex items-center gap-3 text-gray-400">
-          {job.schedule && (
-            <span className="inline-flex items-center gap-1 text-xs font-montserrat">
-              <ClockIcon /> {job.schedule}
-            </span>
-          )}
-          {job.modality && (
-            <span className="inline-flex items-center gap-1 text-xs font-montserrat">
-              <MapPinIcon /> {job.modality}
-            </span>
-          )}
-        </div>
-
-        {/* Ver detalle button */}
+      {/* CTA */}
+      <div className="mt-auto pt-3 border-t border-gray-100 flex justify-end">
         <button
           onClick={() => onOpenDetail(job)}
           className="group inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-cranberry text-white font-montserrat font-semibold text-xs hover:bg-cranberry-dark shadow-sm shadow-cranberry/20 hover:shadow-cranberry/30 transition-all duration-200 flex-shrink-0"
