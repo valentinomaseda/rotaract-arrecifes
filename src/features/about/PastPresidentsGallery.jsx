@@ -188,8 +188,8 @@ export const PastPresidentsGallery = () => {
               onClick={() => scrollToIndex(idx)}
               aria-label={`Ir al presidente ${idx + 1}`}
               className={`transition-all duration-300 rounded-full ${idx === activeIndex
-                  ? 'w-6 h-2 bg-cranberry'
-                  : 'w-2 h-2 bg-gray-300'
+                ? 'w-6 h-2 bg-cranberry'
+                : 'w-2 h-2 bg-gray-300'
                 }`}
             />
           ))}

@@ -53,9 +53,8 @@ const CustomCheckbox = ({ checked, onChange, label }) => (
       )}
     </span>
     {/* Label text */}
-    <span className={`text-sm font-montserrat transition-colors duration-150 ${
-      checked ? 'text-gray-900 font-semibold' : 'text-gray-600 group-hover:text-gray-900'
-    }`}>
+    <span className={`text-sm font-montserrat transition-colors duration-150 ${checked ? 'text-gray-900 font-semibold' : 'text-gray-600 group-hover:text-gray-900'
+      }`}>
       {label}
     </span>
   </label>
@@ -71,14 +70,14 @@ export const JobsPage = () => {
   const [selectedJob, setSelectedJob] = useState(null);
 
   const categories = useMemo(() => Array.from(new Set(jobsData.map((j) => j.category))), []);
-  const types      = useMemo(() => Array.from(new Set(jobsData.map((j) => j.type))),     []);
+  const types = useMemo(() => Array.from(new Set(jobsData.map((j) => j.type))), []);
 
   const filteredJobs = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return jobsData.filter((job) => {
-      const matchCat  = selectedCategories.length === 0 || selectedCategories.includes(job.category);
+      const matchCat = selectedCategories.length === 0 || selectedCategories.includes(job.category);
       const matchType = selectedTypes.length === 0 || selectedTypes.includes(job.type);
-      const matchQ    = !q || [job.title, job.company, job.description].some((f) => f?.toLowerCase().includes(q));
+      const matchQ = !q || [job.title, job.company, job.description].some((f) => f?.toLowerCase().includes(q));
       return matchCat && matchType && matchQ;
     });
   }, [selectedCategories, selectedTypes, searchQuery]);
@@ -154,10 +153,6 @@ export const JobsPage = () => {
             }}>en Arrecifes</span>
           </h1>
 
-          {/* Contador de ofertas */}
-          <p className="font-montserrat text-white/60 text-base mb-6">
-            <span className="text-white font-bold text-xl">{jobsData.length}</span> ofertas disponibles en este momento
-          </p>
 
           {/* CTA scroll */}
           <button
@@ -203,9 +198,6 @@ export const JobsPage = () => {
                 className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 bg-white font-montserrat text-sm text-gray-800 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-cranberry/30 focus:border-cranberry/60 transition-all"
               />
             </div>
-            <span className="font-montserrat text-sm text-gray-500 whitespace-nowrap flex-shrink-0">
-              <span className="font-bold text-gray-800">{filteredJobs.length}</span> oferta{filteredJobs.length !== 1 ? "s" : ""} encontrada{filteredJobs.length !== 1 ? "s" : ""}
-            </span>
           </div>
 
           {/* Active filter chips */}
