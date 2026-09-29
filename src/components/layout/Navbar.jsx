@@ -15,11 +15,11 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '#', label: 'Inicio', sectionId: null },
-    { href: '/empleos', label: 'Bolsa de Trabajo', isDirectRoute: true },
+    { href: '/empleos', label: 'Bolsa de trabajo', isDirectRoute: true },
     { href: '/capacitaciones', label: 'Capacitaciones', isDirectRoute: true },
-    { href: '/juego', label: 'Juego de la Semana', isDirectRoute: true },
+    { href: '/juego', label: 'Juego semanal', isDirectRoute: true },
     { href: '/proyectos', label: 'Proyectos', isDirectRoute: true },
-    { href: '#quienes-somos', label: 'Quiénes Somos', sectionId: 'quienes-somos' },
+    { href: '#quienes-somos', label: 'Quiénes somos', sectionId: 'quienes-somos' },
   ];
 
   // Maneja el click de un link de nav:
