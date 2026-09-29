@@ -158,6 +158,22 @@ export const JobDetailModal = ({ job, onClose }) => {
               </ul>
             </div>
           )}
+
+          {job.benefits && job.benefits.length > 0 && (
+            <div>
+              <h3 className="font-montserrat text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
+                Se ofrece
+              </h3>
+              <ul className="space-y-2">
+                {job.benefits.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 font-montserrat text-sm text-gray-700">
+                    <CheckIcon />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Sticky CTA footer */}

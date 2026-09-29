@@ -50,5 +50,57 @@ export const jobsData = [
     ],
     schedule: '1 vacante a tiempo completo | 1 vacante media jornada (tarde) y fines de semana completo',
     applyVia: 'mailto:espresso.arrecifes@gmail.com?subject=Búsqueda%20de%20cafetería',
+  },
+  {
+    id: 'job-006',
+    title: 'Vendedor',
+    company: 'P. Bouvier Maquinarias',
+    category: 'Comercio / Ventas',
+    type: 'Tiempo completo',
+
+    modality: 'Presencial',
+    description: 'P. Bouvier Maquinarias busca Vendedor para sumarse a su equipo en Arrecifes y Salto. Se buscan perfiles con marcado perfil comercial, proactivos y con experiencia en atención al cliente.',
+    requirements: [
+      'Actitud proactiva.',
+      'Marcado perfil comercial.',
+      'Experiencia en atención al cliente.',
+      'Adaptación al trabajo en equipo.',
+    ],
+    schedule: 'Tiempo completo',
+    applyVia: 'mailto:pbouvier_maquinarias@hotmail.com?subject=Búsqueda%20Laboral%20-%20Vendedor',
+  },
+  {
+    id: 'job-007',
+    title: 'Responsable de Mantenimiento',
+    company: 'Buratovich Hnos.',
+    category: 'Oficios / Mantenimiento',
+    type: 'Tiempo completo',
+
+    modality: 'Presencial',
+    description: 'Importante planta de acopio de granos de la zona de Arrecifes incorpora Responsable de Mantenimiento. Puesto efectivo y estable con posibilidades de crecimiento.',
+    responsibilities: [
+      'Mantenimiento preventivo y correctivo de planta (norias, sinfines, secadora, aireadores, cintas, redler, reductores).',
+      'Mantenimiento electromecánico general.',
+      'Soldadura eléctrica / MIG.',
+      'Limpieza y orden de instalaciones.',
+      'Colaboración en época de cosecha.'
+    ],
+    requirements: [
+      'Experiencia comprobable en mantenimiento industrial, agropecuario o similar (excluyente).',
+      'Conocimientos en electricidad, mecánica y soldadura.',
+      'Disponibilidad horaria y para guardias en cosecha.',
+      'Carnet de conducir.',
+      'Residir en Arrecifes o zona cercana (Salto, Capitán Sarmiento, Pergamino).',
+      'Perfil proactivo, responsable y con ganas de trabajar en equipo.',
+      'Manejo de personal.'
+    ],
+    benefits: [
+      'Puesto efectivo y estable.',
+      'Buen ambiente laboral.',
+      'Sueldo acorde al convenio + horas extras en cosecha.',
+      'Posibilidad de crecimiento.'
+    ],
+    schedule: 'Tiempo completo (guardias en cosecha)',
+    applyVia: 'mailto:Buratovich@buratovich.com?subject=Búsqueda%20Laboral%20-%20Responsable%20de%20Mantenimiento',
   }
 ];
