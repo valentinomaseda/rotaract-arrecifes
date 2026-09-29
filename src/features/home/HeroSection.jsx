@@ -109,53 +109,113 @@ export const HeroSection = () => {
             Somos jóvenes líderes que transforman ideas en acciones. Un espacio para crecer profesionalmente, hacer amigos y servir a nuestra comunidad.
           </p>
 
-          {/* CTAs */}
+          {/* ── CTAs ── */}
           <div
-            className="animate-hidden flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-14"
+            className="animate-hidden w-full mb-14"
             style={{ transitionDelay: '360ms' }}
           >
-            <a
-              href="#contacto"
-              className="inline-flex justify-center items-center gap-2 px-8 py-4 rounded-full font-montserrat font-semibold text-base text-white transition-all duration-300 hover:scale-105"
-              style={{
-                background: 'linear-gradient(135deg, #d41367 0%, #e91e8c 100%)',
-                boxShadow: '0 4px 24px rgba(212,19,103,0.45)',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 4px 40px rgba(212,19,103,0.7)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 4px 24px rgba(212,19,103,0.45)'; }}
-            >
-              Súmate al equipo
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-            <a
-              href="#proyecto-actual"
-              className="inline-flex justify-center items-center gap-2 px-8 py-4 rounded-full font-montserrat font-medium text-base text-white/70 transition-all duration-300 hover:text-white"
-              style={{
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid rgba(255,255,255,0.12)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(212,19,103,0.15)';
-                e.currentTarget.style.borderColor = 'rgba(212,19,103,0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
-              }}
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              Proyectos en curso
-            </a>
+            {/* Fila 1: CTA primario */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-3">
+              <a
+                href="#contacto"
+                className="inline-flex justify-center items-center gap-2 px-8 py-3.5 rounded-full font-montserrat font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
+                style={{
+                  background: 'linear-gradient(135deg, #d41367 0%, #e91e8c 100%)',
+                  boxShadow: '0 4px 24px rgba(212,19,103,0.45)',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 4px 40px rgba(212,19,103,0.7)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 4px 24px rgba(212,19,103,0.45)'; }}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+                Súmate al equipo
+              </a>
+            </div>
+
+            {/* Fila 2: 3 CTAs secundarios — solo en mobile (en desktop están en el nav) */}
+            <div className="flex flex-col gap-2 md:hidden">
+              {/* Proyectos */}
+              <a
+                href="#proyecto-actual"
+                className="inline-flex justify-center items-center gap-2 px-5 py-3.5 rounded-full font-montserrat font-medium text-sm text-white/70 transition-all duration-300 hover:text-white"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(212,19,103,0.12)';
+                  e.currentTarget.style.borderColor = 'rgba(212,19,103,0.35)';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
+                }}
+              >
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Proyectos
+              </a>
+
+              {/* Bolsa de Trabajo */}
+              <a
+                href="/empleos"
+                className="inline-flex justify-center items-center gap-2 px-5 py-3.5 rounded-full font-montserrat font-medium text-sm text-white/70 transition-all duration-300 hover:text-white"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(212,19,103,0.12)';
+                  e.currentTarget.style.borderColor = 'rgba(212,19,103,0.35)';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
+                }}
+              >
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Bolsa de Trabajo
+              </a>
+
+              {/* Capacitaciones */}
+              <a
+                href="/capacitaciones"
+                className="inline-flex justify-center items-center gap-2 px-5 py-3.5 rounded-full font-montserrat font-medium text-sm text-white/70 transition-all duration-300 hover:text-white"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(212,19,103,0.12)';
+                  e.currentTarget.style.borderColor = 'rgba(212,19,103,0.35)';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
+                }}
+              >
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                Capacitaciones
+              </a>
+            </div>
           </div>
 
           {/* Stats con animación de conteo */}
           <div
             className="animate-hidden w-full"
-            style={{ transitionDelay: '480ms' }}
+            style={{ transitionDelay: '540ms' }}
           >
             <div
               className="h-px w-full mb-8"

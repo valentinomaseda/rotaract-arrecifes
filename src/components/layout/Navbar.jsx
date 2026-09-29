@@ -18,7 +18,7 @@ const Navbar = () => {
     { href: '/empleos', label: 'Bolsa de Trabajo', isDirectRoute: true },
     { href: '/capacitaciones', label: 'Capacitaciones', isDirectRoute: true },
     { href: '/juego', label: 'Juego de la Semana', isDirectRoute: true },
-    { href: '#proyectos', label: 'Proyectos', sectionId: 'proyectos' },
+    { href: '/proyectos', label: 'Proyectos', isDirectRoute: true },
     { href: '#quienes-somos', label: 'Quiénes Somos', sectionId: 'quienes-somos' },
   ];
 
@@ -134,25 +134,25 @@ const Navbar = () => {
       >
         {/* El overflow:hidden + minHeight:0 en el hijo es lo que hace funcionar el truco del grid */}
         <div style={{ overflow: 'hidden', minHeight: 0 }}>
-        <div className="border-t border-gray-100 bg-white px-4 pt-3 pb-6 space-y-1">
-          {navLinks.map((link) => (
+          <div className="border-t border-gray-100 bg-white px-4 pt-3 pb-6 space-y-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link)}
+                className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 font-montserrat hover:bg-cranberry/5 hover:text-cranberry transition-all duration-200"
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link)}
-              className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 font-montserrat hover:bg-cranberry/5 hover:text-cranberry transition-all duration-200"
+              href="#unete"
+              onClick={() => setIsOpen(false)}
+              className="block mt-3 px-4 py-3 text-center rounded-xl text-base font-semibold font-montserrat btn-cranberry text-white"
             >
-              {link.label}
+              Colaborar
             </a>
-          ))}
-          <a
-            href="#unete"
-            onClick={() => setIsOpen(false)}
-            className="block mt-3 px-4 py-3 text-center rounded-xl text-base font-semibold font-montserrat btn-cranberry text-white"
-          >
-            Colaborar
-          </a>
-        </div>
+          </div>
         </div>
       </div>
     </nav>
