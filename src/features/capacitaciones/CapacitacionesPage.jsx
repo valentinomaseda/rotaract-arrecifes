@@ -426,26 +426,163 @@ const UpcomingTalk = ({ cap }) => {
 };
 
 /* ─────────────────────────────────────────────────────────────
-   Card: Charla pasada
+   Modal deslizante: detalle de charla pasada
 ───────────────────────────────────────────────────────────── */
-const PastTalkCard = ({ cap, index }) => {
+const PastTalkDetailModal = ({ cap, onClose }) => {
+  useEffect(() => {
+    const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handleKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  if (!cap) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex justify-end"
+      style={{ background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)' }}
+      onClick={onClose}
+      aria-modal="true"
+      role="dialog"
+      aria-label={`Resumen: ${cap.topic}`}
+    >
+      <div
+        className="relative flex flex-col w-full max-w-lg h-full bg-white shadow-2xl focus:outline-none overflow-y-auto"
+        style={{ animation: 'slideInRight 0.3s cubic-bezier(0.32, 0.72, 0, 1) both' }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header oscuro con foto del orador */}
+        <div
+          className="relative flex-shrink-0"
+          style={{ background: 'linear-gradient(135deg, #0a0a0f 0%, #12071a 60%, #0f0a1a 100%)' }}
+        >
+          {/* Glow decorativo */}
+          <div aria-hidden="true" className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute -top-10 right-0 w-48 h-48 rounded-full opacity-20"
+              style={{ background: 'radial-gradient(circle, #d41367 0%, transparent 70%)', filter: 'blur(40px)' }} />
+          </div>
+
+          {/* Botón cerrar */}
+          <button
+            onClick={onClose}
+            className="absolute top-5 right-5 z-20 flex items-center justify-center w-9 h-9 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Cerrar"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Foto del orador */}
+          {cap.speakerPhoto && (
+            <div className="relative h-56 overflow-hidden">
+              <img
+                src={cap.speakerPhoto}
+                alt={`Foto de ${cap.speaker}`}
+                className="w-full h-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-black/20 to-transparent" />
+            </div>
+          )}
+
+          {/* Badges + título */}
+          <div className="relative z-10 px-7 pt-5 pb-6 space-y-3">
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-montserrat font-semibold bg-white/10 text-white/80 border border-white/20">
+                Edición #{cap.edition}
+              </span>
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-montserrat font-semibold bg-cranberry/30 text-pink-200 border border-cranberry/40">
+                {cap.area}
+              </span>
+            </div>
+            <div>
+              <h2 className="font-garet text-2xl text-white leading-tight mb-0.5">{cap.topic}</h2>
+              <p className="font-montserrat text-sm font-bold text-cranberry">{cap.speaker}</p>
+            </div>
+            <div className="flex items-center gap-1.5 text-white/50 text-xs font-montserrat">
+              <CalendarIcon />
+              <span className="capitalize">{formatDate(cap.date)} · {cap.time} hs</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Cuerpo scrollable */}
+        <div className="flex-grow px-7 py-6 space-y-6">
+          {/* Resumen */}
+          {cap.summary && (
+            <div>
+              <p className="font-montserrat text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
+                Resumen del encuentro
+              </p>
+              <p className="font-montserrat text-sm text-gray-700 leading-relaxed">{cap.summary}</p>
+            </div>
+          )}
+
+          {/* Key takeaways */}
+          {cap.keyTakeaways?.length > 0 && (
+            <div>
+              <p className="font-montserrat text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
+                Lo que aprendimos
+              </p>
+              <ul className="space-y-2.5">
+                {cap.keyTakeaways.map((point, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <CheckIcon />
+                    <span className="font-montserrat text-sm text-gray-700 leading-relaxed">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Bio del orador */}
+          {cap.speakerBio && (
+            <div className="bg-gray-50 rounded-2xl p-5">
+              <p className="font-montserrat text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
+                Sobre el orador
+              </p>
+              <p className="font-montserrat text-sm text-gray-600 leading-relaxed">{cap.speakerBio}</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes slideInRight {
+          from { transform: translateX(100%); opacity: 0; }
+          to   { transform: translateX(0);    opacity: 1; }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   Card: Charla pasada (compacta)
+───────────────────────────────────────────────────────────── */
+const PastTalkCard = ({ cap, index, onOpen }) => {
   const [ref, visible] = useScrollAnimation({ threshold: 0.1 });
 
   return (
     <article
       ref={ref}
-      className={`group bg-white rounded-[1.5rem] border border-gray-100 shadow-sm hover:shadow-[0_20px_40px_-10px_rgba(212,19,103,0.1)] hover:-translate-y-1.5 transition-all duration-500 overflow-hidden ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
+      className={`group bg-white rounded-[1.5rem] border border-gray-100 shadow-sm hover:shadow-[0_20px_40px_-10px_rgba(212,19,103,0.1)] hover:-translate-y-1.5 transition-all duration-500 overflow-hidden flex flex-col ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
       style={{
         transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
         transitionDelay: `${index * 80}ms`,
       }}
       aria-label={`Capacitación pasada: ${cap.topic}`}
     >
-      {/* Barra superior de color */}
+      {/* Barra superior */}
       <div className="h-1 bg-gradient-to-r from-cranberry to-cranberry-light" />
 
-      <div className="p-6 md:p-8">
+      <div className="p-6 md:p-7 flex flex-col flex-grow">
         {/* Edición + área */}
         <div className="flex items-center justify-between mb-4">
           <span className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">
@@ -462,47 +599,37 @@ const PastTalkCard = ({ cap, index }) => {
         </h3>
 
         {/* Fecha */}
-        <div className="flex items-center gap-1.5 text-gray-400 text-sm font-montserrat mb-5">
+        <div className="flex items-center gap-1.5 text-gray-400 text-sm font-montserrat mb-4">
           <CalendarIcon />
           <span className="capitalize">{formatDateShort(cap.date)}</span>
         </div>
 
-        {/* Resumen */}
+        {/* Resumen escueto (2 líneas) */}
         {cap.summary && (
-          <p className="font-montserrat text-gray-500 text-sm leading-relaxed mb-5">
+          <p className="font-montserrat text-gray-500 text-sm leading-relaxed mb-5 line-clamp-2">
             {cap.summary}
           </p>
         )}
 
-        {/* Key takeaways */}
-        {cap.keyTakeaways?.length > 0 && (
-          <div className="mb-5">
-            <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider mb-3">
-              Lo que aprendimos
-            </p>
-            <ul className="space-y-2">
-              {cap.keyTakeaways.map((point, i) => (
-                <li key={i} className="flex items-start gap-2.5">
-                  <CheckIcon />
-                  <span className="font-montserrat text-sm text-gray-600 leading-relaxed">{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* Spacer */}
+        <div className="flex-grow" />
 
-        {/* Footer: orador + asistentes */}
-        <div className="flex items-center justify-between pt-5 border-t border-gray-100 mt-auto">
+        {/* Footer: orador + botón */}
+        <div className="flex items-center justify-between pt-5 border-t border-gray-100">
           <div>
             <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Orador/a</p>
             <p className="font-montserrat text-sm text-gray-700 font-medium mt-0.5">{cap.speaker}</p>
           </div>
-          {cap.attendees && (
-            <div className="flex items-center gap-1.5 text-gray-500 bg-gray-50 px-3 py-1.5 rounded-full">
-              <UsersIcon />
-              <span className="font-montserrat text-xs font-medium">{cap.attendees} asistentes</span>
-            </div>
-          )}
+          <button
+            onClick={() => onOpen(cap)}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cranberry text-white font-montserrat font-semibold text-xs hover:bg-cranberry-dark transition-all duration-200 shadow-sm shadow-cranberry/25"
+            aria-label={`Ver resumen completo de ${cap.topic}`}
+          >
+            Ver resumen
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
         </div>
       </div>
     </article>
@@ -514,13 +641,14 @@ const PastTalkCard = ({ cap, index }) => {
 ───────────────────────────────────────────────────────────── */
 const PastTalks = ({ pastCaps }) => {
   const [ref, visible] = useScrollAnimation({ threshold: 0.1 });
+  const [selectedCap, setSelectedCap] = useState(null);
 
   if (pastCaps.length === 0) return null;
 
   return (
     <section
       id="capacitaciones-pasadas"
-      className="relative bg-gray-50 py-20 md:py-28 overflow-hidden"
+      className="relative bg-gray-50 py-12 md:py-16 overflow-hidden"
       aria-labelledby="past-talks-title"
     >
       <div className="blob-decoration w-[350px] h-[350px] bg-cranberry/4 -top-20 -right-20" aria-hidden="true" />
@@ -528,7 +656,7 @@ const PastTalks = ({ pastCaps }) => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <div
           ref={ref}
-          className={`mb-14 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`mb-8 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           style={{ transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)' }}
         >
           <span className="text-cranberry font-montserrat font-bold tracking-widest uppercase text-xs md:text-sm mb-3 block">
@@ -544,10 +672,15 @@ const PastTalks = ({ pastCaps }) => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {pastCaps.map((cap, idx) => (
-            <PastTalkCard key={cap.id} cap={cap} index={idx} />
+            <PastTalkCard key={cap.id} cap={cap} index={idx} onOpen={setSelectedCap} />
           ))}
         </div>
       </div>
+
+      {/* Modal deslizante */}
+      {selectedCap && (
+        <PastTalkDetailModal cap={selectedCap} onClose={() => setSelectedCap(null)} />
+      )}
     </section>
   );
 };
@@ -663,8 +796,63 @@ export const CapacitacionesPage = () => {
       {upcoming ? (
         <UpcomingTalk cap={upcoming} />
       ) : (
-        <section className="py-20 text-center text-gray-400 font-montserrat">
-          Próximamente anunciaremos la siguiente charla. ¡Seguinos para enterarte!
+        <section
+          id="proxima-capacitacion"
+          className="relative py-12 md:py-16 overflow-hidden bg-white"
+          aria-labelledby="upcoming-placeholder-title"
+        >
+          {/* Blobs decorativos */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cranberry/5 rounded-full mix-blend-multiply filter blur-[100px] opacity-80 pointer-events-none" aria-hidden="true" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-cranberry/4 rounded-full mix-blend-multiply filter blur-[80px] pointer-events-none" aria-hidden="true" />
+
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            {/* Indicador pulsante */}
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cranberry opacity-40" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cranberry" />
+              </span>
+              <span className="text-cranberry font-montserrat font-bold tracking-widest uppercase text-xs md:text-sm">
+                Próxima Charla
+              </span>
+            </div>
+
+            <h2
+              id="upcoming-placeholder-title"
+              className="font-garet text-3xl md:text-4xl lg:text-5xl text-gray-900 tracking-tight leading-[1.1] mb-4"
+            >
+              La próxima edición ya<br className="hidden md:block" /> está en camino
+            </h2>
+
+            <p className="font-montserrat text-gray-500 text-sm md:text-base leading-relaxed max-w-xl mx-auto mb-7">
+              Estamos preparando el siguiente encuentro de nuestro Ciclo de Capacitaciones.
+              Pronto vamos a anunciar el tema, el orador y la fecha.
+              ¡Seguinos para enterarte apenas esté disponible!
+            </p>
+
+            {/* Datos que ya sabemos */}
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 bg-gray-50 border border-gray-100 rounded-2xl px-8 py-5 mx-auto">
+              <div className="flex items-center gap-2.5 text-gray-500">
+                <div className="w-8 h-8 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry flex-shrink-0">
+                  <CalendarIcon />
+                </div>
+                <div className="text-left">
+                  <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Cuándo</p>
+                  <p className="font-montserrat text-gray-800 font-medium text-sm">Última semana de octubre</p>
+                </div>
+              </div>
+              <div className="hidden sm:block w-px h-8 bg-gray-200" aria-hidden="true" />
+              <div className="flex items-center gap-2.5 text-gray-500">
+                <div className="w-8 h-8 rounded-xl bg-cranberry/10 flex items-center justify-center text-cranberry flex-shrink-0">
+                  <VideoIcon />
+                </div>
+                <div className="text-left">
+                  <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Plataforma</p>
+                  <p className="font-montserrat text-gray-800 font-medium text-sm">Google Meet · Gratuito</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       )}
 
