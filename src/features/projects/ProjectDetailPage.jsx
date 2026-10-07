@@ -654,16 +654,106 @@ export const ProjectDetailPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
 
-            {/* Galería */}
+            {/* Galería / Video */}
             <div className="lg:col-span-7">
-              {(() => {
-                const allImages = project.imageUrl
-                  ? [project.imageUrl, ...(project.images ?? []).filter(img => img !== project.imageUrl)]
-                  : (project.images ?? []);
-                return allImages.length > 0
-                  ? <GalleryView images={allImages} title={project.title} />
-                  : null;
-              })()}
+              {project.videoPlaceholder ? (
+                /* ─ Video placeholder ocupa el slot de la galería ─ */
+                <div className="space-y-4">
+                  <div style={{
+                    background: 'linear-gradient(135deg, #14532d 0%, #166534 50%, #16a34a 100%)',
+                    borderRadius: '18px',
+                    aspectRatio: '16/9',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '16px',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    boxShadow: '0 8px 40px rgba(21,128,61,0.28)',
+                  }}>
+                    {/* Patrón de puntos */}
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
+                      backgroundSize: '28px 28px',
+                    }} />
+                    {/* Blob decorativo */}
+                    <div style={{
+                      position: 'absolute', top: '-60px', right: '-60px',
+                      width: '220px', height: '220px', borderRadius: '50%',
+                      background: 'rgba(255,255,255,0.05)',
+                    }} />
+                    <div style={{
+                      position: 'absolute', bottom: '-40px', left: '-40px',
+                      width: '160px', height: '160px', borderRadius: '50%',
+                      background: 'rgba(255,255,255,0.04)',
+                    }} />
+                    {/* Badge "próximamente" */}
+                    <div style={{
+                      position: 'absolute', top: '16px', left: '16px',
+                      background: 'rgba(255,255,255,0.15)',
+                      backdropFilter: 'blur(8px)',
+                      border: '1px solid rgba(255,255,255,0.25)',
+                      borderRadius: '100px',
+                      padding: '4px 14px',
+                    }}>
+                      <span style={{ color: '#bbf7d0', fontSize: '0.72rem', fontFamily: 'Montserrat, sans-serif', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                        🎬 Próximamente
+                      </span>
+                    </div>
+                    {/* Ícono play con anillo animado */}
+                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <div style={{
+                        position: 'absolute',
+                        width: '100px', height: '100px',
+                        borderRadius: '50%',
+                        border: '2px solid rgba(255,255,255,0.12)',
+                        animation: 'colillerosPulseOuter 2.4s ease-in-out infinite',
+                      }} />
+                      <div style={{
+                        width: '72px', height: '72px',
+                        borderRadius: '50%',
+                        background: 'rgba(255,255,255,0.18)',
+                        backdropFilter: 'blur(12px)',
+                        border: '2px solid rgba(255,255,255,0.35)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        color: '#ffffff',
+                        position: 'relative',
+                      }}>
+                        <svg width="30" height="30" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                            d="M15 10l4.553-2.276A1 1 0 0121 8.723v6.554a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'center', position: 'relative' }}>
+                      <p style={{ color: '#ffffff', fontWeight: 700, fontSize: '1.05rem', marginBottom: '4px', fontFamily: 'Montserrat, sans-serif' }}>
+                        Video explicativo
+                      </p>
+                      <p style={{ color: '#86efac', fontSize: '0.85rem', fontFamily: 'Montserrat, sans-serif' }}>
+                        Estamos preparando el contenido
+                      </p>
+                    </div>
+                  </div>
+                  <style>{`
+                    @keyframes colillerosPulseOuter {
+                      0%, 100% { opacity: 1; transform: scale(1); }
+                      50% { opacity: 0.35; transform: scale(1.22); }
+                    }
+                  `}</style>
+                </div>
+              ) : (
+                /* ─ Galería normal ─ */
+                (() => {
+                  const allImages = project.imageUrl
+                    ? [project.imageUrl, ...(project.images ?? []).filter(img => img !== project.imageUrl)]
+                    : (project.images ?? []);
+                  return allImages.length > 0
+                    ? <GalleryView images={allImages} title={project.title} />
+                    : null;
+                })()
+              )}
             </div>
 
             {/* Info lateral */}
@@ -671,6 +761,76 @@ export const ProjectDetailPage = () => {
               {/* Tarjeta de servicio destacada (opcional) */}
               {project.serviceHighlight && (
                 <ServiceHighlightCard highlight={project.serviceHighlight} />
+              )}
+
+              {/* Stats del proyecto (opcional) */}
+              {project.stats && project.stats.length > 0 && (
+                <div>
+                  <h2 className="font-garet text-2xl text-gray-900 mb-4">Impacto</h2>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
+                    {project.stats.map((stat, i) => {
+                      const isEnv = project.category === 'Medio Ambiente';
+                      const icons = [
+                        /* 0 */ <svg key="0" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 3l18 18M7 7a9 9 0 0012.93 12.93M12 3a9 9 0 019 9" /></svg>,
+                        /* 1 */ <svg key="1" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
+                        /* 2 */ <svg key="2" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>,
+                      ];
+                      const accentColor = isEnv ? '#15803d' : '#c0004e';
+                      const bgColor = isEnv ? '#f0fdf4' : '#fff1f5';
+                      const borderColor = isEnv ? '#bbf7d0' : '#fecdd3';
+                      const iconBg = isEnv ? '#dcfce7' : '#ffe4e6';
+                      return (
+                        <div
+                          key={i}
+                          style={{
+                            background: bgColor,
+                            border: `1px solid ${borderColor}`,
+                            borderLeft: `4px solid ${accentColor}`,
+                            borderRadius: '14px',
+                            padding: '14px 18px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '14px',
+                          }}
+                        >
+                          {/* Ícono */}
+                          <div style={{
+                            minWidth: '40px', height: '40px',
+                            borderRadius: '10px',
+                            background: iconBg,
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            color: accentColor,
+                            flexShrink: 0,
+                          }}>
+                            {icons[i % icons.length]}
+                          </div>
+                          {/* Valor + label */}
+                          <div>
+                            <div style={{
+                              fontFamily: 'Garet, sans-serif',
+                              fontWeight: 800,
+                              fontSize: '1.15rem',
+                              color: accentColor,
+                              lineHeight: 1.2,
+                              marginBottom: '2px',
+                            }}>
+                              {stat.value}
+                            </div>
+                            <p style={{
+                              fontFamily: 'Montserrat, sans-serif',
+                              fontSize: '0.8rem',
+                              color: '#6b7280',
+                              lineHeight: 1.45,
+                              margin: 0,
+                            }}>
+                              {stat.label}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               )}
 
               {/* Descripción completa */}

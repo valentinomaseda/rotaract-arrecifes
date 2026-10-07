@@ -226,4 +226,21 @@ export const projectsData = [
       { value: 'CEC', label: 'El Roble Arrecifes' },
     ],
   },
+  {
+    id: 'colilleros',
+    title: 'Colilleros Urbanos',
+    description: 'Instalamos colilleros en distintos puntos de Arrecifes para reducir la contaminación por colillas de cigarrillo y generar conciencia ambiental.',
+    imageUrl: '/images/proyectos/colilleros/portada.jpg',
+    date: '2025 — En curso',
+    category: 'Medio Ambiente',
+    impact: 'Toda la ciudad',
+    longDescription: `Las colillas de cigarrillo son uno de los residuos más frecuentes en el espacio público y uno de los más perjudiciales para el medio ambiente. Una sola colilla puede contaminar hasta 50 litros de agua y tarda más de 12 años en degradarse, liberando durante ese tiempo sustancias tóxicas como nicotina, arsénico y plomo.\n\nDesde Rotaract Arrecifes decidimos actuar: instalamos colilleros en puntos estratégicos de la ciudad para brindar una alternativa concreta y accesible. Cada colillero cuenta con un código QR que dirige a esta página, donde vas a encontrar información sobre el impacto del proyecto y cómo contribuir.\n\nEl proyecto busca no solo reducir la cantidad de colillas en la vía pública, sino también generar conciencia sobre la importancia de los pequeños gestos en el cuidado de nuestro entorno. Cada colilla depositada correctamente es un paso hacia una Arrecifes más limpia.`,
+    images: [],
+    videoPlaceholder: true,
+    stats: [
+      { value: '4.500M', label: 'colillas tiradas al suelo por año en Argentina' },
+      { value: '~12 años', label: 'tarda una colilla en degradarse' },
+      { value: '50 lts', label: 'de agua contamina una sola colilla' },
+    ],
+  },
 ];
