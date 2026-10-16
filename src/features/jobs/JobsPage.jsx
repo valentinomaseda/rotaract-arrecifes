@@ -66,6 +66,7 @@ const CustomCheckbox = ({ checked, onChange, label }) => (
 export const JobsPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
+  const [selectedLocations, setSelectedLocations] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedJob, setSelectedJob] = useState(null);
 
@@ -74,23 +75,29 @@ export const JobsPage = () => {
     const raw = jobsData.flatMap((j) => (j.type ? j.type.split(" / ") : []));
     return Array.from(new Set(raw));
   }, []);
+  const locations = useMemo(() => {
+    const locs = jobsData.map((j) => j.location).filter(Boolean);
+    return Array.from(new Set(locs)).filter((l) => l !== 'Arrecifes').sort();
+  }, []);
 
   const filteredJobs = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return jobsData.filter((job) => {
       const matchCat = selectedCategories.length === 0 || selectedCategories.includes(job.category);
       const matchType = selectedTypes.length === 0 || selectedTypes.some((t) => job.type?.includes(t));
+      const matchLoc = selectedLocations.length === 0 || selectedLocations.includes(job.location);
       const matchQ = !q || [job.title, job.company, job.description].some((f) => f?.toLowerCase().includes(q));
-      return matchCat && matchType && matchQ;
+      return matchCat && matchType && matchLoc && matchQ;
     });
-  }, [selectedCategories, selectedTypes, searchQuery]);
+  }, [selectedCategories, selectedTypes, selectedLocations, searchQuery]);
 
-  const hasFilters = selectedCategories.length > 0 || selectedTypes.length > 0 || searchQuery.trim().length > 0;
-  const activeFilterCount = selectedCategories.length + selectedTypes.length;
+  const hasFilters = selectedCategories.length > 0 || selectedTypes.length > 0 || selectedLocations.length > 0 || searchQuery.trim().length > 0;
+  const activeFilterCount = selectedCategories.length + selectedTypes.length + selectedLocations.length;
 
   const clearFilters = useCallback(() => {
     setSelectedCategories([]);
     setSelectedTypes([]);
+    setSelectedLocations([]);
     setSearchQuery("");
   }, []);
 
@@ -102,6 +109,11 @@ export const JobsPage = () => {
   const toggleType = (type) =>
     setSelectedTypes((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+
+  const toggleLocation = (loc) =>
+    setSelectedLocations((prev) =>
+      prev.includes(loc) ? prev.filter((l) => l !== loc) : [...prev, loc]
     );
 
   const scrollToJobs = () => {
@@ -175,10 +187,13 @@ export const JobsPage = () => {
           <FilterSidebar
             categories={categories}
             types={types}
+            locations={locations}
             selectedCategories={selectedCategories}
             selectedTypes={selectedTypes}
+            selectedLocations={selectedLocations}
             toggleCategory={toggleCategory}
             toggleType={toggleType}
+            toggleLocation={toggleLocation}
             activeFilterCount={activeFilterCount}
             onClear={clearFilters}
           />
@@ -217,6 +232,13 @@ export const JobsPage = () => {
                 <button key={type} onClick={() => toggleType(type)}
                   className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 text-xs font-montserrat font-semibold hover:bg-purple-100 transition-colors">
                   {type}
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+              ))}
+              {selectedLocations.map((loc) => (
+                <button key={loc} onClick={() => toggleLocation(loc)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-montserrat font-semibold hover:bg-blue-100 transition-colors">
+                  📍 {loc}
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
               ))}
@@ -291,9 +313,9 @@ const FilterGroup = ({ title, children }) => {
    FILTER SIDEBAR
 ================================================================ */
 const FilterSidebar = ({
-  categories, types,
-  selectedCategories, selectedTypes,
-  toggleCategory, toggleType,
+  categories, types, locations,
+  selectedCategories, selectedTypes, selectedLocations,
+  toggleCategory, toggleType, toggleLocation,
   activeFilterCount, onClear,
 }) => {
   const [panelOpen, setPanelOpen] = useState(false);
@@ -357,6 +379,22 @@ const FilterSidebar = ({
               ))}
             </div>
           </FilterGroup>
+
+          {/* Ubicación — checkboxes (solo ciudades fuera de Arrecifes) */}
+          {locations.length > 0 && (
+            <FilterGroup title="Ubicación">
+              <div className="space-y-2.5">
+                {locations.map((loc) => (
+                  <CustomCheckbox
+                    key={loc}
+                    checked={selectedLocations.includes(loc)}
+                    onChange={() => toggleLocation(loc)}
+                    label={loc}
+                  />
+                ))}
+              </div>
+            </FilterGroup>
+          )}
 
           {/* Limpiar */}
           {activeFilterCount > 0 && (

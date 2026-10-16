@@ -1,5 +1,60 @@
 export const jobsData = [
   {
+    id: 'job-010',
+    title: 'Vendedor - Productos de Consumo Masivo',
+    company: null,
+    category: 'Comercio / Ventas',
+    type: 'Tiempo completo',
+    modality: 'Presencial',
+    description: 'Si te gustan las ventas, el contacto con clientes y los desafíos diarios, ¡esta oportunidad es para vos!',
+    requirements: [
+      'Nivel de estudio: terciario, universitario o estudiante avanzado.',
+      'Movilidad propia (excluyente).',
+    ],
+    schedule: 'Lunes a sábado, horario corrido.',
+    location: 'Salto y Arrecifes',
+    applyVia: 'mailto:busqueda1130@gmail.com?subject=Postulación%20Vendedor',
+  },
+  {
+    id: 'job-011',
+    title: 'Asistente de Breeding / Técnico en Ensayos Agrícolas',
+    company: 'HR Foster',
+    category: 'Agro / Campo',
+    type: 'Tiempo completo',
+    modality: 'Presencial',
+    description: 'HR Foster se encuentra en la búsqueda de personal para incorporar a su equipo de trabajo. Actividad: mejoramiento genético de Camelina.',
+    requirements: [
+      'Referencias comprobables.',
+    ],
+    schedule: null,
+    location: 'Pergamino',
+    applyVia: 'mailto:info@hrfoster.com.ar?subject=Postulación%20Asistente%20de%20Breeding',
+  },
+  {
+    id: 'job-012',
+    title: 'Controladores de Cosecha',
+    company: 'Buratovich Hnos.',
+    category: 'Agro / Campo',
+    type: 'Tiempo completo',
+    modality: 'Presencial',
+    description: 'Buratovich Hnos. busca Controladores de Cosecha para Arrecifes. Contrato de régimen transitorio con posibilidad de quedar efectivo.',
+    responsibilities: [
+      'Control de pérdidas de cosecha.',
+      'Supervisar la carga de camiones y embolsado.',
+      'Confección y control de cartas de porte.',
+      'Registrar y enviar información diaria a la administración.',
+    ],
+    requirements: [
+      'Jóvenes entre 18 y 35 años.',
+      'Disponibilidad horaria: full time.',
+      'Período: 11 de noviembre al 20 de diciembre.',
+    ],
+    vacancies: 4,
+    schedule: 'Full time',
+    location: 'Arrecifes',
+    applyVia: 'mailto:edefferrari@buratovich.com?subject=Postulación%20Controlador%20de%20Cosecha',
+  },
+  {
     id: 'job-004',
     title: 'Operario de Mantenimiento',
     company: 'La Gauchita',
@@ -23,6 +78,7 @@ export const jobsData = [
       'Disponibilidad horaria a tiempo completo.'
     ],
     schedule: 'Tiempo completo',
+    location: 'Arrecifes',
     applyVia: 'mailto:rrhh@lagauchita.com',
   },
   {
@@ -49,6 +105,7 @@ export const jobsData = [
       'Ganas y compromiso para aprender.'
     ],
     schedule: '1 vacante a tiempo completo | 1 vacante media jornada (tarde) y fines de semana completo',
+    location: 'Arrecifes',
     applyVia: 'mailto:espresso.arrecifes@gmail.com?subject=Búsqueda%20de%20cafetería',
   },
   {
@@ -67,6 +124,7 @@ export const jobsData = [
       'Adaptación al trabajo en equipo.',
     ],
     schedule: 'Tiempo completo',
+    location: 'Arrecifes',
     applyVia: 'mailto:pbouvier_maquinarias@hotmail.com?subject=Búsqueda%20Laboral%20-%20Vendedor',
   },
   {
@@ -101,6 +159,7 @@ export const jobsData = [
       'Posibilidad de crecimiento.'
     ],
     schedule: 'Tiempo completo (guardias en cosecha)',
+    location: 'Arrecifes',
     applyVia: 'mailto:Buratovich@buratovich.com?subject=Búsqueda%20Laboral%20-%20Responsable%20de%20Mantenimiento',
   }
 ];
