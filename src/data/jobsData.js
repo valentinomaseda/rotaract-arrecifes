@@ -36,7 +36,7 @@ export const jobsData = [
       'Movilidad propia (excluyente).',
     ],
     schedule: 'Lunes a sábado, horario corrido.',
-    location: 'Salto y Arrecifes',
+    location: ['Salto', 'Arrecifes'],
     applyVia: 'mailto:busqueda1130@gmail.com?subject=Postulación%20Vendedor',
   },
   {

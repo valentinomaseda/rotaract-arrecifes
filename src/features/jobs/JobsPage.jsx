@@ -76,8 +76,8 @@ export const JobsPage = () => {
     return Array.from(new Set(raw));
   }, []);
   const locations = useMemo(() => {
-    const locs = jobsData.map((j) => j.location).filter(Boolean);
-    return Array.from(new Set(locs)).filter((l) => l !== 'Arrecifes').sort();
+    const locs = jobsData.flatMap((j) => j.location ? (Array.isArray(j.location) ? j.location : [j.location]) : []);
+    return Array.from(new Set(locs)).sort();
   }, []);
 
   const filteredJobs = useMemo(() => {
@@ -85,7 +85,8 @@ export const JobsPage = () => {
     return jobsData.filter((job) => {
       const matchCat = selectedCategories.length === 0 || selectedCategories.includes(job.category);
       const matchType = selectedTypes.length === 0 || selectedTypes.some((t) => job.type?.includes(t));
-      const matchLoc = selectedLocations.length === 0 || selectedLocations.includes(job.location);
+      const jobLocs = Array.isArray(job.location) ? job.location : (job.location ? [job.location] : []);
+      const matchLoc = selectedLocations.length === 0 || selectedLocations.some((l) => jobLocs.includes(l));
       const matchQ = !q || [job.title, job.company, job.description].some((f) => f?.toLowerCase().includes(q));
       return matchCat && matchType && matchLoc && matchQ;
     });
