@@ -52,7 +52,7 @@ export const JobDetailModal = ({ job, onClose }) => {
   if (!job) return null;
 
   const isEmail = job.applyVia?.startsWith("mailto:");
-  const buttonText = isEmail ? "Enviar CV por Email" : "Postularse / Contactar";
+  const buttonText = isEmail ? "Enviar CV por Email" : "Completá el formulario y postulate";
 
   return (
     <div

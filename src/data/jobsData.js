@@ -1,5 +1,29 @@
 export const jobsData = [
   {
+    id: 'job-013',
+    title: 'Asistente de Envasado y Empaque',
+    company: 'GINKA',
+    category: 'Industria / Producción',
+    type: 'Tiempo completo',
+    modality: 'Presencial',
+    description: 'GINKA se encuentra en la búsqueda de personal para incorporarse al área productiva de una empresa vinculada al mercado agrícola.',
+    responsibilities: [
+      'Participación en procesos productivos.',
+      'Envasado de productos.',
+      'Empaque y acondicionamiento.',
+      'Colaboración en las distintas etapas de producción.',
+    ],
+    requirements: [
+      'Secundario completo.',
+      'Experiencia en el sector industrial.',
+      'Perfil orientado a tareas operativas y productivas.',
+      'Compromiso, responsabilidad y capacidad de trabajo en equipo.',
+    ],
+    schedule: 'Tiempo completo',
+    location: 'Pergamino',
+    applyVia: 'https://lnkd.in/dKSs8bQZ',
+  },
+  {
     id: 'job-010',
     title: 'Vendedor - Productos de Consumo Masivo',
     company: null,
