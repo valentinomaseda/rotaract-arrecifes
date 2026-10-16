@@ -1,5 +1,29 @@
 export const jobsData = [
   {
+    id: 'job-014',
+    title: 'Electricista / Técnico en Redes y Seguridad Electrónica',
+    company: null,
+    category: 'Oficios / Tecnología',
+    type: 'Tiempo completo',
+    modality: 'Presencial',
+    description: 'Empresa de Arrecifes busca personal para incorporar a su equipo. Si tenés conocimientos en electricidad, cableado de red y seguridad electrónica, ¡esta oportunidad puede ser para vos!',
+    responsibilities: [
+      'Instalación y mantenimiento de sistemas eléctricos.',
+      'Cableado estructurado de red.',
+      'Instalación y configuración de sistemas de seguridad electrónica.',
+    ],
+    requirements: [
+      'Conocimientos en electricidad.',
+      'Conocimientos en cableado de red.',
+      'Conocimientos en seguridad electrónica.',
+      'Movilidad propia (excluyente).',
+      'Ganas de trabajar, aprender y sumarse a un equipo.',
+    ],
+    schedule: 'Tiempo completo',
+    location: 'Arrecifes',
+    applyVia: 'mailto:seguridadelectronica2026@hotmail.com?subject=Postulación%20-%20Técnico%20en%20Redes%20y%20Seguridad',
+  },
+  {
     id: 'job-013',
     title: 'Asistente de Envasado y Empaque',
     company: 'GINKA',
