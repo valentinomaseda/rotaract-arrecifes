@@ -1,5 +1,25 @@
 export const jobsData = [
   {
+    id: 'job-016',
+    title: 'Vendedora - Local Comercial de Muebles',
+    company: null,
+    category: 'Comercio / Ventas',
+    type: 'Tiempo completo',
+    modality: 'Presencial',
+    description: 'Local comercial del rubro venta de muebles busca vendedora para incorporar a su equipo. Se busca una persona comprometida, proactiva y con experiencia en ventas y atención al cliente.',
+    requirements: [
+      'Edad mínima: 30 años (excluyente).',
+      'Experiencia en ventas y atención al cliente.',
+      'Referencias comerciales comprobables.',
+      'Compromiso y responsabilidad.',
+      'Proactividad y buena predisposición.',
+      'Disponibilidad full time.',
+    ],
+    schedule: 'Lunes a sábado, jornada completa.',
+    location: 'Arrecifes',
+    applyVia: 'mailto:cv.empleados.dp@gmail.com?subject=Postulación%20-%20Vendedora%20Local%20de%20Muebles',
+  },
+  {
     id: 'job-014',
     title: 'Electricista / Técnico en Redes y Seguridad Electrónica',
     company: null,
