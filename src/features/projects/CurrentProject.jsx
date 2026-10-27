@@ -29,18 +29,18 @@ const PROJECTS = [
   },
   {
     badge: 'Próxima Capacitación',
-    title: 'Ciclo de Capacitaciones: Finanzas Personales',
+    title: 'Ciclo de Capacitaciones: El poder de la palabra',
     description:
-      'En esta edición nos acompaña Luciano Gilabert para abordar las finanzas personales desde una mirada práctica. ¡No te lo pierdas!',
+      'Nos acompaña Celia Cruz de Giay, Vicepresidente de Rotary International (2014-2015), para reflexionar sobre cómo comunicar para inspirar, convencer y conectar. ¡Cupos limitados!',
     stats: [
-      { value: '30 Sep', label: 'Fecha' },
+      { value: '28 Oct', label: 'Fecha' },
       { value: '19:30', label: 'Hora' },
       { value: 'Virtual', label: 'Modalidad' },
     ],
     cta: {
-      href: 'https://docs.google.com/forms/d/e/1FAIpQLSf5EnWUZZfib9GEz4iast19zAoaZQKU8nb1cPQL6B5SXSUpxA/viewform?usp=header',
+      href: 'https://forms.gle/xo34hqDap7BAJa2V9',
       label: '¡Inscribite acá!',
-      ariaLabel: 'Inscribirse a la capacitación de Finanzas Personales',
+      ariaLabel: 'Inscribirse a la capacitación El poder de la palabra',
       icon: (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />

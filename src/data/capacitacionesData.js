@@ -54,6 +54,41 @@ Es múltiple socio Paul Harris y en mayo de 2022 recibió el premio "Dar de sí 
     ],
     attendees: null,
   },
+  {
+    id: 'cap-002',
+    edition: 2,
+    status: 'upcoming',
+    topic: 'El poder de la palabra: comunicar para inspirar, convencer y conectar',
+    tagline: 'Comunicar para inspirar, convencer y conectar',
+    description:
+      `¿Alguna vez te pusiste a pensar cómo nuestras palabras pueden transformar realidades, motivar a un equipo o tender puentes con quienes piensan diferente?
+
+En el marco de nuestro Ciclo de Capacitaciones, tenemos el enorme honor de recibir a una referente indiscutida de nuestra familia rotaria. Vamos a reflexionar juntos sobre cómo expresar nuestras ideas con claridad, transmitir entusiasmo y convencer sin imponer.
+
+¡Una oportunidad única para potenciar nuestro liderazgo y nuestra comunicación cotidiana!`,
+    speaker: 'Celia Cruz de Giay',
+    // TODO: cargar manualmente la foto en public/images/oradores/celia.jpeg
+    speakerPhoto: '/images/oradores/celia.jpeg',
+    speakerBio:
+      `Educadora, periodista, escritora y líder social argentina, reconocida internacionalmente como una de las figuras pioneras en el liderazgo femenino dentro de Rotary International. Estuvo casada con Luis Vicente Giay, primer argentino en presidir Rotary International a nivel mundial (1996-1997).
+
+• Primera mujer latinoamericana en la Junta Directiva: Directora de Rotary International (2013-2015).
+
+• Segunda mujer vicepresidenta mundial: Vicepresidente de Rotary International (2014-2015), la segunda mujer en la historia de la organización en ocupar ese cargo y la primera latinoamericana.
+
+• Gobernadora del Distrito 4820 de Rotary International en Argentina, impulsando proyectos comunitarios de impacto regional.
+
+• Coordinadora Regional de La Fundación Rotaria (2009-2012), promoviendo subvenciones educativas, sanitarias y programas de desarrollo comunitario.
+
+• Dirigió y editó la revista oficial Vida Rotaria, contribuyendo a la comunicación institucional, la formación de líderes y la divulgación de programas de servicio en los países de habla hispana.`,
+    date: '2026-10-28',
+    time: '19:30',
+    platform: 'Google Meet',
+    area: 'Liderazgo y Comunicación',
+    votedFirst: false,
+    registrationLink: 'https://forms.gle/xo34hqDap7BAJa2V9',
+    attendees: null,
+  },
 ];
 
 /**

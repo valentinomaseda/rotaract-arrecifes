@@ -239,7 +239,7 @@ const SpeakerModalCard = ({ cap }) => {
               {cap.speakerBio && (
                 <div>
                   <p className="font-montserrat text-xs text-cranberry uppercase tracking-widest font-bold mb-3">Sobre el orador</p>
-                  <p className="font-montserrat text-gray-600 text-base leading-relaxed">{cap.speakerBio}</p>
+                  <p className="font-montserrat text-gray-600 text-base leading-relaxed whitespace-pre-line">{cap.speakerBio}</p>
                 </div>
               )}
 
