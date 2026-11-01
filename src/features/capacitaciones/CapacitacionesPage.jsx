@@ -116,21 +116,27 @@ const SpeakerModalCard = ({ cap }) => {
         <div className="relative overflow-hidden rounded-[2rem] border border-white/80 shadow-[0_20px_60px_-10px_rgba(212,19,103,0.12)] bg-white/60 backdrop-blur-xl">
           {/* Foto del orador — ocupa todo el ancho */}
           {cap.speakerPhoto && (
-            <div className="relative h-64 md:h-72 overflow-hidden">
+            <div className="relative h-64 md:h-72 overflow-hidden bg-[#0a0a0f]">
+              <img
+                src={cap.speakerPhoto}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover object-center scale-110 blur-xl opacity-45"
+              />
               <img
                 src={cap.speakerPhoto}
                 alt={`Foto de ${cap.speaker}`}
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                className="relative z-10 w-full h-full object-contain object-top transition-transform duration-700 group-hover:scale-105"
               />
               {/* Gradiente inferior */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
               {/* Nombre sobre la foto */}
-              <div className="absolute bottom-0 left-0 right-0 p-6">
+              <div className="absolute bottom-0 left-0 right-0 z-20 p-6">
                 <p className="font-montserrat text-white/70 text-xs uppercase tracking-widest mb-1">Orador/a • Ed. #{cap.edition}</p>
                 <p className="font-garet text-white text-xl md:text-2xl leading-tight">{cap.speaker}</p>
               </div>
               {/* Badge hover: "Ver más" */}
-              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm text-white text-xs font-montserrat font-semibold px-3 py-1.5 rounded-full border border-white/30">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                   Ver perfil
@@ -215,11 +221,17 @@ const SpeakerModalCard = ({ cap }) => {
 
             {/* Foto grande */}
             {cap.speakerPhoto && (
-              <div className="relative h-72 md:h-96 overflow-hidden rounded-t-[2rem]">
+              <div className="relative h-72 md:h-96 overflow-hidden rounded-t-[2rem] bg-[#0a0a0f]">
+                <img
+                  src={cap.speakerPhoto}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover object-center scale-110 blur-xl opacity-45"
+                />
                 <img
                   src={cap.speakerPhoto}
                   alt={`Foto de ${cap.speaker}`}
-                  className="w-full h-full object-cover object-center"
+                  className="relative z-10 w-full h-full object-contain object-top"
                 />
               </div>
             )}
@@ -469,7 +481,7 @@ const PastTalkDetailModal = ({ cap, onClose }) => {
           {/* Botón cerrar */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 z-20 flex items-center justify-center w-9 h-9 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+            className="absolute top-5 right-5 z-20 flex items-center justify-center w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm text-white/80 hover:text-white hover:bg-black/60 transition-colors"
             aria-label="Cerrar"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -479,13 +491,19 @@ const PastTalkDetailModal = ({ cap, onClose }) => {
 
           {/* Foto del orador */}
           {cap.speakerPhoto && (
-            <div className="relative h-56 overflow-hidden">
+            <div className="relative h-64 sm:h-72 overflow-hidden bg-[#0a0a0f]">
+              <img
+                src={cap.speakerPhoto}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover object-center scale-110 blur-xl opacity-45"
+              />
               <img
                 src={cap.speakerPhoto}
                 alt={`Foto de ${cap.speaker}`}
-                className="w-full h-full object-cover object-center"
+                className="relative z-10 w-full h-full object-contain object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-black/20 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-16 z-10 bg-gradient-to-t from-[#0a0a0f] to-transparent pointer-events-none" />
             </div>
           )}
 
@@ -545,7 +563,7 @@ const PastTalkDetailModal = ({ cap, onClose }) => {
               <p className="font-montserrat text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
                 Sobre el orador
               </p>
-              <p className="font-montserrat text-sm text-gray-600 leading-relaxed">{cap.speakerBio}</p>
+              <p className="font-montserrat text-sm text-gray-600 leading-relaxed whitespace-pre-line">{cap.speakerBio}</p>
             </div>
           )}
         </div>
@@ -582,7 +600,9 @@ const PastTalkCard = ({ cap, index, onOpen }) => {
       {/* Barra superior */}
       <div className="h-1 bg-gradient-to-r from-cranberry to-cranberry-light" />
 
-      <div className="p-6 md:p-7 flex flex-col flex-grow">
+      <div className="flex flex-col sm:flex-row flex-grow">
+
+        <div className="p-6 md:p-7 flex flex-col flex-1 min-w-0">
         {/* Edición + área */}
         <div className="flex items-center justify-between mb-4">
           <span className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">
@@ -632,6 +652,21 @@ const PastTalkCard = ({ cap, index, onOpen }) => {
           </button>
         </div>
       </div>
+        {/* Columna derecha: foto del orador */}
+        {cap.speakerPhoto && (
+          <div
+            onClick={() => onOpen(cap)}
+            className="relative w-full sm:w-44 md:w-52 h-60 sm:h-auto flex-shrink-0 overflow-hidden bg-gray-100 cursor-pointer"
+          >
+            <img
+              src={cap.speakerPhoto}
+              alt={`Foto de ${cap.speaker}`}
+              loading="lazy"
+              className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+        )}
+      </div>
     </article>
   );
 };
@@ -670,7 +705,7 @@ const PastTalks = ({ pastCaps }) => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {pastCaps.map((cap, idx) => (
             <PastTalkCard key={cap.id} cap={cap} index={idx} onOpen={setSelectedCap} />
           ))}
@@ -838,7 +873,7 @@ export const CapacitacionesPage = () => {
                 </div>
                 <div className="text-left">
                   <p className="font-montserrat text-xs text-gray-400 uppercase tracking-wider">Cuándo</p>
-                  <p className="font-montserrat text-gray-800 font-medium text-sm">Última semana de octubre</p>
+                  <p className="font-montserrat text-gray-800 font-medium text-sm">Último miércoles del mes</p>
                 </div>
               </div>
               <div className="hidden sm:block w-px h-8 bg-gray-200" aria-hidden="true" />

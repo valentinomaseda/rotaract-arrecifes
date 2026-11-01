@@ -57,17 +57,16 @@ Es múltiple socio Paul Harris y en mayo de 2022 recibió el premio "Dar de sí 
   {
     id: 'cap-002',
     edition: 2,
-    status: 'upcoming',
+    status: 'past',
     topic: 'El poder de la palabra: comunicar para inspirar, convencer y conectar',
     tagline: 'Comunicar para inspirar, convencer y conectar',
     description:
       `¿Alguna vez te pusiste a pensar cómo nuestras palabras pueden transformar realidades, motivar a un equipo o tender puentes con quienes piensan diferente?
 
-En el marco de nuestro Ciclo de Capacitaciones, tenemos el enorme honor de recibir a una referente indiscutida de nuestra familia rotaria. Vamos a reflexionar juntos sobre cómo expresar nuestras ideas con claridad, transmitir entusiasmo y convencer sin imponer.
+En el marco de nuestro Ciclo de Capacitaciones, tuvimos el enorme honor de recibir a una referente indiscutida de nuestra familia rotaria. Reflexionamos juntos sobre cómo expresar nuestras ideas con claridad, transmitir entusiasmo y convencer sin imponer.
 
 ¡Una oportunidad única para potenciar nuestro liderazgo y nuestra comunicación cotidiana!`,
     speaker: 'Celia Cruz de Giay',
-    // TODO: cargar manualmente la foto en public/images/oradores/celia.jpeg
     speakerPhoto: '/images/oradores/celia.jpeg',
     speakerBio:
       `Educadora, periodista, escritora y líder social argentina, reconocida internacionalmente como una de las figuras pioneras en el liderazgo femenino dentro de Rotary International. Estuvo casada con Luis Vicente Giay, primer argentino en presidir Rotary International a nivel mundial (1996-1997).
@@ -86,7 +85,22 @@ En el marco de nuestro Ciclo de Capacitaciones, tenemos el enorme honor de recib
     platform: 'Google Meet',
     area: 'Liderazgo y Comunicación',
     votedFirst: false,
-    registrationLink: 'https://forms.gle/xo34hqDap7BAJa2V9',
+    summary:
+      `En el segundo encuentro del Ciclo de Capacitaciones, Celia Cruz de Giay —ex vicepresidenta de Rotary International y referente histórica del distrito— nos invitó a reflexionar sobre cómo las palabras construyen realidades. A través de dinámicas participativas y experiencias personales como la histórica Convención Virtual de Honolulu 2020 (que reunió a 60.700 personas en plena pandemia), abordamos herramientas concretas para inspirar desde el ejemplo, convencer sin imponer y escuchar activamente para conectar con los demás.`,
+    keyTakeaways: [
+      'Las palabras construyen o destruyen realidades: pueden abrir una conversación, despertar capacidades ocultas o cerrar una puerta.',
+      'Inspirar no requiere ocupar un gran cargo: cualquiera puede hacerlo si transmite convicción y disposición a acompañar.',
+      'Decirle a alguien qué debe hacer genera obediencia; ayudarlo a descubrir de qué es capaz despierta verdadero compromiso.',
+      'Las tres claves para inspirar: autenticidad (hablar desde lo que uno cree y siente), entusiasmo (fuerza interior contagiosa) y ejemplo (coherencia entre palabra y acción).',
+      'Cuando las circunstancias cambian drásticamente, debemos encontrar nuevas formas de comunicar con claridad y transmitir confianza.',
+      'Convencer no es ganar una discusión ni hablar más fuerte, sino presentar una idea para que el otro comprenda su valor y decida acompañar.',
+      'Los cuatro pilares de un mensaje convincente: claridad, argumentos sólidos, ejemplos reales y respeto por las diferencias.',
+      'Antes de presentar un proyecto, responder cuatro preguntas: ¿Qué propongo? ¿Por qué es importante? ¿Qué beneficio genera? ¿Qué necesito concretamente del otro?',
+      'Escuchar también es comunicar: implica dejar nuestras respuestas en segundo plano para comprender qué vive, piensa o siente el otro.',
+      'Tres hábitos para conectar: escuchar sin interrumpir, preguntar antes de sacar conclusiones y reconocer el punto de vista ajeno.',
+      'En momentos de tensión, cambiar el reproche por una pregunta sincera y la acusación por una propuesta transforma el conflicto en colaboración.',
+      'En el mundo digital las palabras también dejan huella: pensar en el efecto del mensaje antes de responder.',
+    ],
     attendees: null,
   },
 ];
