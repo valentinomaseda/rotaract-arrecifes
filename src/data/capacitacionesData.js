@@ -83,7 +83,7 @@ En el marco de nuestro Ciclo de Capacitaciones, tuvimos el enorme honor de recib
     date: '2026-10-28',
     time: '19:30',
     platform: 'Google Meet',
-    area: 'Liderazgo y Comunicación',
+    area: 'Comunicación',
     votedFirst: false,
     summary:
       `En el segundo encuentro del Ciclo de Capacitaciones, Celia Cruz de Giay —ex vicepresidenta de Rotary International y referente histórica del distrito— nos invitó a reflexionar sobre cómo las palabras construyen realidades. A través de dinámicas participativas y experiencias personales como la histórica Convención Virtual de Honolulu 2020 (que reunió a 60.700 personas en plena pandemia), abordamos herramientas concretas para inspirar desde el ejemplo, convencer sin imponer y escuchar activamente para conectar con los demás.`,
