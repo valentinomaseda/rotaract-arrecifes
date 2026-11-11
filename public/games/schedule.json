@@ -1,4 +1,8 @@
 {
+    "default": {
+        "type": "crossword",
+        "dataPath": "/games/crossword-week-37.json"
+    },
     "33": {
         "type": "wordle",
         "dataPath": "/games/wordle-week-33.json"

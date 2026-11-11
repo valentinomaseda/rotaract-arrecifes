@@ -12,11 +12,17 @@ function getISOWeek(date) {
     return Math.ceil(((d - yearStart) / 86_400_000 + 1) / 7);
 }
 
+const DEFAULT_GAME_CONFIG = {
+    type: 'crossword',
+    dataPath: '/games/crossword-week-37.json',
+};
+
 /**
  * useWeeklyGameManager
  *
  * Fetches /games/schedule.json and resolves which game to show for the
- * current ISO week.
+ * current ISO week. Falls back to schedule.default (or DEFAULT_GAME_CONFIG)
+ * when the current week has no specific game assigned.
  *
  * Returns:
  *   status     — 'loading' | 'found' | 'not-found' | 'error'
@@ -41,14 +47,19 @@ export function useWeeklyGameManager() {
                 if (cancelled) return;
 
                 const key = String(isoWeek);
-                if (schedule[key]) {
-                    setGameConfig(schedule[key]);
+                const resolvedGame = schedule[key] ?? schedule.default ?? DEFAULT_GAME_CONFIG;
+
+                if (resolvedGame) {
+                    setGameConfig(resolvedGame);
                     setStatus('found');
                 } else {
                     setStatus('not-found');
                 }
             } catch {
-                if (!cancelled) setStatus('error');
+                if (!cancelled) {
+                    setGameConfig(DEFAULT_GAME_CONFIG);
+                    setStatus('found');
+                }
             }
         }
 
