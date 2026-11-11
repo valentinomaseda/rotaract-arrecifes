@@ -1,10 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WeeklyGameView from './WeeklyGameView';
 import { useWeeklyGameManager } from './useWeeklyGameManager';
 
+const AVAILABLE_MODES = [
+  {
+    id: 'crossword',
+    type: 'crossword',
+    label: 'Crucigrama',
+    icon: '🧩',
+    dataPath: '/games/crossword-week-37.json',
+  },
+  {
+    id: 'wordle',
+    type: 'wordle',
+    label: 'Wordle',
+    icon: '🔤',
+    dataPath: '/games/wordle-week-38.json',
+  },
+  {
+    id: 'conexiones',
+    type: 'conexiones',
+    label: 'Conexiones',
+    icon: '🔗',
+    dataPath: '/games/conexiones-week-34.json',
+  },
+  {
+    id: 'trivia',
+    type: 'trivia',
+    label: 'Trivia',
+    icon: '🧠',
+    dataPath: '/games/trivia-week-39.json',
+  },
+  {
+    id: 'wordsearch',
+    type: 'wordsearch',
+    label: 'Sopa de Letras',
+    icon: '🔍',
+    dataPath: '/games/wordsearch-week-36.json',
+  },
+];
+
 export function GamePage() {
   // Single hook call — state flows down to WeeklyGameView as props.
-  const { status, gameConfig, isoWeek } = useWeeklyGameManager();
+  const { status, gameConfig } = useWeeklyGameManager();
+  const [selectedOverride, setSelectedOverride] = useState(null);
+
+  const activeGameConfig = selectedOverride ?? gameConfig;
 
   const GAME_LABELS = {
     crossword:  'Crucigrama',
@@ -24,11 +65,11 @@ export function GamePage() {
     sopa:       'Buscá las palabras rotarias escondidas en la grilla. ¡Encontrá todas!',
   };
 
-  const gameTypeLabel   = GAME_LABELS[gameConfig?.type]       ?? 'Juego';
-  const gameDescription = GAME_DESCRIPTIONS[gameConfig?.type] ?? '¡El desafío de esta semana te espera!';
+  const gameTypeLabel   = GAME_LABELS[activeGameConfig?.type]       ?? 'Juego';
+  const gameDescription = GAME_DESCRIPTIONS[activeGameConfig?.type] ?? '¡El desafío de esta semana te espera!';
 
   const showCrosswordInstructions =
-    status === 'found' && gameConfig?.type === 'crossword';
+    status === 'found' && activeGameConfig?.type === 'crossword';
 
   return (
     <div className="bg-gray-50 min-h-screen overflow-x-hidden">
@@ -84,9 +125,38 @@ export function GamePage() {
         </div>
       </section>
 
+      {/* ── Selector de desafíos ── */}
+      <section className="max-w-5xl mx-auto px-6 pt-8 pb-2" aria-label="Elegir modo de juego">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white border border-gray-100 rounded-2xl shadow-sm p-3 sm:px-5 sm:py-3.5">
+          <span className="font-montserrat text-xs font-bold uppercase tracking-wider text-gray-400 px-1">
+            Elegí tu desafío:
+          </span>
+          <div className="flex flex-wrap gap-2">
+            {AVAILABLE_MODES.map((mode) => {
+              const isActive = activeGameConfig?.type === mode.type || (mode.type === 'wordsearch' && activeGameConfig?.type === 'sopa');
+              return (
+                <button
+                  key={mode.id}
+                  type="button"
+                  onClick={() => setSelectedOverride({ type: mode.type, dataPath: mode.dataPath })}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-montserrat text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? 'bg-cranberry text-white shadow-sm shadow-cranberry/25'
+                      : 'bg-gray-50 text-gray-600 hover:bg-cranberry/8 hover:text-cranberry border border-gray-100'
+                  }`}
+                >
+                  <span aria-hidden="true">{mode.icon}</span>
+                  {mode.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ── Instructions (crossword only) ── */}
       {showCrosswordInstructions && (
-        <section className="max-w-5xl mx-auto px-6 pt-8 pb-2">
+        <section className="max-w-5xl mx-auto px-6 pt-4 pb-2">
           <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-5">
             <h2 className="font-garet text-lg text-gray-800 mb-3">¿Cómo jugar?</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -109,9 +179,13 @@ export function GamePage() {
       )}
 
       {/* ── Game ── */}
-      <section className="max-w-5xl mx-auto px-6 py-8">
+      <section className="max-w-5xl mx-auto px-6 py-6">
         <div className="bg-white border border-gray-100 rounded-3xl shadow-sm p-6 md:p-8">
-          <WeeklyGameView status={status} gameConfig={gameConfig} />
+          <WeeklyGameView
+            key={`${activeGameConfig?.type}-${activeGameConfig?.dataPath}`}
+            status={status}
+            gameConfig={activeGameConfig}
+          />
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useCountUp } from '../../hooks/useCountUp';
 
 const heroImageUrl = '/hero-image.jpeg';
@@ -111,11 +112,11 @@ export const HeroSection = () => {
 
           {/* ── CTAs ── */}
           <div
-            className="animate-hidden w-full mb-14"
+            className="animate-hidden w-full mb-12"
             style={{ transitionDelay: '360ms' }}
           >
-            {/* Fila 1: CTA primario */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-3">
+            {/* Fila 1: CTA primario + secundario en desktop */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-4">
               <a
                 href="#contacto"
                 className="inline-flex justify-center items-center gap-2 px-8 py-3.5 rounded-full font-montserrat font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
@@ -131,84 +132,80 @@ export const HeroSection = () => {
                 </svg>
                 Unite al equipo
               </a>
-            </div>
 
-            {/* Fila 2: 3 CTAs secundarios — solo en mobile (en desktop están en el nav) */}
-            <div className="flex flex-col gap-2 md:hidden">
-              {/* Proyectos */}
               <a
                 href="#proyecto-actual"
-                className="inline-flex justify-center items-center gap-2 px-5 py-3.5 rounded-full font-montserrat font-medium text-sm text-white/70 transition-all duration-300 hover:text-white"
+                className="hidden sm:inline-flex justify-center items-center gap-2 px-7 py-3.5 rounded-full font-montserrat font-semibold text-sm text-white/80 hover:text-white transition-all duration-300"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.14)',
+                }}
+              >
+                Ver proyectos
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+            </div>
+
+            {/* Fila 2: Accesos rápidos compactos en grilla 2x2 — solo en mobile */}
+            <div className="grid grid-cols-2 gap-2 md:hidden">
+              <a
+                href="#proyecto-actual"
+                className="inline-flex justify-center items-center gap-1.5 px-3 py-2.5 rounded-2xl font-montserrat font-medium text-xs text-white/75 hover:text-white transition-all duration-200"
                 style={{
                   background: 'rgba(255,255,255,0.06)',
                   border: '1px solid rgba(255,255,255,0.12)',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(212,19,103,0.12)';
-                  e.currentTarget.style.borderColor = 'rgba(212,19,103,0.35)';
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
-                }}
               >
-                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg className="w-3.5 h-3.5 text-cranberry flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
                 Proyectos
               </a>
 
-              {/* Bolsa de Trabajo */}
-              <a
-                href="/empleos"
-                className="inline-flex justify-center items-center gap-2 px-5 py-3.5 rounded-full font-montserrat font-medium text-sm text-white/70 transition-all duration-300 hover:text-white"
+              <Link
+                to="/empleos"
+                className="inline-flex justify-center items-center gap-1.5 px-3 py-2.5 rounded-2xl font-montserrat font-medium text-xs text-white/75 hover:text-white transition-all duration-200"
                 style={{
                   background: 'rgba(255,255,255,0.06)',
                   border: '1px solid rgba(255,255,255,0.12)',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(212,19,103,0.12)';
-                  e.currentTarget.style.borderColor = 'rgba(212,19,103,0.35)';
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
-                }}
               >
-                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg className="w-3.5 h-3.5 text-cranberry flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 Bolsa de Trabajo
-              </a>
+              </Link>
 
-              {/* Capacitaciones */}
-              <a
-                href="/capacitaciones"
-                className="inline-flex justify-center items-center gap-2 px-5 py-3.5 rounded-full font-montserrat font-medium text-sm text-white/70 transition-all duration-300 hover:text-white"
+              <Link
+                to="/capacitaciones"
+                className="inline-flex justify-center items-center gap-1.5 px-3 py-2.5 rounded-2xl font-montserrat font-medium text-xs text-white/75 hover:text-white transition-all duration-200"
                 style={{
                   background: 'rgba(255,255,255,0.06)',
                   border: '1px solid rgba(255,255,255,0.12)',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(212,19,103,0.12)';
-                  e.currentTarget.style.borderColor = 'rgba(212,19,103,0.35)';
-                  e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
-                }}
               >
-                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <svg className="w-3.5 h-3.5 text-cranberry flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
                 Capacitaciones
-              </a>
+              </Link>
+
+              <Link
+                to="/juego"
+                className="inline-flex justify-center items-center gap-1.5 px-3 py-2.5 rounded-2xl font-montserrat font-medium text-xs text-white/75 hover:text-white transition-all duration-200"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                }}
+              >
+                <svg className="w-3.5 h-3.5 text-cranberry flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Juego semanal
+              </Link>
             </div>
           </div>
 

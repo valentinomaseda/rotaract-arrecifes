@@ -1,9 +1,58 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useSwipe } from '../../hooks/useSwipe';
+import { getUpcomingCapacitacion, getPastCapacitaciones } from '../../data/capacitacionesData';
 
-const FORM_VOTACION_URL = 'https://forms.gle/Wtm3uDqYNu33eSUB7';
 const AUTOPLAY_INTERVAL = 8000;
+
+const upcomingCap = getUpcomingCapacitacion();
+const pastCaps = getPastCapacitaciones();
+
+const CAPACITACIONES_SLIDE = upcomingCap
+  ? {
+      badge: 'Próxima Capacitación',
+      title: `Ciclo de Capacitaciones: ${upcomingCap.topic}`,
+      description: upcomingCap.description.split('\n\n')[0],
+      stats: [
+        { value: `Ed. #${upcomingCap.edition}`, label: 'Encuentro' },
+        { value: `${upcomingCap.time} hs`, label: 'Horario' },
+        { value: 'Virtual', label: 'Modalidad' },
+      ],
+      cta: {
+        href: upcomingCap.registrationLink || '/capacitaciones',
+        internal: !upcomingCap.registrationLink,
+        label: upcomingCap.registrationLink ? '¡Inscribite acá!' : 'Ver detalles',
+        ariaLabel: `Ver detalles de la capacitación ${upcomingCap.topic}`,
+        icon: (
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+        ),
+      },
+    }
+  : {
+      badge: 'Ciclo en marcha',
+      title: 'Ciclo de Capacitaciones Abiertas',
+      description:
+        'Encuentros virtuales mensuales gratuitos con referentes e invitados especiales sobre finanzas, comunicación y liderazgo. ¡Repasá los resúmenes y aprendizajes de las ediciones anteriores!',
+      stats: [
+        { value: `${pastCaps.length}`, label: 'Ediciones' },
+        { value: 'Mensual', label: 'Frecuencia' },
+        { value: 'Gratuito', label: 'Acceso' },
+      ],
+      cta: {
+        href: '/capacitaciones',
+        internal: true,
+        label: 'Ver charlas y resúmenes',
+        ariaLabel: 'Ir al Ciclo de Capacitaciones',
+        icon: (
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        ),
+      },
+    };
 
 const PROJECTS = [
   {
@@ -27,27 +76,7 @@ const PROJECTS = [
       ),
     },
   },
-  {
-    badge: 'Próxima Capacitación',
-    title: 'Ciclo de Capacitaciones: El poder de la palabra',
-    description:
-      'Nos acompaña Celia Cruz de Giay, Vicepresidente de Rotary International (2014-2015), para reflexionar sobre cómo comunicar para inspirar, convencer y conectar. ¡Cupos limitados!',
-    stats: [
-      { value: '28 Oct', label: 'Fecha' },
-      { value: '19:30', label: 'Hora' },
-      { value: 'Virtual', label: 'Modalidad' },
-    ],
-    cta: {
-      href: 'https://forms.gle/xo34hqDap7BAJa2V9',
-      label: '¡Inscribite acá!',
-      ariaLabel: 'Inscribirse a la capacitación El poder de la palabra',
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
-      ),
-    },
-  },
+  CAPACITACIONES_SLIDE,
   {
     badge: 'En progreso',
     title: 'Banco Ortopédico',
@@ -129,20 +158,35 @@ const ProjectCard = ({ badge, title, description, stats, cta, active, autoplayKe
       )}
 
       <div className="mt-auto">
-        <a
-          href={cta.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center w-full sm:w-auto gap-3 px-6 sm:px-8 py-3.5 rounded-2xl bg-cranberry text-white font-montserrat font-medium text-sm sm:text-base hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_25px_rgba(212,19,103,0.4)] transition-all duration-300 group"
-          aria-label={cta.ariaLabel}
-          tabIndex={active ? 0 : -1}
-        >
-          {cta.icon}
-          {cta.label}
-          <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
+        {cta.internal ? (
+          <Link
+            to={cta.href}
+            className="inline-flex items-center justify-center w-full sm:w-auto gap-3 px-6 sm:px-8 py-3.5 rounded-2xl bg-cranberry text-white font-montserrat font-medium text-sm sm:text-base hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_25px_rgba(212,19,103,0.4)] transition-all duration-300 group"
+            aria-label={cta.ariaLabel}
+            tabIndex={active ? 0 : -1}
+          >
+            {cta.icon}
+            {cta.label}
+            <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        ) : (
+          <a
+            href={cta.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center w-full sm:w-auto gap-3 px-6 sm:px-8 py-3.5 rounded-2xl bg-cranberry text-white font-montserrat font-medium text-sm sm:text-base hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_25px_rgba(212,19,103,0.4)] transition-all duration-300 group"
+            aria-label={cta.ariaLabel}
+            tabIndex={active ? 0 : -1}
+          >
+            {cta.icon}
+            {cta.label}
+            <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        )}
       </div>
     </div>
   </div>

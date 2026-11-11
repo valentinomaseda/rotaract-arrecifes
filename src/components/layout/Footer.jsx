@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const socialLinks = [
   {
@@ -23,12 +23,12 @@ const socialLinks = [
 ];
 
 const navLinks = [
-  { href: '#', label: 'Inicio' },
-  { href: '#quienes-somos', label: 'Quiénes Somos' },
-  { href: '#proyectos', label: 'Proyectos' },
-  { href: '#contacto', label: 'Contacto' },
-  { href: '/capacitaciones', label: 'Capacitaciones' },
-  { href: '/juego', label: 'Juego de la semana' },
+  { href: '/', label: 'Inicio', sectionId: null },
+  { href: '/empleos', label: 'Bolsa de trabajo', isDirectRoute: true },
+  { href: '/capacitaciones', label: 'Capacitaciones', isDirectRoute: true },
+  { href: '/juego', label: 'Juego semanal', isDirectRoute: true },
+  { href: '/proyectos', label: 'Proyectos', isDirectRoute: true },
+  { href: '#quienes-somos', label: 'Quiénes Somos', sectionId: 'quienes-somos' },
 ];
 
 const contactItems = [
@@ -65,7 +65,28 @@ const contactItems = [
 const Footer = () => {
   const year = new Date().getFullYear();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const isJobsPage = pathname === '/empleos';
+
+  const handleFooterNavClick = (e, link) => {
+    e.preventDefault();
+    if (link.isDirectRoute) {
+      navigate(link.href);
+      window.scrollTo(0, 0);
+      return;
+    }
+    if (!link.sectionId) {
+      if (pathname !== '/') navigate('/');
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (pathname !== '/') {
+      navigate('/', { state: { scrollTo: link.sectionId } });
+    } else {
+      const el = document.getElementById(link.sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <footer
@@ -270,10 +291,11 @@ const Footer = () => {
               Navegación
             </h3>
             <ul className="space-y-3">
-              {navLinks.map(({ href, label }) => (
-                <li key={label}>
+              {navLinks.map((link) => (
+                <li key={link.label}>
                   <a
-                    href={href}
+                    href={link.href}
+                    onClick={(e) => handleFooterNavClick(e, link)}
                     className="font-montserrat text-sm text-white/40 hover:text-white transition-colors duration-200 flex items-center gap-2 group"
                   >
                     <span
@@ -281,7 +303,7 @@ const Footer = () => {
                       style={{ width: '16px' }}
                       onMouseEnter={(e) => { e.currentTarget.style.width = '24px'; }}
                     />
-                    {label}
+                    {link.label}
                   </a>
                 </li>
               ))}

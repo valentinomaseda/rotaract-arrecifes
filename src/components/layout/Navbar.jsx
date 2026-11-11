@@ -14,13 +14,23 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { href: '#', label: 'Inicio', sectionId: null },
+    { href: '/', label: 'Inicio', sectionId: null },
     { href: '/empleos', label: 'Bolsa de trabajo', isDirectRoute: true },
     { href: '/capacitaciones', label: 'Capacitaciones', isDirectRoute: true },
     { href: '/juego', label: 'Juego semanal', isDirectRoute: true },
     { href: '/proyectos', label: 'Proyectos', isDirectRoute: true },
     { href: '#quienes-somos', label: 'Quiénes somos', sectionId: 'quienes-somos' },
   ];
+
+  const isLinkActive = (link) => {
+    if (link.isDirectRoute) {
+      return location.pathname === link.href || location.pathname.startsWith(`${link.href}/`);
+    }
+    if (!link.sectionId) {
+      return location.pathname === '/';
+    }
+    return false;
+  };
 
   // Maneja el click de un link de nav:
   // - Si ya estamos en "/", hace scroll suave al ID
@@ -79,18 +89,28 @@ const Navbar = () => {
 
           {/* Desktop links */}
           <div className="hidden md:flex md:items-center md:gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link)}
-                className="relative px-4 py-2 text-sm font-medium text-gray-600 font-montserrat transition-colors duration-300 hover:text-cranberry group"
-              >
-                {link.label}
-                {/* Underline animado */}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-cranberry rounded-full transition-all duration-300 group-hover:w-3/4" />
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const active = isLinkActive(link);
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link)}
+                  aria-current={active ? 'page' : undefined}
+                  className={`relative px-4 py-2 text-sm font-montserrat transition-colors duration-300 group ${
+                    active ? 'text-cranberry font-semibold' : 'font-medium text-gray-600 hover:text-cranberry'
+                  }`}
+                >
+                  {link.label}
+                  {/* Underline animado */}
+                  <span
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-cranberry rounded-full transition-all duration-300 ${
+                      active ? 'w-3/4' : 'w-0 group-hover:w-3/4'
+                    }`}
+                  />
+                </a>
+              );
+            })}
             <a
               href="https://wa.me/5492478513553"
               target="_blank"
@@ -135,22 +155,35 @@ const Navbar = () => {
         {/* El overflow:hidden + minHeight:0 en el hijo es lo que hace funcionar el truco del grid */}
         <div style={{ overflow: 'hidden', minHeight: 0 }}>
           <div className="border-t border-gray-100 bg-white px-4 pt-3 pb-6 space-y-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link)}
-                className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 font-montserrat hover:bg-cranberry/5 hover:text-cranberry transition-all duration-200"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const active = isLinkActive(link);
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link)}
+                  aria-current={active ? 'page' : undefined}
+                  className={`block px-4 py-3 rounded-xl text-base font-montserrat transition-all duration-200 ${
+                    active
+                      ? 'bg-cranberry/10 text-cranberry font-semibold'
+                      : 'font-medium text-gray-700 hover:bg-cranberry/5 hover:text-cranberry'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
             <a
-              href="#unete"
+              href="https://wa.me/5492478513553"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="block mt-3 px-4 py-3 text-center rounded-xl text-base font-semibold font-montserrat btn-cranberry text-white"
+              className="mt-3 px-4 py-3 text-center rounded-xl text-base font-semibold font-montserrat btn-cranberry text-white flex items-center justify-center gap-2"
             >
               Colaborar
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </a>
           </div>
         </div>

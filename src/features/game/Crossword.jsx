@@ -1,7 +1,8 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { WORDS, buildGrid } from './crosswordData';
 
 const { grid: SOLUTION, numberMap, rows: ROWS, cols: COLS } = buildGrid();
+const STORAGE_KEY = 'rotaract-crossword-cells-v1';
 
 // ── helpers ──────────────────────────────────────────────────
 function getWordAt(row, col, direction) {
@@ -27,16 +28,34 @@ function isWordSolved(w, cells) {
 
 // ── component ────────────────────────────────────────────────
 export default function Crossword() {
-  const [cells, setCells] = useState(() =>
-    Array.from({ length: ROWS }, () => Array(COLS).fill(''))
-  );
-  const [selected, setSelected] = useState(null);
-  const [direction, setDirection] = useState('across');
+  const [cells, setCells] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length === ROWS) return parsed;
+      }
+    } catch {
+      // ignore storage errors
+    }
+    return Array.from({ length: ROWS }, () => Array(COLS).fill(''));
+  });
+  const [selected, setSelected] = useState({ row: WORDS[0].row, col: WORDS[0].col });
+  const [direction, setDirection] = useState(WORDS[0].direction);
   const [checked, setChecked] = useState(false);
   // 'idle' | 'allCorrect' | 'hasErrors' | 'incomplete'
   const [checkResult, setCheckResult] = useState('idle');
   const [solved, setSolved] = useState(false);
+  const [copiedShare, setCopiedShare] = useState(false);
   const inputRefs = useRef({});
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cells));
+    } catch {
+      // ignore storage errors
+    }
+  }, [cells]);
 
   const focusCell = useCallback((r, c) => {
     inputRefs.current[`${r}-${c}`]?.focus();
@@ -115,8 +134,40 @@ export default function Crossword() {
   };
 
   const handleReset = () => {
-    setCells(Array.from({ length: ROWS }, () => Array(COLS).fill('')));
+    const empty = Array.from({ length: ROWS }, () => Array(COLS).fill(''));
+    setCells(empty);
+    try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
     setChecked(false); setCheckResult('idle'); setSolved(false);
+  };
+
+  const stepWord = (delta) => {
+    const currentWord = selected ? getWordAt(selected.row, selected.col, direction) : null;
+    const idx = currentWord ? WORDS.indexOf(currentWord) : 0;
+    const nextIdx = (idx + delta + WORDS.length) % WORDS.length;
+    const next = WORDS[nextIdx];
+    setSelected({ row: next.row, col: next.col });
+    setDirection(next.direction);
+    focusCell(next.row, next.col);
+  };
+
+  const handleShareWin = async () => {
+    const shareUrl = window.location.href;
+    const shareText = '🧩 ¡Completé el Crucigrama de Rotaract Arrecifes! ¿Te animás a resolverlo?';
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Crucigrama Rotaract Arrecifes', text: shareText, url: shareUrl });
+        return;
+      } catch {
+        // fallback below
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+      setCopiedShare(true);
+      setTimeout(() => setCopiedShare(false), 2200);
+    } catch {
+      window.open(`https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`, '_blank', 'noopener,noreferrer');
+    }
   };
 
   // active word highlight
@@ -206,12 +257,21 @@ export default function Crossword() {
               Completaste el crucigrama de la semana. ¡Hasta el próximo juego!
             </p>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2.5">
               <button
                 onClick={() => setSolved(false)}
                 className="btn-cranberry text-white py-3 rounded-2xl font-montserrat font-semibold text-sm"
               >
                 ¡Ver el crucigrama! 🔍
+              </button>
+              <button
+                onClick={handleShareWin}
+                className="border border-cranberry/30 bg-cranberry/5 hover:bg-cranberry/10 text-cranberry py-3 rounded-2xl font-montserrat font-semibold text-sm transition-colors inline-flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                {copiedShare ? '¡Enlace copiado!' : 'Compartir resultado'}
               </button>
               <button
                 onClick={() => { handleReset(); setSolved(false); }}
@@ -223,6 +283,59 @@ export default function Crossword() {
           </div>
         </div>
       )}
+
+      {/* ── BARRA DE PISTA ACTIVA (UX Mobile & Desktop) ── */}
+      <div className="mb-4 flex items-center gap-2 bg-cranberry/5 border border-cranberry/15 rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3">
+        <button
+          type="button"
+          onClick={() => stepWord(-1)}
+          aria-label="Palabra anterior"
+          className="w-8 h-8 rounded-xl bg-white border border-gray-200 hover:border-cranberry text-gray-600 hover:text-cranberry flex items-center justify-center flex-shrink-0 transition-colors cursor-pointer"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <div
+          onClick={() => {
+            if (activeWord) focusCell(selected?.row ?? activeWord.row, selected?.col ?? activeWord.col);
+          }}
+          className="flex-1 min-w-0 cursor-pointer px-1"
+        >
+          {activeWord ? (
+            <>
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-montserrat font-bold uppercase tracking-wider bg-cranberry text-white">
+                  {activeWord.number} {activeWord.direction === 'across' ? 'Horizontal →' : 'Vertical ↓'}
+                </span>
+                <span className="text-[11px] font-montserrat text-gray-400">
+                  ({activeWord.answer.length} letras)
+                </span>
+              </div>
+              <p className="font-montserrat text-xs sm:text-sm text-gray-800 font-medium leading-snug">
+                {activeWord.clue}
+              </p>
+            </>
+          ) : (
+            <p className="font-montserrat text-xs sm:text-sm text-gray-500 text-center">
+              Seleccioná una celda de la grilla o una pista para empezar a completar el crucigrama.
+            </p>
+          )}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => stepWord(1)}
+          aria-label="Siguiente palabra"
+          className="w-8 h-8 rounded-xl bg-white border border-gray-200 hover:border-cranberry text-gray-600 hover:text-cranberry flex items-center justify-center flex-shrink-0 transition-colors cursor-pointer"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
       {/* ── TOP LAYOUT: grid left, clues right ── */}
       <div className="flex flex-col lg:flex-row gap-6 items-start">
 

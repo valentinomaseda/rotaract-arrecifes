@@ -59,6 +59,9 @@ export const JobDetailModal = ({ job, onClose }) => {
     ? "Enviá tu CV por WhatsApp"
     : "Completá el formulario y postulate";
 
+  const shareText = `💼 Búsqueda laboral en Arrecifes: *${job.title}* en *${job.company}*. Mirá los detalles en la Bolsa de Trabajo de Rotaract Arrecifes: ${window.location.origin}/empleos`;
+  const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+
   return (
     <div
       className="fixed inset-0 z-50 flex justify-end"
@@ -182,17 +185,29 @@ export const JobDetailModal = ({ job, onClose }) => {
         </div>
 
         {/* Sticky CTA footer */}
-        <div className="flex-shrink-0 px-7 py-5 border-t border-gray-100 bg-white">
+        <div className="flex-shrink-0 px-7 py-5 border-t border-gray-100 bg-white flex flex-col sm:flex-row gap-2.5">
           <a
             href={job.applyVia}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-full bg-cranberry text-white font-montserrat font-semibold text-sm hover:bg-cranberry-dark shadow-lg shadow-cranberry/25 hover:shadow-cranberry/40 transition-all duration-300"
+            className="flex-1 inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-full bg-cranberry text-white font-montserrat font-semibold text-sm hover:bg-cranberry-dark shadow-lg shadow-cranberry/25 hover:shadow-cranberry/40 transition-all duration-300"
           >
             {buttonText}
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
+          </a>
+          <a
+            href={whatsappShareUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Compartir búsqueda por WhatsApp"
+            className="inline-flex justify-center items-center gap-2 px-5 py-3.5 rounded-full border border-gray-200 text-gray-600 hover:border-cranberry hover:text-cranberry font-montserrat font-semibold text-sm transition-all duration-200"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+            </svg>
+            Compartir
           </a>
         </div>
       </div>
