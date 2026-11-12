@@ -84,20 +84,6 @@ export const HeroSection = () => {
         {/* ── Columna de Texto ── */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:col-span-7 order-1">
 
-          {/* Badge institucional superior */}
-          <div
-            className="animate-hidden inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full mb-6 border border-cranberry/35 bg-cranberry/15 backdrop-blur-md"
-            style={{ transitionDelay: '40ms' }}
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-400" />
-            </span>
-            <span className="font-montserrat text-xs font-semibold tracking-widest uppercase text-pink-200">
-              Rotaract Club Arrecifes · Distrito 4895
-            </span>
-          </div>
-
           {/* Título */}
           <h1
             className="animate-hidden font-garet text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.08] tracking-tight mb-6"

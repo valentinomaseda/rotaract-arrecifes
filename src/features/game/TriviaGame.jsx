@@ -13,12 +13,12 @@ function getStars(score, total) {
 }
 
 const MESSAGES = [
-  'Seguí estudiando, ¡la próxima la rompés! 💪',
-  '¡Buen comienzo! Hay mucho por aprender 📚',
-  'No está mal, ¡pero podés mejorar! 🔍',
-  '¡Muy bien! Sabés bastante de Rotary 👏',
-  '¡Excelente! Sos casi un experto rotario 🌟',
-  '¡Perfecto! ¡Rotario del año! 🏆',
+  'Seguí estudiando, ¡la próxima la rompés!',
+  '¡Buen comienzo! Hay mucho por aprender.',
+  'No está mal, ¡pero podés mejorar!',
+  '¡Muy bien! Sabés bastante de Rotary.',
+  '¡Excelente! Sos casi un experto rotario.',
+  '¡Perfecto! ¡Rotario del año!',
 ];
 
 function TriviaSkeleton() {
@@ -136,7 +136,11 @@ export default function TriviaGame({ dataPath }) {
   if (status === 'idle') {
     return (
       <div className="flex flex-col items-center gap-8 py-10 max-w-sm mx-auto text-center">
-        <div className="text-6xl select-none">🧠</div>
+        <div className="w-16 h-16 rounded-2xl bg-cranberry/10 text-cranberry flex items-center justify-center" aria-hidden="true">
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
         <div className="space-y-2">
           <p className="font-garet text-2xl text-gray-800">
             Trivia Rotaract
@@ -147,20 +151,47 @@ export default function TriviaGame({ dataPath }) {
         </div>
         <ul className="text-left space-y-3 w-full">
           {[
-            { icon: '⏱️', text: 'Cada pregunta tiene un tiempo límite' },
-            { icon: '✅', text: 'Al responder se muestra la opción correcta' },
-            { icon: '⭐', text: 'Al final ves tu puntaje en estrellas' },
+            {
+              icon: (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              ),
+              text: 'Cada pregunta tiene un tiempo límite',
+            },
+            {
+              icon: (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              ),
+              text: 'Al responder se muestra la opción correcta',
+            },
+            {
+              icon: (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                </svg>
+              ),
+              text: 'Al final ves tu puntaje en estrellas',
+            },
           ].map(({ icon, text }) => (
             <li key={text} className="flex items-center gap-3 font-montserrat text-sm text-gray-600">
-              <span className="text-xl">{icon}</span>{text}
+              <span className="w-8 h-8 rounded-xl bg-cranberry/10 text-cranberry flex items-center justify-center flex-shrink-0">
+                {icon}
+              </span>
+              {text}
             </li>
           ))}
         </ul>
         <button
           onClick={handleStart}
-          className="w-full py-4 rounded-full bg-cranberry text-white font-montserrat font-semibold text-base shadow-md hover:shadow-lg active:scale-95 transition-all"
+          className="w-full py-4 rounded-full bg-cranberry text-white font-montserrat font-semibold text-base shadow-md hover:shadow-lg active:scale-95 transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
         >
-          ¡Comenzar! 🚀
+          <span>¡Comenzar!</span>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
         </button>
       </div>
     );
@@ -237,8 +268,11 @@ export default function TriviaGame({ dataPath }) {
       {/* Timeout message */}
       {timedOut && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 text-center">
-          <p className="font-montserrat text-sm text-yellow-700">
-            ⏰ ¡Se acabó el tiempo! La correcta era <strong>{currentQ.options[currentQ.correct]}</strong>
+          <p className="font-montserrat text-sm text-yellow-700 inline-flex items-center justify-center gap-2">
+            <svg className="w-4 h-4 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>¡Se acabó el tiempo! La correcta era <strong>{currentQ.options[currentQ.correct]}</strong></span>
           </p>
         </div>
       )}

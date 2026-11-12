@@ -240,8 +240,8 @@ const ProjectCard = ({
       </div>
 
       <div className="relative z-10 flex flex-col flex-1 p-5 sm:p-7 md:px-9 md:py-7">
-        {/* Cabecera de la tarjeta: ícono + badges + numeración */}
-        <div className="flex items-center justify-between gap-4 mb-3.5 sm:mb-4">
+        {/* Cabecera de la tarjeta: ícono + categoría + numeración */}
+        <div className="flex items-center justify-between gap-4 mb-4">
           <div className="flex items-center gap-3">
             <div
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br ${
@@ -251,25 +251,27 @@ const ProjectCard = ({
               {projectIcon}
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-900 text-white text-[10px] font-montserrat font-bold tracking-wider uppercase shadow-xs">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-pink-400" />
+            {category && (
+              <span
+                className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-montserrat font-bold tracking-wide ${
+                  accent?.pillBg || 'bg-cranberry/10 text-cranberry border-cranberry/20'
+                }`}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span
+                    className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                      accent?.statBar || 'bg-cranberry'
+                    }`}
+                  />
+                  <span
+                    className={`relative inline-flex rounded-full h-2 w-2 ${
+                      accent?.statBar || 'bg-cranberry'
+                    }`}
+                  />
                 </span>
-                {badge}
+                {category}
               </span>
-
-              {category && (
-                <span
-                  className={`inline-flex items-center px-3 py-1 rounded-full border text-[10px] font-montserrat font-bold tracking-wide ${
-                    accent?.pillBg || 'bg-cranberry/10 text-cranberry border-cranberry/20'
-                  }`}
-                >
-                  {category}
-                </span>
-              )}
-            </div>
+            )}
           </div>
 
           <span
@@ -283,46 +285,15 @@ const ProjectCard = ({
         </div>
 
         {/* Título y descripción */}
-        <div className="mb-4 sm:mb-5 flex-grow">
-          <h3 className="font-garet text-xl sm:text-2xl md:text-3xl text-gray-900 tracking-tight leading-snug mb-2">
+        <div className="mb-5 flex-grow">
+          <h3 className="font-garet text-xl sm:text-2xl md:text-3xl text-gray-900 tracking-tight leading-snug mb-2.5">
             {title}
           </h3>
 
-          <p className="font-montserrat text-gray-600 leading-relaxed text-xs sm:text-sm md:text-base max-w-3xl">
+          <p className="font-montserrat text-gray-600 leading-relaxed text-sm sm:text-base max-w-3xl">
             {description}
           </p>
         </div>
-
-        {/* Indicadores clave en sub-cards con acento lateral de color */}
-        {stats && (
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-5">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className={`relative overflow-hidden flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-2 px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border text-center sm:text-left transition-colors duration-300 ${
-                  accent?.statBg || 'bg-white/80 border-gray-200/80'
-                }`}
-              >
-                <span
-                  aria-hidden="true"
-                  className={`hidden sm:block absolute left-0 top-2 bottom-2 w-1 rounded-r-full ${
-                    accent?.statBar || 'bg-cranberry'
-                  }`}
-                />
-                <span
-                  className={`font-garet text-sm sm:text-lg md:text-xl font-bold leading-tight ${
-                    accent?.statValueText || 'text-gray-900'
-                  }`}
-                >
-                  {stat.value}
-                </span>
-                <span className="text-[9px] sm:text-[11px] font-montserrat text-gray-600 font-semibold tracking-wider uppercase">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* Pie de tarjeta: CTA interactivo o bloque informativo de impacto */}
         <div className="mt-auto pt-3.5 sm:pt-4 border-t border-gray-200/60">

@@ -38,7 +38,7 @@ function EmptyState() {
           Estamos preparando el juego de esta semana
         </p>
         <p className="font-montserrat text-sm text-gray-400 leading-relaxed">
-          Volvé pronto. Publicamos un nuevo desafío cada semana 🗓️
+          Volvé pronto. Publicamos un nuevo desafío cada semana.
         </p>
       </div>
     </div>

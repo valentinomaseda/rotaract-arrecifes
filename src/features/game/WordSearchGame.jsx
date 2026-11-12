@@ -240,8 +240,11 @@ export default function WordSearchGame({ dataPath }) {
       </div>
 
       {/* ── Hint ── */}
-      <p className="text-center text-xs text-gray-400 mb-5">
-        Arrastrá sobre las letras para encontrar las palabras ↕ ↔ ↗ ↘
+      <p className="flex items-center justify-center gap-1.5 text-center text-xs text-gray-400 mb-5">
+        <svg className="w-3.5 h-3.5 text-cranberry/70 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+        </svg>
+        <span>Arrastrá sobre las letras en cualquier dirección para encontrar las palabras</span>
       </p>
 
       {/* ── Body: grid + word list ── */}

@@ -152,7 +152,7 @@ export default function Crossword() {
 
   const handleShareWin = async () => {
     const shareUrl = window.location.href;
-    const shareText = '🧩 ¡Completé el Crucigrama de Rotaract Arrecifes! ¿Te animás a resolverlo?';
+    const shareText = '¡Completé el Crucigrama de Rotaract Arrecifes! ¿Te animás a resolverlo?';
     if (navigator.share) {
       try {
         await navigator.share({ title: 'Crucigrama Rotaract Arrecifes', text: shareText, url: shareUrl });
@@ -189,8 +189,28 @@ export default function Crossword() {
 
   // feedback banner config (only for non-success states)
   const feedbackMap = {
-    hasErrors:  { bg: 'bg-red-50 border-red-200',        icon: '❌', text: 'text-red-700',    msg: 'Hay algunas respuestas incorrectas.',  sub: 'Las celdas en rojo tienen un error. ¡Seguí intentando!' },
-    incomplete: { bg: 'bg-yellow-50 border-yellow-200',  icon: '⚠️', text: 'text-yellow-700', msg: 'Faltan algunas respuestas.',             sub: 'Completá todas las celdas antes de verificar.' },
+    hasErrors: {
+      bg: 'bg-red-50 border-red-200',
+      icon: (
+        <svg className="w-5 h-5 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      text: 'text-red-700',
+      msg: 'Hay algunas respuestas incorrectas.',
+      sub: 'Las celdas en rojo tienen un error. ¡Seguí intentando!',
+    },
+    incomplete: {
+      bg: 'bg-yellow-50 border-yellow-200',
+      icon: (
+        <svg className="w-5 h-5 text-yellow-600 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      ),
+      text: 'text-yellow-700',
+      msg: 'Faltan algunas respuestas.',
+      sub: 'Completá todas las celdas antes de verificar.',
+    },
   };
   const feedback = feedbackMap[checkResult];
 
@@ -242,8 +262,12 @@ export default function Crossword() {
               </svg>
             </button>
 
-            {/* confetti emoji ring */}
-            <div className="text-5xl mb-4 select-none">🎉</div>
+            {/* success icon ring */}
+            <div className="w-16 h-16 rounded-2xl bg-cranberry/10 text-cranberry mx-auto mb-4 flex items-center justify-center" aria-hidden="true">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
 
             {/* badge */}
             <span className="inline-block px-4 py-1.5 rounded-full text-xs font-montserrat font-bold tracking-widest uppercase bg-cranberry/10 text-cranberry mb-4">
@@ -260,9 +284,13 @@ export default function Crossword() {
             <div className="flex flex-col gap-2.5">
               <button
                 onClick={() => setSolved(false)}
-                className="btn-cranberry text-white py-3 rounded-2xl font-montserrat font-semibold text-sm"
+                className="btn-cranberry text-white py-3 rounded-2xl font-montserrat font-semibold text-sm inline-flex items-center justify-center gap-2"
               >
-                ¡Ver el crucigrama! 🔍
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                ¡Ver el crucigrama!
               </button>
               <button
                 onClick={handleShareWin}

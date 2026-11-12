@@ -157,9 +157,15 @@ export default function ConexionesGame({ dataPath }) {
       <div className="flex items-center gap-2">
         <span className="font-montserrat text-xs text-gray-500">Intentos:</span>
         {Array.from({ length: 4 }).map((_, i) => (
-          <span key={i} className={`text-lg transition-all ${i < lives ? 'opacity-100' : 'opacity-20 grayscale'}`}>
-            ❤️
-          </span>
+          <svg
+            key={i}
+            className={`w-4 h-4 transition-all ${i < lives ? 'text-cranberry opacity-100' : 'text-gray-300 opacity-40'}`}
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
         ))}
       </div>
 
@@ -257,7 +263,11 @@ export default function ConexionesGame({ dataPath }) {
       {/* Win state inline (kept for context after modal closes) */}
       {status === 'won' && (
         <div className="bg-green-50 border border-green-200 rounded-2xl px-6 py-5 text-center w-full max-w-sm">
-          <p className="text-3xl mb-2">🎉</p>
+          <div className="w-10 h-10 rounded-xl bg-green-100 text-green-600 mx-auto mb-2.5 flex items-center justify-center" aria-hidden="true">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
           <p className="font-garet text-xl text-green-700">¡Perfecto! Encontraste todas las conexiones</p>
           <p className="font-montserrat text-sm text-green-500 mt-1">
             con {lives} {lives === 1 ? 'vida' : 'vidas'} restante{lives !== 1 ? 's' : ''}
