@@ -12,6 +12,18 @@ const pastCaps = getPastCapacitaciones();
 const CAPACITACIONES_SLIDE = upcomingCap
   ? {
       badge: 'Próxima Capacitación',
+      category: 'Desarrollo Profesional',
+      tabLabel: 'Capacitaciones',
+      accent: {
+        iconBg: 'from-cranberry to-pink-600',
+        pillBg: 'bg-cranberry/8 text-cranberry border-cranberry/20',
+        glow: 'rgba(212, 19, 103, 0.12)',
+      },
+      projectIcon: (
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
       title: `Ciclo de Capacitaciones: ${upcomingCap.topic}`,
       description: upcomingCap.description.split('\n\n')[0],
       stats: [
@@ -24,8 +36,9 @@ const CAPACITACIONES_SLIDE = upcomingCap
         internal: !upcomingCap.registrationLink,
         label: upcomingCap.registrationLink ? '¡Inscribite acá!' : 'Ver detalles',
         ariaLabel: `Ver detalles de la capacitación ${upcomingCap.topic}`,
+        note: 'Abierto a toda la comunidad',
         icon: (
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
           </svg>
         ),
@@ -33,6 +46,18 @@ const CAPACITACIONES_SLIDE = upcomingCap
     }
   : {
       badge: 'Ciclo en marcha',
+      category: 'Desarrollo Profesional',
+      tabLabel: 'Capacitaciones',
+      accent: {
+        iconBg: 'from-cranberry to-pink-600',
+        pillBg: 'bg-cranberry/8 text-cranberry border-cranberry/20',
+        glow: 'rgba(212, 19, 103, 0.12)',
+      },
+      projectIcon: (
+        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      ),
       title: 'Ciclo de Capacitaciones Abiertas',
       description:
         'Encuentros virtuales mensuales gratuitos con referentes e invitados especiales sobre finanzas, comunicación y liderazgo. ¡Repasá los resúmenes y aprendizajes de las ediciones anteriores!',
@@ -46,8 +71,9 @@ const CAPACITACIONES_SLIDE = upcomingCap
         internal: true,
         label: 'Ver charlas y resúmenes',
         ariaLabel: 'Ir al Ciclo de Capacitaciones',
+        note: 'Material y grabaciones disponibles',
         icon: (
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
         ),
@@ -57,6 +83,18 @@ const CAPACITACIONES_SLIDE = upcomingCap
 const PROJECTS = [
   {
     badge: 'En progreso',
+    category: 'Medio Ambiente',
+    tabLabel: 'Medio Ambiente',
+    accent: {
+      iconBg: 'from-emerald-600 to-teal-600',
+      pillBg: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20',
+      glow: 'rgba(16, 185, 129, 0.10)',
+    },
+    projectIcon: (
+      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
     title: 'Tu Huella, No Tu Colilla',
     description:
       'Instalación de 50 colilleros ecológicos en puntos estratégicos de Arrecifes. Buscamos reducir la contaminación y concientizar mediante códigos QR.',
@@ -67,10 +105,11 @@ const PROJECTS = [
     ],
     cta: {
       href: 'https://drive.google.com/file/d/1sWJZDwZ3C59xsntAB4VdBAK4M1R56G-Z/view',
-      label: 'Conocé más',
+      label: 'Conocé más del proyecto',
       ariaLabel: 'Saber más sobre Tu Huella, No Tu Colilla',
+      note: 'Dossier informativo en PDF',
       icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
@@ -79,126 +118,244 @@ const PROJECTS = [
   CAPACITACIONES_SLIDE,
   {
     badge: 'En progreso',
-    title: 'Banco Ortopédico',
+    category: 'Salud Comunitaria',
+    tabLabel: 'Hospital Municipal',
+    accent: {
+      iconBg: 'from-cranberry to-rose-600',
+      pillBg: 'bg-rose-500/10 text-cranberry border-cranberry/20',
+      glow: 'rgba(212, 19, 103, 0.12)',
+    },
+    projectIcon: (
+      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    ),
+    title: 'Donación al Hospital Municipal',
     description:
-      'Fortalecemos el banco de elementos de Rotary (sillas de ruedas, andadores) para facilitar recursos a personas que los necesitan temporalmente.',
+      'Estamos trabajando para donar una cama eléctrica de tres movimientos para el sector de cardiología del Hospital Municipal Santa Francisca Romana.',
     stats: [
-      { value: 'Salud', label: 'Área' },
-      { value: 'Rotary', label: 'Sede' },
-      { value: 'Activa', label: 'Campaña' },
+      { value: '3 Mov.', label: 'Cama Eléctrica' },
+      { value: 'Cardiología', label: 'Sector' },
+      { value: 'Activo', label: 'Estado' },
     ],
-    cta: {
-      href: 'https://wa.me/5492478513553',
-      label: 'Sumate a colaborar',
-      ariaLabel: 'Cómo colaborar con la renovación del banco ortopédico',
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
-      ),
+    footerInfo: {
+      title: 'Hospital Municipal Santa Francisca Romana',
+      subtitle: 'Equipamiento destinado al sector de Cardiología · Gestión directa del club',
     },
   },
 ];
 
 /* ─── Card Individual ─── */
-const ProjectCard = ({ badge, title, description, stats, cta, active, autoplayKey, autoplayDuration, paused }) => (
-  <div
-    className={`relative flex flex-col h-full bg-white/70 backdrop-blur-2xl rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border transition-all duration-700 ${active
-      ? 'border-white/80 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] opacity-100 scale-100'
-      : 'border-white/20 shadow-none opacity-40 scale-[0.95]'
+const ProjectCard = ({
+  index,
+  badge,
+  category,
+  accent,
+  projectIcon,
+  title,
+  description,
+  stats,
+  cta,
+  footerInfo,
+  active,
+  autoplayKey,
+  autoplayDuration,
+  paused,
+  onSelect,
+}) => {
+  const stepNumber = String(index + 1).padStart(2, '0');
+
+  return (
+    <article
+      onClick={!active ? onSelect : undefined}
+      className={`relative flex flex-col h-full rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden border transition-all duration-700 ${
+        active
+          ? 'bg-white border-gray-200/80 shadow-[0_24px_60px_-15px_rgba(18,7,26,0.10),0_0_0_1px_rgba(212,19,103,0.08)] opacity-100 scale-100'
+          : 'bg-white/75 border-gray-200/50 shadow-sm opacity-45 hover:opacity-70 scale-[0.95] cursor-pointer'
       }`}
-    style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
-    aria-hidden={!active}
-  >
-    <div className="absolute top-0 left-0 right-0 h-1 bg-gray-100/50">
-      {active && (
-        <div
-          key={autoplayKey}
-          className="h-full bg-gradient-to-r from-cranberry to-cranberry-light rounded-r-full"
-          style={{
-            animation: `carouselProgress ${autoplayDuration}ms linear forwards`,
-            animationPlayState: paused ? 'paused' : 'running',
-          }}
-        />
-      )}
-    </div>
-
-    {/* Padding reducido en mobile (p-6) para optimizar el espacio útil */}
-    <div className="flex flex-col flex-1 p-6 sm:p-10 md:p-12">
-      <div className="flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6">
-        <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cranberry opacity-40"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-cranberry"></span>
-        </span>
-        <span className="text-[10px] sm:text-[11px] font-montserrat font-bold tracking-widest uppercase text-gray-500 line-clamp-1">
-          {badge}
-        </span>
-      </div>
-
-      <h3 className="font-garet text-xl sm:text-3xl md:text-4xl text-gray-900 tracking-tight leading-[1.15] mb-3 sm:mb-5">
-        {title}
-      </h3>
-
-      <p className="font-montserrat text-gray-500 leading-relaxed text-sm sm:text-base mb-6 sm:mb-8 flex-grow">
-        {description}
-      </p>
-
-      {/* Grid en lugar de flex para asegurar que las columnas no colapsen en pantallas chicas */}
-      {stats && (
-        <div className="grid grid-cols-3 divide-x divide-gray-100/80 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-100/80">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center sm:items-start px-2 sm:px-4 first:pl-0 last:pr-0 text-center sm:text-left">
-              <span className="font-garet text-lg sm:text-2xl font-bold text-gray-900">{stat.value}</span>
-              <span className="text-[9px] sm:text-[11px] md:text-xs font-montserrat text-gray-400 font-medium tracking-wide uppercase mt-1">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="mt-auto">
-        {cta.internal ? (
-          <Link
-            to={cta.href}
-            className="inline-flex items-center justify-center w-full sm:w-auto gap-3 px-6 sm:px-8 py-3.5 rounded-2xl bg-cranberry text-white font-montserrat font-medium text-sm sm:text-base hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_25px_rgba(212,19,103,0.4)] transition-all duration-300 group"
-            aria-label={cta.ariaLabel}
-            tabIndex={active ? 0 : -1}
-          >
-            {cta.icon}
-            {cta.label}
-            <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        ) : (
-          <a
-            href={cta.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-full sm:w-auto gap-3 px-6 sm:px-8 py-3.5 rounded-2xl bg-cranberry text-white font-montserrat font-medium text-sm sm:text-base hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_25px_rgba(212,19,103,0.4)] transition-all duration-300 group"
-            aria-label={cta.ariaLabel}
-            tabIndex={active ? 0 : -1}
-          >
-            {cta.icon}
-            {cta.label}
-            <svg className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+      style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+      aria-hidden={!active}
+    >
+      {/* Barra superior de progreso */}
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gray-100/80 z-20">
+        {active && (
+          <div
+            key={autoplayKey}
+            className="carousel-progress-bar h-full w-full bg-gradient-to-r from-cranberry via-pink-500 to-cranberry-dark"
+            style={{
+              '--autoplay-duration': `${autoplayDuration}ms`,
+              animationPlayState: paused ? 'paused' : 'running',
+            }}
+          />
         )}
       </div>
-    </div>
-  </div>
-);
+
+      {/* Resplandor decorativo interno */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl transition-opacity duration-700"
+        style={{
+          background: `radial-gradient(circle, ${accent?.glow || 'rgba(212,19,103,0.1)'} 0%, transparent 70%)`,
+          opacity: active ? 1 : 0,
+        }}
+      />
+
+      <div className="relative z-10 flex flex-col flex-1 p-5 sm:p-7 md:px-9 md:py-7">
+        {/* Cabecera de la tarjeta: ícono + badges + numeración */}
+        <div className="flex items-center justify-between gap-4 mb-3.5 sm:mb-4">
+          <div className="flex items-center gap-3">
+            <div
+              className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br ${
+                accent?.iconBg || 'from-cranberry to-pink-600'
+              } flex items-center justify-center shadow-[0_6px_16px_-4px_rgba(212,19,103,0.35)] flex-shrink-0`}
+            >
+              {projectIcon}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-900 text-white text-[10px] font-montserrat font-bold tracking-wider uppercase">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cranberry opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cranberry" />
+                </span>
+                {badge}
+              </span>
+
+              {category && (
+                <span
+                  className={`inline-flex items-center px-2.5 py-1 rounded-full border text-[10px] font-montserrat font-semibold tracking-wide ${
+                    accent?.pillBg || 'bg-cranberry/10 text-cranberry border-cranberry/20'
+                  }`}
+                >
+                  {category}
+                </span>
+              )}
+            </div>
+          </div>
+
+          <span
+            aria-hidden="true"
+            className="font-garet text-2xl sm:text-4xl font-bold leading-none select-none text-gray-200/80"
+          >
+            {stepNumber}
+          </span>
+        </div>
+
+        {/* Título y descripción */}
+        <div className="mb-4 sm:mb-5 flex-grow">
+          <h3 className="font-garet text-xl sm:text-2xl md:text-3xl text-gray-900 tracking-tight leading-snug mb-2">
+            {title}
+          </h3>
+
+          <p className="font-montserrat text-gray-600 leading-relaxed text-xs sm:text-sm md:text-base max-w-3xl">
+            {description}
+          </p>
+        </div>
+
+        {/* Indicadores clave en sub-cards compactas */}
+        {stats && (
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-5">
+            {stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-2 px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-gray-50/90 border border-gray-100 text-center sm:text-left transition-colors duration-300 hover:bg-gray-100/70"
+              >
+                <span className="font-garet text-sm sm:text-lg md:text-xl font-bold text-gray-900 leading-tight">
+                  {stat.value}
+                </span>
+                <span className="text-[9px] sm:text-[11px] font-montserrat text-gray-500 font-semibold tracking-wider uppercase">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Pie de tarjeta: CTA interactivo o bloque informativo de impacto */}
+        <div className="mt-auto pt-3.5 sm:pt-4 border-t border-gray-100">
+          {cta ? (
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              {cta.internal ? (
+                <Link
+                  to={cta.href}
+                  className="interactive-control inline-flex items-center justify-center w-full sm:w-auto gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-cranberry text-white font-montserrat font-semibold text-xs sm:text-sm hover:bg-cranberry-dark shadow-[0_6px_16px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_22px_rgba(212,19,103,0.38)] group"
+                  aria-label={cta.ariaLabel}
+                  tabIndex={active ? 0 : -1}
+                >
+                  {cta.icon}
+                  {cta.label}
+                  <svg
+                    className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              ) : (
+                <a
+                  href={cta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="interactive-control inline-flex items-center justify-center w-full sm:w-auto gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-cranberry text-white font-montserrat font-semibold text-xs sm:text-sm hover:bg-cranberry-dark shadow-[0_6px_16px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_22px_rgba(212,19,103,0.38)] group"
+                  aria-label={cta.ariaLabel}
+                  tabIndex={active ? 0 : -1}
+                >
+                  {cta.icon}
+                  {cta.label}
+                  <svg
+                    className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              )}
+
+              {cta.note && (
+                <span className="hidden sm:inline font-montserrat text-xs text-gray-400 font-medium text-right">
+                  {cta.note}
+                </span>
+              )}
+            </div>
+          ) : (
+            footerInfo && (
+              <div className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-cranberry/[0.05] via-rose-50/60 to-transparent border border-cranberry/15">
+                <div className="w-8 h-8 rounded-lg bg-cranberry/10 text-cranberry flex items-center justify-center flex-shrink-0">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <div className="min-w-0">
+                  <p className="font-montserrat text-xs sm:text-sm font-bold text-gray-900 truncate">
+                    {footerInfo.title}
+                  </p>
+                  <p className="font-montserrat text-[11px] text-gray-500 line-clamp-1">
+                    {footerInfo.subtitle}
+                  </p>
+                </div>
+              </div>
+            )
+          )}
+        </div>
+      </div>
+    </article>
+  );
+};
 
 const NavArrow = ({ direction, onClick, label }) => (
   <button
+    type="button"
     onClick={onClick}
     aria-label={label}
-    className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/60 backdrop-blur-md border border-white shadow-[0_8px_20px_rgba(0,0,0,0.04)] text-gray-700 hover:bg-white hover:text-cranberry hover:scale-105 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-cranberry z-30"
+    className="interactive-control flex-shrink-0 w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-full bg-white border border-gray-200/90 shadow-sm text-gray-700 hover:border-cranberry hover:text-cranberry hover:shadow-md z-30"
   >
-    <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d={direction === 'prev' ? 'M15 19l-7-7 7-7' : 'M9 5l7 7-7 7'} />
     </svg>
   </button>
@@ -207,14 +364,19 @@ const NavArrow = ({ direction, onClick, label }) => (
 export const CurrentProject = () => {
   const [headerRef, headerVisible] = useScrollAnimation({ threshold: 0.2 });
   const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [userPaused, setUserPaused] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
+  );
   const clipRef = useRef(null);
 
-  // Variables de estado dinámicas
   const [containerW, setContainerW] = useState(0);
-  const [layoutConfig, setLayoutConfig] = useState({ ratio: 0.82, gap: 24 });
+  const [layoutConfig, setLayoutConfig] = useState({ ratio: 0.84, gap: 24 });
 
   const total = PROJECTS.length;
+  const paused = hoverPaused || userPaused;
 
   useEffect(() => {
     if (!clipRef.current) return;
@@ -222,8 +384,7 @@ export const CurrentProject = () => {
       if (clipRef.current) {
         const width = clipRef.current.offsetWidth;
         setContainerW(width);
-        // Si es mobile (<768px), la tarjeta ocupa el 90% y el gap es menor.
-        setLayoutConfig(width < 768 ? { ratio: 0.90, gap: 16 } : { ratio: 0.85, gap: 32 });
+        setLayoutConfig(width < 768 ? { ratio: 0.90, gap: 16 } : { ratio: 0.84, gap: 28 });
       }
     };
     update();
@@ -255,58 +416,121 @@ export const CurrentProject = () => {
   return (
     <section
       id="proyecto-actual"
-      className="scroll-mt-20 relative bg-gray-50/50 py-16 md:py-32 overflow-hidden"
+      className="scroll-mt-16 relative bg-gradient-to-b from-white via-gray-50/70 to-gray-50 py-8 md:py-10 lg:py-12 overflow-hidden"
       aria-labelledby="current-project-title"
     >
-      <div className="absolute top-0 left-1/4 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-cranberry/5 rounded-full mix-blend-multiply filter blur-[80px] md:blur-[100px] opacity-70 animate-pulse" aria-hidden="true" />
+      {/* Blobs de ambientación */}
+      <div
+        className="pointer-events-none absolute -top-24 left-1/4 w-[420px] md:w-[620px] h-[420px] md:h-[620px] bg-cranberry/[0.04] rounded-full blur-[90px]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute bottom-0 right-1/4 w-[360px] md:w-[500px] h-[360px] md:h-[500px] bg-pink-500/[0.04] rounded-full blur-[90px]"
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Cabecera compacta: título a la izquierda y selector de proyectos a la derecha en desktop */}
         <div
           ref={headerRef}
-          className={`text-center mb-10 md:mb-16 px-6 lg:px-8 transition-all duration-1000 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+          className={`flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-4 md:mb-6 px-6 lg:px-8 transition-all duration-1000 ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
         >
-          <span className="text-cranberry font-montserrat font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3 block">Iniciativas</span>
-          <h2 id="current-project-title" className="font-garet text-3xl md:text-5xl lg:text-6xl text-gray-900 mb-4 md:mb-6 tracking-tight">
-            Proyectos Actuales
-          </h2>
-          <p className="font-montserrat text-gray-500 text-base md:text-xl max-w-2xl mx-auto leading-relaxed px-4">
-            Lo que estamos construyendo hoy para transformar Arrecifes mañana.
-          </p>
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cranberry/10 border border-cranberry/20 text-cranberry font-montserrat font-bold tracking-widest uppercase text-[10px] mb-2">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cranberry opacity-60" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cranberry" />
+              </span>
+              Iniciativas en curso
+            </div>
+
+            <h2
+              id="current-project-title"
+              className="font-garet text-2xl sm:text-3xl md:text-4xl text-gray-900 tracking-tight leading-tight"
+            >
+              Proyectos{' '}
+              <span
+                style={{
+                  background: 'linear-gradient(90deg, #d41367, #ff5ca8)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Actuales
+              </span>
+            </h2>
+
+            <p className="font-montserrat text-gray-500 text-xs sm:text-sm md:text-base max-w-xl mx-auto lg:mx-0 mt-1">
+              Lo que estamos construyendo hoy desde el club para transformar Arrecifes mañana.
+            </p>
+          </div>
+
+          {/* Selector rápido de proyectos (Pills) */}
+          <div
+            className="self-center lg:self-end inline-flex flex-wrap items-center justify-center gap-1.5 p-1 rounded-2xl bg-gray-100/90 border border-gray-200/70 max-w-full"
+            role="tablist"
+            aria-label="Seleccionar proyecto actual"
+          >
+            {PROJECTS.map((project, idx) => {
+              const isSelected = idx === current;
+              const num = String(idx + 1).padStart(2, '0');
+              return (
+                <button
+                  key={project.title}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  onClick={() => goTo(idx)}
+                  className={`interactive-control inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-montserrat text-xs font-semibold ${
+                    isSelected
+                      ? 'bg-white text-gray-900 shadow-sm border border-gray-200/80'
+                      : 'text-gray-500 hover:text-gray-800 border border-transparent'
+                  }`}
+                >
+                  <span
+                    className={`font-garet text-[10px] ${
+                      isSelected ? 'text-cranberry' : 'text-gray-400'
+                    }`}
+                  >
+                    {num}
+                  </span>
+                  <span>{project.tabLabel || project.title}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
+        {/* Carrusel */}
         <div
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onTouchStart={() => setPaused(true)}
-          onTouchEnd={() => setPaused(false)}
+          onMouseEnter={() => setHoverPaused(true)}
+          onMouseLeave={() => setHoverPaused(false)}
+          onTouchStart={() => setHoverPaused(true)}
+          onTouchEnd={() => setHoverPaused(false)}
         >
-          {/* Hint de deslizamiento — solo mobile, siempre renderizado para evitar saltos de layout */}
-          <div className="flex md:hidden items-center justify-center gap-2 mb-4 text-gray-400 pointer-events-none select-none">
-            <svg className="w-4 h-4 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          {/* Hint de deslizamiento — solo mobile */}
+          <div className="flex md:hidden items-center justify-center gap-2 mb-2 text-gray-400 pointer-events-none select-none">
+            <svg className="w-3.5 h-3.5 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
-            <span className="font-montserrat text-xs tracking-wide">Deslizá para ver más</span>
-            <svg className="w-4 h-4 animate-bounce-x-reverse" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <span className="font-montserrat text-[11px] tracking-wide">Deslizá para explorar</span>
+            <svg className="w-3.5 h-3.5 animate-bounce-x-reverse" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </div>
 
-          <div className="relative group">
-            <div className="hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <NavArrow direction="prev" onClick={prev} label="Proyecto anterior" />
-            </div>
-            <div className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <NavArrow direction="next" onClick={next} label="Proyecto siguiente" />
-            </div>
-
+          <div className="relative">
             <div
               ref={clipRef}
-              className="overflow-hidden pb-4 md:pb-8 select-none"
+              className="overflow-hidden py-2 md:py-3 select-none"
               style={{ touchAction: 'pan-y' }}
               {...swipeHandlers}
             >
               <div
-                className="flex transition-transform duration-700"
+                className="flex items-stretch transition-transform duration-700"
                 style={{
                   gap: `${layoutConfig.gap}px`,
                   transform: `translateX(${translateX}px)`,
@@ -316,15 +540,17 @@ export const CurrentProject = () => {
                 {PROJECTS.map((project, idx) => (
                   <div
                     key={project.title}
-                    className="flex-shrink-0"
+                    className="flex-shrink-0 flex flex-col"
                     style={{ width: cardW > 0 ? `${cardW}px` : `${layoutConfig.ratio * 100}%` }}
                   >
                     <ProjectCard
                       {...project}
+                      index={idx}
                       active={idx === current}
                       autoplayKey={current}
                       autoplayDuration={AUTOPLAY_INTERVAL}
                       paused={paused}
+                      onSelect={() => goTo(idx)}
                     />
                   </div>
                 ))}
@@ -332,16 +558,45 @@ export const CurrentProject = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-2 md:gap-3 mt-2 md:mt-4">
-            {PROJECTS.map((p, idx) => (
-              <button
-                key={p.title}
-                onClick={() => goTo(idx)}
-                aria-label={`Ir a ${p.title}`}
-                className={`relative h-1.5 md:h-2 transition-all duration-500 rounded-full ${idx === current ? 'w-8 md:w-10 bg-cranberry' : 'w-1.5 md:w-2 bg-gray-300 hover:bg-gray-400'
+          {/* Barra inferior de controles: Anterior / Indicadores / Pausa / Siguiente */}
+          <div className="flex items-center justify-center gap-3 mt-2 px-6">
+            <NavArrow direction="prev" onClick={prev} label="Proyecto anterior" />
+
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-white border border-gray-200/80 shadow-sm">
+              {PROJECTS.map((p, idx) => (
+                <button
+                  key={p.title}
+                  type="button"
+                  onClick={() => goTo(idx)}
+                  aria-label={`Ir a ${p.title}`}
+                  className={`interactive-control relative h-2 transition-all duration-500 rounded-full ${
+                    idx === current ? 'w-8 bg-cranberry' : 'w-2 bg-gray-300 hover:bg-gray-400'
                   }`}
-              />
-            ))}
+                />
+              ))}
+
+              <span className="mx-1 h-3.5 w-px bg-gray-200" aria-hidden="true" />
+
+              <button
+                type="button"
+                onClick={() => setUserPaused((prevPaused) => !prevPaused)}
+                aria-label={userPaused ? 'Reanudar rotación automática' : 'Pausar rotación automática'}
+                title={userPaused ? 'Reanudar rotación automática' : 'Pausar rotación automática'}
+                className="interactive-control w-5 h-5 rounded-full flex items-center justify-center text-gray-500 hover:text-cranberry"
+              >
+                {userPaused ? (
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                ) : (
+                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
+            <NavArrow direction="next" onClick={next} label="Proyecto siguiente" />
           </div>
         </div>
       </div>

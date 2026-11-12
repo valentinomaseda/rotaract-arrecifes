@@ -309,8 +309,15 @@
    CARRUSEL DE PROYECTOS
    ========================================= */
 @keyframes carouselProgress {
-  from { width: 0%; }
-  to   { width: 100%; }
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.carousel-progress-bar {
+  transform-origin: left center;
+  @media (prefers-reduced-motion: no-preference) {
+    animation: carouselProgress var(--autoplay-duration, 8000ms) linear forwards;
+  }
 }
 
 @keyframes bounceX {
@@ -324,10 +331,26 @@
   60%       { transform: translateX(-5px); }
 }
 .animate-bounce-x {
-  animation: bounceX 1.4s ease-in-out infinite;
+  @media (prefers-reduced-motion: no-preference) {
+    animation: bounceX 1.4s ease-in-out infinite;
+  }
 }
 .animate-bounce-x-reverse {
-  animation: bounceXReverse 1.4s ease-in-out infinite;
+  @media (prefers-reduced-motion: no-preference) {
+    animation: bounceXReverse 1.4s ease-in-out infinite;
+  }
+}
+
+/* Natural interaction states for carousel controls */
+.interactive-control {
+  transition: box-shadow 150ms ease-out, scale 150ms ease-out, background-color 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out;
+}
+.interactive-control:active {
+  scale: 0.97;
+}
+.interactive-control:focus-visible {
+  outline: 2px solid CanvasText;
+  outline-offset: 3px;
 }
 /* Oculta la scrollbar nativa manteniendo funcionalidad */
 .carousel-track::-webkit-scrollbar {
