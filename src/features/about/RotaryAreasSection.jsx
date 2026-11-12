@@ -53,6 +53,51 @@ const AreaIcon = ({ name, className = "w-6 h-6" }) => {
   }
 };
 
+const AREA_THEMES = {
+  paz: {
+    cardBg: 'from-blue-50/90 via-white to-indigo-50/60',
+    border: 'border-blue-200/80 hover:border-blue-400',
+    num: 'text-blue-500/20',
+    pill: 'bg-blue-500/10 text-blue-700 border-blue-500/20',
+  },
+  enfermedades: {
+    cardBg: 'from-rose-50/90 via-white to-red-50/60',
+    border: 'border-rose-200/80 hover:border-rose-400',
+    num: 'text-rose-500/20',
+    pill: 'bg-rose-500/10 text-rose-700 border-rose-500/20',
+  },
+  agua: {
+    cardBg: 'from-sky-50/90 via-white to-blue-50/60',
+    border: 'border-sky-200/80 hover:border-sky-400',
+    num: 'text-sky-500/20',
+    pill: 'bg-sky-500/10 text-sky-700 border-sky-500/20',
+  },
+  materno: {
+    cardBg: 'from-pink-50/90 via-white to-rose-50/60',
+    border: 'border-pink-200/80 hover:border-pink-400',
+    num: 'text-pink-500/20',
+    pill: 'bg-pink-500/10 text-pink-700 border-pink-500/20',
+  },
+  educacion: {
+    cardBg: 'from-amber-50/90 via-white to-orange-50/60',
+    border: 'border-amber-200/80 hover:border-amber-400',
+    num: 'text-amber-500/25',
+    pill: 'bg-amber-500/12 text-amber-800 border-amber-500/25',
+  },
+  desarrollo: {
+    cardBg: 'from-emerald-50/90 via-white to-teal-50/60',
+    border: 'border-emerald-200/80 hover:border-emerald-400',
+    num: 'text-emerald-500/20',
+    pill: 'bg-emerald-500/10 text-emerald-800 border-emerald-500/20',
+  },
+  medioambiente: {
+    cardBg: 'from-green-50/90 via-white to-emerald-50/60',
+    border: 'border-green-200/80 hover:border-green-400',
+    num: 'text-green-600/20',
+    pill: 'bg-green-500/10 text-green-800 border-green-500/20',
+  },
+};
+
 export const RotaryAreasSection = () => {
   const trackRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -95,7 +140,7 @@ export const RotaryAreasSection = () => {
   };
 
   return (
-    <div className="py-10 md:py-8 border-t border-gray-100">
+    <div className="py-4">
       {/* Section Header with Navigation Controls */}
       <div
         ref={ref}
@@ -104,12 +149,12 @@ export const RotaryAreasSection = () => {
         }`}
       >
         <div className="space-y-3">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-montserrat font-semibold uppercase tracking-wider bg-cranberry/10 text-cranberry">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-montserrat font-bold uppercase tracking-wider bg-cranberry/10 text-cranberry border border-cranberry/20">
             <span className="w-2 h-2 rounded-full bg-cranberry animate-pulse" />
             Rotary International
           </span>
-          <h3 className="text-3xl md:text-4xl font-garet text-gray-900">
-            Las 7 Áreas de Interés
+          <h3 className="text-3xl sm:text-4xl font-garet text-gray-900 tracking-tight">
+            Las 7 <span className="text-gradient-cranberry">Áreas de Interés</span>
           </h3>
           <p className="text-gray-600 font-montserrat text-base max-w-xl">
             Nuestras causas y proyectos locales en Arrecifes se alinean con los ejes estratégicos globales de Rotary International.
@@ -121,7 +166,7 @@ export const RotaryAreasSection = () => {
           <button
             onClick={prevSlide}
             aria-label="Área anterior"
-            className="w-12 h-12 rounded-full border border-gray-200 bg-white text-gray-700 hover:text-cranberry hover:border-cranberry hover:shadow-lg transition-all duration-300 flex items-center justify-center"
+            className="interactive-control w-12 h-12 rounded-full border border-gray-200 bg-white text-gray-700 hover:text-cranberry hover:border-cranberry hover:shadow-lg flex items-center justify-center"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -130,7 +175,7 @@ export const RotaryAreasSection = () => {
           <button
             onClick={nextSlide}
             aria-label="Área siguiente"
-            className="w-12 h-12 rounded-full bg-cranberry text-white hover:bg-cranberry-dark hover:shadow-lg transition-all duration-300 flex items-center justify-center"
+            className="interactive-control w-12 h-12 rounded-full bg-cranberry text-white hover:bg-cranberry-dark hover:shadow-lg flex items-center justify-center"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -142,45 +187,62 @@ export const RotaryAreasSection = () => {
       {/* Carousel Track */}
       <div
         ref={trackRef}
+        role="region"
+        aria-label="Las 7 Áreas de Interés de Rotary"
+        tabIndex={0}
         className="carousel-track flex gap-6 overflow-x-auto pb-8 pt-2 px-4 md:px-0 max-w-6xl mx-auto scroll-smooth"
       >
-        {rotaryAreasData.map((area, index) => (
-          <div
-            key={area.id}
-            className={`min-w-[290px] sm:min-w-[340px] md:min-w-[360px] group relative bg-white rounded-3xl p-7 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 card-hover flex flex-col justify-between ${
-              index === activeIndex ? 'ring-2 ring-cranberry/30' : ''
-            }`}
-          >
-            {/* Top gradient highlight */}
-            <div className={`absolute top-0 left-6 right-6 h-1 rounded-b-full bg-gradient-to-r ${area.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500`} />
+        {rotaryAreasData.map((area, index) => {
+          const theme = AREA_THEMES[area.id] || AREA_THEMES.paz;
+          return (
+            <div
+              key={area.id}
+              className={`min-w-[290px] sm:min-w-[340px] md:min-w-[360px] group relative bg-gradient-to-br ${theme.cardBg} rounded-3xl p-7 border ${theme.border} shadow-sm hover:shadow-xl transition-all duration-500 card-hover flex flex-col justify-between overflow-hidden ${
+                index === activeIndex ? 'ring-2 ring-cranberry/25' : ''
+              }`}
+            >
+              {/* Top gradient bar always visible */}
+              <div
+                className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${area.color}`}
+                aria-hidden="true"
+              />
 
-            <div>
-              {/* Number & Icon Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${area.color} text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                  <AreaIcon name={area.icon} className="w-6 h-6" />
+              <div>
+                {/* Number & Icon Header */}
+                <div className="flex items-center justify-between mb-6 pt-1">
+                  <div
+                    className={`w-13 h-13 rounded-2xl bg-gradient-to-br ${area.color} text-white flex items-center justify-center shadow-md transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 ring-4 ring-white/80`}
+                  >
+                    <AreaIcon name={area.icon} className="w-6 h-6" />
+                  </div>
+                  <span
+                    className={`text-4xl font-garet font-extrabold ${theme.num} transition-colors duration-300 select-none`}
+                  >
+                    {area.number}
+                  </span>
                 </div>
-                <span className="text-3xl font-garet font-bold text-gray-200 group-hover:text-cranberry/30 transition-colors duration-300">
-                  {area.number}
-                </span>
+
+                {/* Title & Description */}
+                <h4 className="text-xl font-garet text-gray-900 mb-3 group-hover:text-cranberry transition-colors duration-300 leading-snug">
+                  {area.title}
+                </h4>
+                <p className="text-gray-600 font-montserrat text-sm leading-relaxed">
+                  {area.description}
+                </p>
               </div>
 
-              {/* Title & Description */}
-              <h4 className="text-xl font-garet text-gray-900 mb-3 group-hover:text-cranberry transition-colors duration-300">
-                {area.title}
-              </h4>
-              <p className="text-gray-500 font-montserrat text-sm leading-relaxed">
-                {area.description}
-              </p>
+              {/* Bottom Accent Badge */}
+              <div className="mt-6 pt-4 border-t border-gray-200/60 flex items-center justify-between">
+                <span className={`px-3 py-1 rounded-full border text-xs font-montserrat font-bold ${theme.pill}`}>
+                  {area.shortTitle}
+                </span>
+                <span className="text-gray-400 group-hover:text-cranberry group-hover:translate-x-1 transition-all duration-300 font-bold">
+                  →
+                </span>
+              </div>
             </div>
-
-            {/* Bottom Accent Badge */}
-            <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-montserrat font-medium text-gray-400">
-              <span className="text-cranberry font-semibold">{area.shortTitle}</span>
-              <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Pagination Dots */}

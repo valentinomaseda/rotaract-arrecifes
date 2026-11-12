@@ -118,7 +118,7 @@ export const committeesData = [
     name: "Imagen Pública",
     category: "Comunicación & Prensa",
     description: "Difunde el trabajo del club, gestiona redes sociales, comunicación de eventos y proyecta la identidad de Rotaract Arrecifes.",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80",
+    image: "https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?auto=format&fit=crop&w=600&q=80",
     icon: "Megaphone",
   },
   {

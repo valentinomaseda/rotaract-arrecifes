@@ -17,7 +17,7 @@ const AnimatedStat = ({ prefix, value, suffix, label, delay }) => {
       <span
         className="font-garet text-3xl md:text-4xl font-bold leading-none tabular-nums"
         style={{
-          background: 'linear-gradient(90deg, #d41367, #ff6eb0)',
+          background: 'linear-gradient(90deg, #ff3b8b, #ff85be)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
@@ -25,7 +25,7 @@ const AnimatedStat = ({ prefix, value, suffix, label, delay }) => {
       >
         {prefix}{count}{suffix}
       </span>
-      <span className="font-montserrat text-sm text-white/40 mt-1">{label}</span>
+      <span className="font-montserrat text-xs sm:text-sm text-white/65 font-medium mt-1.5">{label}</span>
     </div>
   );
 };
@@ -84,15 +84,28 @@ export const HeroSection = () => {
         {/* ── Columna de Texto ── */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:col-span-7 order-1">
 
+          {/* Badge institucional superior */}
+          <div
+            className="animate-hidden inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full mb-6 border border-cranberry/35 bg-cranberry/15 backdrop-blur-md"
+            style={{ transitionDelay: '40ms' }}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-400" />
+            </span>
+            <span className="font-montserrat text-xs font-semibold tracking-widest uppercase text-pink-200">
+              Rotaract Club Arrecifes · Distrito 4895
+            </span>
+          </div>
 
           {/* Título */}
           <h1
-            className="animate-hidden font-garet text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.08] tracking-tight mb-6"
+            className="animate-hidden font-garet text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.08] tracking-tight mb-6"
             style={{ transitionDelay: '120ms' }}
           >
             Impulsando{' '}
             <span style={{
-              background: 'linear-gradient(90deg, #d41367, #ff6eb0)',
+              background: 'linear-gradient(90deg, #ff3b8b, #ff85be)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -104,7 +117,7 @@ export const HeroSection = () => {
 
           {/* Descripción */}
           <p
-            className="animate-hidden font-montserrat text-lg md:text-xl text-white/55 max-w-xl mb-10 leading-relaxed"
+            className="animate-hidden font-montserrat text-base sm:text-lg md:text-xl text-white/70 max-w-xl mb-10 leading-relaxed"
             style={{ transitionDelay: '240ms' }}
           >
             Somos jóvenes líderes que transforman ideas en acciones. Un espacio para crecer profesionalmente, hacer amigos y servir a nuestra comunidad.

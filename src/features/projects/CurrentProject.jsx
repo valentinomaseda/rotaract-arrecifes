@@ -15,9 +15,16 @@ const CAPACITACIONES_SLIDE = upcomingCap
       category: 'Desarrollo Profesional',
       tabLabel: 'Capacitaciones',
       accent: {
-        iconBg: 'from-cranberry to-pink-600',
-        pillBg: 'bg-cranberry/8 text-cranberry border-cranberry/20',
-        glow: 'rgba(212, 19, 103, 0.12)',
+        iconBg: 'from-cranberry via-pink-600 to-purple-700',
+        pillBg: 'bg-cranberry/10 text-cranberry border-cranberry/25',
+        cardBg: 'from-white via-[#FFF9FC] to-[#FCEEF5]/70',
+        cardBorder: 'border-cranberry/20',
+        statBg: 'bg-cranberry/[0.04] border-cranberry/15 hover:bg-cranberry/[0.08]',
+        statBar: 'bg-cranberry',
+        statValueText: 'text-cranberry-dark',
+        btnClass: 'bg-cranberry hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.28)]',
+        numberText: 'text-cranberry/15',
+        glow: 'rgba(212, 19, 103, 0.16)',
       },
       projectIcon: (
         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -49,9 +56,16 @@ const CAPACITACIONES_SLIDE = upcomingCap
       category: 'Desarrollo Profesional',
       tabLabel: 'Capacitaciones',
       accent: {
-        iconBg: 'from-cranberry to-pink-600',
-        pillBg: 'bg-cranberry/8 text-cranberry border-cranberry/20',
-        glow: 'rgba(212, 19, 103, 0.12)',
+        iconBg: 'from-cranberry via-pink-600 to-purple-700',
+        pillBg: 'bg-cranberry/10 text-cranberry border-cranberry/25',
+        cardBg: 'from-white via-[#FFF9FC] to-[#FCEEF5]/70',
+        cardBorder: 'border-cranberry/20',
+        statBg: 'bg-cranberry/[0.04] border-cranberry/15 hover:bg-cranberry/[0.08]',
+        statBar: 'bg-cranberry',
+        statValueText: 'text-cranberry-dark',
+        btnClass: 'bg-cranberry hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.28)]',
+        numberText: 'text-cranberry/15',
+        glow: 'rgba(212, 19, 103, 0.16)',
       },
       projectIcon: (
         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -86,9 +100,16 @@ const PROJECTS = [
     category: 'Medio Ambiente',
     tabLabel: 'Medio Ambiente',
     accent: {
-      iconBg: 'from-emerald-600 to-teal-600',
-      pillBg: 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20',
-      glow: 'rgba(16, 185, 129, 0.10)',
+      iconBg: 'from-emerald-600 via-teal-600 to-cyan-700',
+      pillBg: 'bg-emerald-500/12 text-emerald-800 border-emerald-500/25',
+      cardBg: 'from-white via-[#F6FDF9] to-[#EBF9F2]/80',
+      cardBorder: 'border-emerald-500/25',
+      statBg: 'bg-emerald-600/[0.05] border-emerald-600/15 hover:bg-emerald-600/[0.09]',
+      statBar: 'bg-emerald-600',
+      statValueText: 'text-emerald-900',
+      btnClass: 'bg-emerald-600 hover:bg-emerald-700 shadow-[0_8px_20px_rgba(5,150,105,0.28)]',
+      numberText: 'text-emerald-600/15',
+      glow: 'rgba(16, 185, 129, 0.16)',
     },
     projectIcon: (
       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -107,7 +128,6 @@ const PROJECTS = [
       href: 'https://drive.google.com/file/d/1sWJZDwZ3C59xsntAB4VdBAK4M1R56G-Z/view',
       label: 'Conocé más del proyecto',
       ariaLabel: 'Saber más sobre Tu Huella, No Tu Colilla',
-      note: 'Dossier informativo en PDF',
       icon: (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -121,9 +141,16 @@ const PROJECTS = [
     category: 'Salud Comunitaria',
     tabLabel: 'Hospital Municipal',
     accent: {
-      iconBg: 'from-cranberry to-rose-600',
-      pillBg: 'bg-rose-500/10 text-cranberry border-cranberry/20',
-      glow: 'rgba(212, 19, 103, 0.12)',
+      iconBg: 'from-rose-600 via-cranberry to-pink-700',
+      pillBg: 'bg-rose-500/12 text-cranberry border-cranberry/25',
+      cardBg: 'from-white via-[#FFF8FA] to-[#FDECF2]/80',
+      cardBorder: 'border-cranberry/25',
+      statBg: 'bg-rose-500/[0.05] border-cranberry/15 hover:bg-rose-500/[0.09]',
+      statBar: 'bg-cranberry',
+      statValueText: 'text-cranberry-dark',
+      btnClass: 'bg-cranberry hover:bg-cranberry-dark shadow-[0_8px_20px_rgba(212,19,103,0.28)]',
+      numberText: 'text-cranberry/15',
+      glow: 'rgba(212, 19, 103, 0.16)',
     },
     projectIcon: (
       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -168,20 +195,24 @@ const ProjectCard = ({
   return (
     <article
       onClick={!active ? onSelect : undefined}
-      className={`relative flex flex-col h-full rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden border transition-all duration-700 ${
+      className={`relative flex flex-col h-full rounded-[1.75rem] sm:rounded-[2.25rem] overflow-hidden border bg-gradient-to-br ${
+        accent?.cardBg || 'from-white to-pink-50/40'
+      } transition-all duration-700 ${
         active
-          ? 'bg-white border-gray-200/80 shadow-[0_24px_60px_-15px_rgba(18,7,26,0.10),0_0_0_1px_rgba(212,19,103,0.08)] opacity-100 scale-100'
-          : 'bg-white/75 border-gray-200/50 shadow-sm opacity-45 hover:opacity-70 scale-[0.95] cursor-pointer'
+          ? `${accent?.cardBorder || 'border-cranberry/25'} shadow-[0_24px_60px_-15px_rgba(18,7,26,0.13),0_0_0_1px_rgba(212,19,103,0.08)] opacity-100 scale-100`
+          : 'border-gray-200/60 shadow-sm opacity-45 hover:opacity-70 scale-[0.95] cursor-pointer'
       }`}
       style={{ transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
       aria-hidden={!active}
     >
       {/* Barra superior de progreso */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gray-100/80 z-20">
+      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gray-200/70 z-20">
         {active && (
           <div
             key={autoplayKey}
-            className="carousel-progress-bar h-full w-full bg-gradient-to-r from-cranberry via-pink-500 to-cranberry-dark"
+            className={`carousel-progress-bar h-full w-full bg-gradient-to-r ${
+              accent?.iconBg || 'from-cranberry via-pink-500 to-cranberry-dark'
+            }`}
             style={{
               '--autoplay-duration': `${autoplayDuration}ms`,
               animationPlayState: paused ? 'paused' : 'running',
@@ -193,37 +224,45 @@ const ProjectCard = ({
       {/* Resplandor decorativo interno */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full blur-3xl transition-opacity duration-700"
+        className="pointer-events-none absolute -top-24 -right-24 w-80 h-80 rounded-full blur-3xl transition-opacity duration-700"
         style={{
-          background: `radial-gradient(circle, ${accent?.glow || 'rgba(212,19,103,0.1)'} 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${accent?.glow || 'rgba(212,19,103,0.14)'} 0%, transparent 70%)`,
           opacity: active ? 1 : 0,
         }}
       />
+
+      {/* Marca de agua decorativa de fondo (ícono gigante tenue) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-10 -right-8 w-44 h-44 opacity-[0.045] text-gray-900 transform -rotate-12 scale-[2.6] flex items-center justify-center"
+      >
+        {projectIcon}
+      </div>
 
       <div className="relative z-10 flex flex-col flex-1 p-5 sm:p-7 md:px-9 md:py-7">
         {/* Cabecera de la tarjeta: ícono + badges + numeración */}
         <div className="flex items-center justify-between gap-4 mb-3.5 sm:mb-4">
           <div className="flex items-center gap-3">
             <div
-              className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br ${
+              className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br ${
                 accent?.iconBg || 'from-cranberry to-pink-600'
-              } flex items-center justify-center shadow-[0_6px_16px_-4px_rgba(212,19,103,0.35)] flex-shrink-0`}
+              } flex items-center justify-center shadow-lg flex-shrink-0 ring-4 ring-white/80`}
             >
               {projectIcon}
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-900 text-white text-[10px] font-montserrat font-bold tracking-wider uppercase">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-900 text-white text-[10px] font-montserrat font-bold tracking-wider uppercase shadow-xs">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cranberry opacity-75" />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cranberry" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-pink-400" />
                 </span>
                 {badge}
               </span>
 
               {category && (
                 <span
-                  className={`inline-flex items-center px-2.5 py-1 rounded-full border text-[10px] font-montserrat font-semibold tracking-wide ${
+                  className={`inline-flex items-center px-3 py-1 rounded-full border text-[10px] font-montserrat font-bold tracking-wide ${
                     accent?.pillBg || 'bg-cranberry/10 text-cranberry border-cranberry/20'
                   }`}
                 >
@@ -235,7 +274,9 @@ const ProjectCard = ({
 
           <span
             aria-hidden="true"
-            className="font-garet text-2xl sm:text-4xl font-bold leading-none select-none text-gray-200/80"
+            className={`font-garet text-3xl sm:text-5xl font-extrabold leading-none select-none ${
+              accent?.numberText || 'text-cranberry/15'
+            }`}
           >
             {stepNumber}
           </span>
@@ -252,18 +293,30 @@ const ProjectCard = ({
           </p>
         </div>
 
-        {/* Indicadores clave en sub-cards compactas */}
+        {/* Indicadores clave en sub-cards con acento lateral de color */}
         {stats && (
           <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-5">
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-2 px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-gray-50/90 border border-gray-100 text-center sm:text-left transition-colors duration-300 hover:bg-gray-100/70"
+                className={`relative overflow-hidden flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-0.5 sm:gap-2 px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl border text-center sm:text-left transition-colors duration-300 ${
+                  accent?.statBg || 'bg-white/80 border-gray-200/80'
+                }`}
               >
-                <span className="font-garet text-sm sm:text-lg md:text-xl font-bold text-gray-900 leading-tight">
+                <span
+                  aria-hidden="true"
+                  className={`hidden sm:block absolute left-0 top-2 bottom-2 w-1 rounded-r-full ${
+                    accent?.statBar || 'bg-cranberry'
+                  }`}
+                />
+                <span
+                  className={`font-garet text-sm sm:text-lg md:text-xl font-bold leading-tight ${
+                    accent?.statValueText || 'text-gray-900'
+                  }`}
+                >
                   {stat.value}
                 </span>
-                <span className="text-[9px] sm:text-[11px] font-montserrat text-gray-500 font-semibold tracking-wider uppercase">
+                <span className="text-[9px] sm:text-[11px] font-montserrat text-gray-600 font-semibold tracking-wider uppercase">
                   {stat.label}
                 </span>
               </div>
@@ -272,13 +325,15 @@ const ProjectCard = ({
         )}
 
         {/* Pie de tarjeta: CTA interactivo o bloque informativo de impacto */}
-        <div className="mt-auto pt-3.5 sm:pt-4 border-t border-gray-100">
+        <div className="mt-auto pt-3.5 sm:pt-4 border-t border-gray-200/60">
           {cta ? (
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               {cta.internal ? (
                 <Link
                   to={cta.href}
-                  className="interactive-control inline-flex items-center justify-center w-full sm:w-auto gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-cranberry text-white font-montserrat font-semibold text-xs sm:text-sm hover:bg-cranberry-dark shadow-[0_6px_16px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_22px_rgba(212,19,103,0.38)] group"
+                  className={`interactive-control inline-flex items-center justify-center w-full sm:w-auto gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-white font-montserrat font-semibold text-xs sm:text-sm group ${
+                    accent?.btnClass || 'bg-cranberry hover:bg-cranberry-dark'
+                  }`}
                   aria-label={cta.ariaLabel}
                   tabIndex={active ? 0 : -1}
                 >
@@ -299,7 +354,9 @@ const ProjectCard = ({
                   href={cta.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="interactive-control inline-flex items-center justify-center w-full sm:w-auto gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-cranberry text-white font-montserrat font-semibold text-xs sm:text-sm hover:bg-cranberry-dark shadow-[0_6px_16px_rgba(212,19,103,0.25)] hover:shadow-[0_8px_22px_rgba(212,19,103,0.38)] group"
+                  className={`interactive-control inline-flex items-center justify-center w-full sm:w-auto gap-2.5 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-white font-montserrat font-semibold text-xs sm:text-sm group ${
+                    accent?.btnClass || 'bg-cranberry hover:bg-cranberry-dark'
+                  }`}
                   aria-label={cta.ariaLabel}
                   tabIndex={active ? 0 : -1}
                 >
@@ -318,15 +375,15 @@ const ProjectCard = ({
               )}
 
               {cta.note && (
-                <span className="hidden sm:inline font-montserrat text-xs text-gray-400 font-medium text-right">
+                <span className="hidden sm:inline font-montserrat text-xs text-gray-500 font-medium text-right">
                   {cta.note}
                 </span>
               )}
             </div>
           ) : (
             footerInfo && (
-              <div className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-cranberry/[0.05] via-rose-50/60 to-transparent border border-cranberry/15">
-                <div className="w-8 h-8 rounded-lg bg-cranberry/10 text-cranberry flex items-center justify-center flex-shrink-0">
+              <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/80 backdrop-blur-xs border border-cranberry/20 shadow-2xs">
+                <div className="w-9 h-9 rounded-lg bg-cranberry text-white flex items-center justify-center flex-shrink-0 shadow-xs">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
@@ -335,7 +392,7 @@ const ProjectCard = ({
                   <p className="font-montserrat text-xs sm:text-sm font-bold text-gray-900 truncate">
                     {footerInfo.title}
                   </p>
-                  <p className="font-montserrat text-[11px] text-gray-500 line-clamp-1">
+                  <p className="font-montserrat text-[11px] text-gray-600 line-clamp-1">
                     {footerInfo.subtitle}
                   </p>
                 </div>
@@ -416,16 +473,18 @@ export const CurrentProject = () => {
   return (
     <section
       id="proyecto-actual"
-      className="scroll-mt-16 relative bg-gradient-to-b from-white via-gray-50/70 to-gray-50 py-8 md:py-10 lg:py-12 overflow-hidden"
+      className="scroll-mt-16 relative bg-gradient-to-b from-[#FAF4F7] via-[#F6EFF4] to-[#F2ECF2] py-10 md:py-12 lg:py-14 overflow-hidden border-b border-cranberry/10"
       aria-labelledby="current-project-title"
     >
+      {/* Patrón de puntos sutil */}
+      <div className="pointer-events-none absolute inset-0 bg-dots-subtle opacity-60" aria-hidden="true" />
       {/* Blobs de ambientación */}
       <div
-        className="pointer-events-none absolute -top-24 left-1/4 w-[420px] md:w-[620px] h-[420px] md:h-[620px] bg-cranberry/[0.04] rounded-full blur-[90px]"
+        className="pointer-events-none absolute -top-24 left-1/4 w-[420px] md:w-[620px] h-[420px] md:h-[620px] bg-cranberry/[0.07] rounded-full blur-[90px]"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute bottom-0 right-1/4 w-[360px] md:w-[500px] h-[360px] md:h-[500px] bg-pink-500/[0.04] rounded-full blur-[90px]"
+        className="pointer-events-none absolute bottom-0 right-1/4 w-[360px] md:w-[500px] h-[360px] md:h-[500px] bg-pink-500/[0.07] rounded-full blur-[90px]"
         aria-hidden="true"
       />
 

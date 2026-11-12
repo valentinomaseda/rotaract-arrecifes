@@ -120,19 +120,21 @@ export const CommitteesCarousel = () => {
   };
 
   return (
-    <div className="py-12 md:py-10 border-t border-gray-100 bg-gradient-to-b from-white via-gray-50/50 to-white">
+    <div className="py-4">
       {/* Section Header */}
       <div
         ref={ref}
-        className={`flex flex-col md:flex-row md:items-end justify-between max-w-6xl mx-auto mb-10 md:mb-8 space-y-4 md:space-y-0 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+        className={`flex flex-col md:flex-row md:items-end justify-between max-w-6xl mx-auto mb-10 md:mb-8 space-y-4 md:space-y-0 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
       >
         <div className="space-y-3">
-          <span className="inline-block text-xs font-montserrat font-semibold tracking-[0.2em] uppercase text-cranberry">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-montserrat font-bold tracking-wider uppercase bg-cranberry/10 text-cranberry border border-cranberry/20">
+            <span className="w-2 h-2 rounded-full bg-cranberry animate-pulse" />
             Estructura Operativa
           </span>
-          <h3 className="text-3xl md:text-4xl font-garet text-gray-900">
-            Nuestros Comités de Trabajo
+          <h3 className="text-3xl sm:text-4xl font-garet text-gray-900 tracking-tight">
+            Nuestros <span className="text-gradient-cranberry">Comités de Trabajo</span>
           </h3>
           <p className="text-gray-600 font-montserrat text-base max-w-xl">
             Cada comité impulsa iniciativas específicas coordinando esfuerzos en beneficio del club y la comunidad.
@@ -144,7 +146,7 @@ export const CommitteesCarousel = () => {
           <button
             onClick={prevSlide}
             aria-label="Comité anterior"
-            className="w-12 h-12 rounded-full border border-gray-200 bg-white text-gray-700 hover:text-cranberry hover:border-cranberry hover:shadow-lg transition-all duration-300 flex items-center justify-center"
+            className="interactive-control w-12 h-12 rounded-full border border-gray-200 bg-white text-gray-700 hover:text-cranberry hover:border-cranberry hover:shadow-lg flex items-center justify-center"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -153,7 +155,7 @@ export const CommitteesCarousel = () => {
           <button
             onClick={nextSlide}
             aria-label="Comité siguiente"
-            className="w-12 h-12 rounded-full bg-cranberry text-white hover:bg-cranberry-dark hover:shadow-lg transition-all duration-300 flex items-center justify-center"
+            className="interactive-control w-12 h-12 rounded-full bg-cranberry text-white hover:bg-cranberry-dark hover:shadow-lg flex items-center justify-center"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -165,41 +167,67 @@ export const CommitteesCarousel = () => {
       {/* Mini Carousel Track */}
       <div
         ref={trackRef}
+        role="region"
+        aria-label="Comités de Trabajo"
+        tabIndex={0}
         className="carousel-track flex gap-6 overflow-x-auto pb-8 pt-2 px-4 md:px-0 max-w-6xl mx-auto scroll-smooth"
       >
         {committeesData.map((committee, idx) => {
           const gradient = gradients[idx % gradients.length];
+          const num = String(idx + 1).padStart(2, '0');
 
           return (
             <div
               key={committee.id}
-              className={`min-w-[290px] sm:min-w-[340px] md:min-w-[360px] group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 card-hover flex flex-col justify-between ${idx === activeIndex ? 'ring-2 ring-cranberry/30' : ''
-                }`}
+              className={`min-w-[290px] sm:min-w-[340px] md:min-w-[360px] group bg-gradient-to-b from-white to-[#FAF7F9] rounded-3xl overflow-hidden border border-gray-200/80 hover:border-cranberry/35 shadow-sm hover:shadow-xl transition-all duration-500 card-hover flex flex-col justify-between ${
+                idx === activeIndex ? 'ring-2 ring-cranberry/25' : ''
+              }`}
             >
-              {/* Committee Icon Header (Gradient Box + Icon) */}
-              <div className={`relative h-44 p-6 bg-gradient-to-br ${gradient} text-white flex flex-col justify-between overflow-hidden`}>
-                {/* Background decorative circle */}
-                <div className="absolute -right-8 -bottom-8 w-36 h-36 bg-white/10 rounded-full blur-xl pointer-events-none" />
+              {/* Committee Photo + Gradient Header */}
+              <div className={`relative h-48 p-6 bg-gradient-to-br ${gradient} text-white flex flex-col justify-between overflow-hidden`}>
+                {committee.image && (
+                  <img
+                    src={committee.image}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover opacity-35 mix-blend-luminosity group-hover:scale-110 group-hover:opacity-45 transition-all duration-700"
+                  />
+                )}
+                {/* Dark vignette at bottom of header */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" aria-hidden="true" />
 
                 <div className="flex items-center justify-between z-10">
-                  <span className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-montserrat font-semibold text-white shadow-sm border border-white/30">
+                  <span className="px-3 py-1 bg-black/35 backdrop-blur-md rounded-full text-xs font-montserrat font-semibold text-white shadow-sm border border-white/25">
                     {committee.category}
                   </span>
-                  <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white shadow-inner group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-md group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                     <CommitteeIcon name={committee.icon} className="w-6 h-6" />
                   </div>
                 </div>
 
-                <h4 className="text-2xl font-garet text-white drop-shadow-md z-10">
-                  {committee.name}
-                </h4>
+                <div className="z-10 flex items-end justify-between gap-2">
+                  <h4 className="text-2xl font-garet text-white drop-shadow-md leading-tight">
+                    {committee.name}
+                  </h4>
+                  <span className="font-garet text-2xl font-extrabold text-white/35 select-none">
+                    {num}
+                  </span>
+                </div>
               </div>
 
-              {/* Description & Tags */}
-              <div className="p-6 flex-grow flex flex-col justify-between space-y-6">
+              {/* Description & Footer */}
+              <div className="p-6 flex-grow flex flex-col justify-between">
                 <p className="text-gray-600 font-montserrat text-sm leading-relaxed">
                   {committee.description}
                 </p>
+
+                <div className="mt-5 pt-3.5 border-t border-gray-200/60 flex items-center justify-between">
+                  <span className="font-montserrat text-[11px] font-bold uppercase tracking-wider text-cranberry">
+                    Comité Activo
+                  </span>
+                  <span className={`h-1.5 w-10 rounded-full bg-gradient-to-r ${gradient} group-hover:w-16 transition-all duration-500`} />
+                </div>
               </div>
             </div>
           );

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@600;700;800&display=swap');
 @import "tailwindcss";
 
 /* =========================================
@@ -8,9 +8,9 @@
   --color-cranberry: #d41367;
   --color-cranberry-dark: #b51059;
   --color-cranberry-light: #f9e6ef;
-  --font-heading: "Garet Bold", "Montserrat", sans-serif;
+  --font-heading: "Garet Bold", "Outfit", "Montserrat", sans-serif;
   --font-body: "Montserrat", sans-serif;
-  --font-garet: "Garet Bold", "Montserrat", sans-serif;
+  --font-garet: "Garet Bold", "Outfit", "Montserrat", sans-serif;
   --font-montserrat: "Montserrat", sans-serif;
 }
 
@@ -246,11 +246,50 @@
 
 /* Navbar glass effect */
 .navbar-glass {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(212, 19, 103, 0.08);
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(212, 19, 103, 0.12);
+  box-shadow: 0 4px 24px rgba(18, 7, 26, 0.06);
+}
+
+.navbar-dark-top {
+  background-color: rgba(10, 10, 15, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Text gradient cranberry */
+.text-gradient-cranberry {
+  background: linear-gradient(90deg, #d41367 0%, #ff5ca8 55%, #ff85be 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle dot pattern background */
+.bg-dots-subtle {
+  background-image: radial-gradient(rgba(212, 19, 103, 0.11) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Hover-reveal elements that remain accessible on keyboard focus and touch screens */
+.card-reveal-action {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 250ms ease-out, transform 250ms ease-out;
+}
+.group:hover .card-reveal-action,
+.group:focus-within .card-reveal-action {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (hover: none) {
+  .card-reveal-action {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Card hover lift */
