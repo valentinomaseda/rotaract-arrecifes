@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import { useSwipe } from '../../hooks/useSwipe';
 import { getUpcomingCapacitacion, getPastCapacitaciones } from '../../data/capacitacionesData';
+import { jobsData } from '../../data/jobsData';
 
 const AUTOPLAY_INTERVAL = 8000;
 
@@ -136,6 +137,48 @@ const PROJECTS = [
     },
   },
   CAPACITACIONES_SLIDE,
+  {
+    badge: 'Activo',
+    category: 'Empleo y Comunidad',
+    tabLabel: 'Bolsa de Trabajo',
+    accent: {
+      iconBg: 'from-indigo-600 via-violet-600 to-purple-700',
+      pillBg: 'bg-indigo-500/12 text-indigo-800 border-indigo-500/25',
+      cardBg: 'from-white via-[#F8F7FF] to-[#F0EEFF]/80',
+      cardBorder: 'border-indigo-500/25',
+      statBg: 'bg-indigo-600/[0.05] border-indigo-600/15 hover:bg-indigo-600/[0.09]',
+      statBar: 'bg-indigo-600',
+      statValueText: 'text-indigo-900',
+      btnClass: 'bg-indigo-600 hover:bg-indigo-700 shadow-[0_8px_20px_rgba(79,70,229,0.28)]',
+      numberText: 'text-indigo-600/15',
+      glow: 'rgba(99, 102, 241, 0.16)',
+    },
+    projectIcon: (
+      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+    title: 'Bolsa de Trabajo Local',
+    description:
+      'Conectamos a vecinos en búsqueda laboral con comercios, empresas y productores de Arrecifes y la región. Un espacio gratuito y actualizado para impulsar el empleo en nuestra comunidad.',
+    stats: [
+      { value: `${jobsData.length}`, label: 'Búsquedas activas' },
+      { value: 'Gratuito', label: 'Servicio' },
+      { value: 'Arrecifes y zona', label: 'Alcance' },
+    ],
+    cta: {
+      href: '/empleos',
+      internal: true,
+      label: 'Ver ofertas laborales',
+      ariaLabel: 'Ir a la Bolsa de Trabajo de Arrecifes',
+      note: `${jobsData.length} búsquedas activas · Acceso libre y gratuito`,
+      icon: (
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      ),
+    },
+  },
   {
     badge: 'En progreso',
     category: 'Salud Comunitaria',
