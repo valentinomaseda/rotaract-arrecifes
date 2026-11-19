@@ -103,6 +103,30 @@ En el marco de nuestro Ciclo de Capacitaciones, tuvimos el enorme honor de recib
     ],
     attendees: null,
   },
+  {
+    id: 'cap-003',
+    edition: 3,
+    status: 'upcoming',
+    topic: 'Basta de “¿qué subo hoy?”: estrategia y planificación de contenidos para emprendedores',
+    tagline: 'Estrategia y planificación de contenidos para emprendedores',
+    description:
+      `¿Cuántas veces abriste Instagram para publicar algo de tu emprendimiento y te quedaste mirando la pantalla sin saber qué subir? Improvisar todos los días agota y rara vez trae resultados.
+
+En este encuentro vamos a trabajar junto a Flor Sales Mayer —mentora de emprendedores, creadora del Método Flor y fundadora de KROV STUDIO— para dejar de publicar por compromiso y empezar a armar una comunicación con sentido, orden y objetivos claros.`,
+    speaker: 'Flor Sales Mayer',
+    speakerPhoto: '/images/oradores/flor.jpeg',
+    speakerBio:
+      `Mentora de emprendedores, especialista en marketing digital y estrategia de negocios, creadora del Método Flor y fundadora de KROV STUDIO.
+
+A través de sus programas de formación, mentorías y su academia digital, acompaña a emprendedores y marcas a estructurar su comunicación, planificar contenidos estratégicos y potenciar sus ventas en redes sociales con sentido, orden y objetivos claros.`,
+    date: '2026-11-26',
+    time: '19:30',
+    platform: 'Google Meet',
+    area: 'Marketing y Emprendedurismo',
+    votedFirst: false,
+    registrationLink: 'https://forms.gle/xo34hqDap7BAJa2V9',
+    attendees: null,
+  },
 ];
 
 /**
