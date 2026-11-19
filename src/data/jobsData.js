@@ -1,5 +1,33 @@
 export const jobsData = [
   {
+    id: 'job-019',
+    title: 'Coordinador Técnico',
+    company: 'SELUCOM',
+    category: 'Oficios / Tecnología',
+    type: 'Tiempo completo',
+    modality: 'Presencial',
+    description: 'SELUCOM busca Coordinador Técnico para su Sede Central en Arrecifes. Su misión será coordinar, organizar y supervisar la operación técnica diaria de instalaciones y mantenimientos, optimizando los recursos humanos y materiales para asegurar la máxima calidad y seguridad del servicio. Horario: lunes a viernes de 8:00 a 17:00 hs (con flexibilidad horaria por proyectos u obras).',
+    responsibilities: [
+      'Planificar y asignar diariamente las tareas y rutas de las cuadrillas y equipos técnicos.',
+      'Gestionar y validar la documentación corporativa requerida por clientes (ART, Permisos de Trabajo, Seguros).',
+      'Supervisar y asegurar el equipamiento (herramientas, instrumentales, vehículos y EPP) antes de la salida a campo.',
+      'Liderar y auditar periódicamente en campo las obras y mantenimientos, acompañando al equipo en tareas complejas.',
+      'Gestionar y despachar los tickets de mantenimiento y coordinar los planes preventivos.',
+      'Controlar el stock de repuestos e insumos de las cuadrillas.',
+      'Coordinar capacitaciones técnicas para el equipo de campo.',
+      'Monitorear el avance diario, resolver desvíos y consolidar reportes de cierre del área.',
+    ],
+    requirements: [
+      'Formación en carreras técnicas o afines.',
+      'Deseable experiencia previa en coordinación de equipos técnicos, infraestructura, redes o seguridad electrónica (no excluyente).',
+      'Manejo de herramientas de gestión de tickets, planillas operativas e indicadores técnicos.',
+      'Liderazgo, proactividad, comunicación asertiva, resolución de problemas bajo presión y excelente gestión del tiempo.',
+    ],
+    schedule: 'Lunes a viernes de 8:00 a 17:00 hs (con flexibilidad horaria por proyectos u obras).',
+    location: 'Arrecifes',
+    applyVia: 'mailto:fmas@potential.com.ar?subject=Coordinador%20Técnico%20-%20Arrecifes',
+  },
+  {
     id: 'job-018',
     title: 'Tornero / Operario Metalúrgico',
     company: 'Bethular',
